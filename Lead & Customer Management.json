@@ -1,0 +1,183 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-02T07:36:46.490Z",
+  "nodes": [
+    {
+      "id": "assistant-297",
+      "type": "assistant",
+      "position": {
+        "x": 434.802,
+        "y": 770.693
+      },
+      "data": {
+        "label": "Customer Lead AI Assistant",
+        "instructions": "You are an AI assistant for managing leads and customers. Your goal is to analyze customer data using the RFM (Recency, Frequency, Monetary) model and classify leads for prioritization.\nFollow the lead scoring guide from the file with the Google Doc ID [Your Google Doc ID]\nRetrieve customer data from the database file with the Google Sheet ID  [Your Google Sheet ID] in the vector database. Implement the RFM model based on the content of the file with the Google Doc File data. \nOnce the output for all users is prepared, follow these steps for the final output:\nBe sure to call the function write_google_sheet_* with the following values:\nwrite_google_sheet_*(\n    \"range\": \"Sheet1!A:E\",\n    \"values\": [\n        \"customer\": \"Customer Name\",\n        \"email\": \"Email\",\n        \"rfm_score\": \"RFM Score\",\n        \"category\": \"Category\",\n        \"phone\": \"Phone Number\",\n    ]\n)\nImportant: Do not provide any descriptions or explanations, only call the write_google_sheet_* function with the specified values and announce the result of the call.\nResult: The function write_google_sheet_* was called successfully with the provided values.\n",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "assistant-298",
+      "type": "assistant",
+      "position": {
+        "x": -188.09224095940965,
+        "y": 781.03847601476
+      },
+      "data": {
+        "label": "SMS Generation Assistant",
+        "instructions": "You are an AI assistant for generating personalized SMS messages. Your goal is to create marketing SMS based on customers' RFM data for purposes such as retention, repeat purchases, or promoting new products.\nImportant: Retrieve customer data by calling the read_google_sheet_* function and extract the columns customer, email, rfm_score, category, and phone from the Google Sheet, storing them as user information.\nFollow these steps after analysis:\nThe analysis must be performed for all users in the Google Sheet.\nBased on user information, generate an SMS for each user tailored to their category. For example:\nVIP: Encourage repeat purchases (e.g., \"Dear Ali, get 10% off your next purchase! 😊\").\nPotential: Encourage first purchase (e.g., \"Dear Sara, try our new product! 🎉\").\nNeeds Attention: Re-engage the customer (e.g., \"Dear Mohammad, we miss you! Use code XYZ for 20% off.\").\nLoyal: Acknowledge loyal customers (e.g., \"Dear Mehran, thank you for staying with us.\").\nKeep SMS messages short (under 160 characters), in Persian, and with a friendly tone.\nAfter analyzing users based on their data, perform the following steps for each user:\nCreate a JSON output with this exact structure:\njson\n{\n  \"receptor\": \"phone number\",\n  \"message\": \"message\"\n}\nThe output must only be in JSON format, with no descriptions or analysis in the final output.\nDo not summarize the results in Persian or any other language. You must send the JSON output with the intended messages.\nImportant: The final result must be sent to Telegram.\nResult: The JSON output with personalized SMS messages for each user has been generated and sent to Telegram as requested.\n",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-255",
+      "type": "telegram",
+      "position": {
+        "x": 433.804,
+        "y": 985.636
+      },
+      "data": {
+        "label": "dela customer lead bot"
+      }
+    },
+    {
+      "id": "telegram-256",
+      "type": "telegram",
+      "position": {
+        "x": 9.867757195571883,
+        "y": 1016.16
+      },
+      "data": {
+        "label": "dele customer lead sms"
+      }
+    },
+    {
+      "id": "vectorstore-172",
+      "type": "vectorstore",
+      "position": {
+        "x": 434.439,
+        "y": 528.303
+      },
+      "data": {
+        "label": "Leads Database"
+      }
+    },
+    {
+      "id": "googledoc-97",
+      "type": "googledoc",
+      "position": {
+        "x": 620.472,
+        "y": 200.302
+      },
+      "data": {
+        "label": "Lead Score Guide"
+      }
+    },
+    {
+      "id": "googlesheet-112",
+      "type": "googlesheet",
+      "position": {
+        "x": 43.4936,
+        "y": 495.134
+      },
+      "data": {
+        "label": "RFM Report"
+      }
+    },
+    {
+      "id": "googlesheet-113",
+      "type": "googlesheet",
+      "position": {
+        "x": 263.136,
+        "y": 196.357
+      },
+      "data": {
+        "label": "Customer Data"
+      }
+    },
+    {
+      "id": "trigger-21",
+      "type": "trigger",
+      "position": {
+        "x": 758.845,
+        "y": 591.507
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "trigger-22",
+      "type": "trigger",
+      "position": {
+        "x": -90.40576752767535,
+        "y": 588.678952398524
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "sms-4",
+      "type": "sms",
+      "position": {
+        "x": -235.73024169741706,
+        "y": 1005.1456191881921
+      },
+      "data": {
+        "label": "پیامک"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "evectorstore-172-assistant-297-1756798069062-46",
+      "source": "vectorstore-172",
+      "target": "assistant-297"
+    },
+    {
+      "id": "egoogledoc-97-vectorstore-172-1756798069062-696",
+      "source": "googledoc-97",
+      "target": "vectorstore-172"
+    },
+    {
+      "id": "eassistant-297-telegram-255-1756798069062-600",
+      "source": "assistant-297",
+      "target": "telegram-255"
+    },
+    {
+      "id": "etrigger-21-assistant-297-1756798069062-409",
+      "source": "trigger-21",
+      "target": "assistant-297"
+    },
+    {
+      "id": "etrigger-22-assistant-298-1756798069062-231",
+      "source": "trigger-22",
+      "target": "assistant-298"
+    },
+    {
+      "id": "egooglesheet-113-vectorstore-172-1756798069062-589",
+      "source": "googlesheet-113",
+      "target": "vectorstore-172"
+    },
+    {
+      "id": "eassistant-298-telegram-256-1756798069062-127",
+      "source": "assistant-298",
+      "target": "telegram-256"
+    },
+    {
+      "id": "eassistant-298-sms-4-1756798069062-627",
+      "source": "assistant-298",
+      "target": "sms-4"
+    },
+    {
+      "id": "egooglesheet-112-assistant-297-1756798069062-264",
+      "source": "googlesheet-112",
+      "target": "assistant-297"
+    },
+    {
+      "id": "egooglesheet-112-assistant-298-1756798069062-87",
+      "source": "googlesheet-112",
+      "target": "assistant-298"
+    }
+  ]
+}
