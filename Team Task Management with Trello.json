@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-30T12:44:58.033Z",
+  "nodes": [
+    {
+      "id": "assistant-309",
+      "type": "assistant",
+      "position": {
+        "x": 314.121,
+        "y": 72.3801
+      },
+      "data": {
+        "label": "Task Management Assistant",
+        "instructions": "You retrieve data from Trello cards of the target project based on a specified date filter, analyze the data, and generate a comprehensive task management report in Persian with a professional yet friendly tone. The final report would be generated in a Google Doc with ID  [Your Google Doc ID].\nData Sources:\nRetrieve card information from the Trello node using the get_trello_cards function.\nInformation includes: card name, card description, due date, labels, members, attachments, checklists, and comments.\nFilter based on the specified date for precise card retrieval.\nStep-by-Step Process:\nExecute the get_trello_cards function with the date filter parameter to retrieve cards for the target project.\nExtract and analyze data:\nCurrent Status: Count tasks in each list (e.g., To Do, Doing, Done) and identify cards nearing their due dates.\nDaily Progress: Review changes in the past 24 hours, including card movements or task completions.\nProductivity Analysis: Identify bottlenecks, such as tasks with no progress in the last 7 days.\nImprovement Suggestions: Provide recommendations for better task prioritization and workload redistribution for improved coordination.\nPrepare the report in a professional and friendly tone, written in Persian.\nGenerate the complete report in a Google Doc with ID [Your Google Doc ID] using the write_google_doc function.\nOutput Format:\nComplete text of the comprehensive task management report.\nGenerate  in a Google Doc using the write_google_doc function.\nRules and Constraints:\nData must only be retrieved from the Trello node via the get_trello_cards function.\nThe report must be analytical, comprehensive, and include actionable suggestions.\nThe tone of the report should be professional yet friendly.\nEnsure accuracy in using card information (e.g., checklists, comments, attachments) for more precise analysis.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-338",
+      "type": "telegram",
+      "position": {
+        "x": 31.2417,
+        "y": 62.799
+      },
+      "data": {
+        "label": "Trello Dela"
+      }
+    },
+    {
+      "id": "googledoc-114",
+      "type": "googledoc",
+      "position": {
+        "x": 589.731,
+        "y": -189.938
+      },
+      "data": {
+        "label": "Tasks Report"
+      }
+    },
+    {
+      "id": "trigger-74",
+      "type": "trigger",
+      "position": {
+        "x": 222.937,
+        "y": -93.9462
+      },
+      "data": {
+        "label": "تریگر ترلو"
+      }
+    },
+    {
+      "id": "trello-9",
+      "type": "trello",
+      "position": {
+        "x": 313.815,
+        "y": -260.538
+      },
+      "data": {
+        "label": "Trello"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "etrello-9-assistant-309-1756557378391-893",
+      "source": "trello-9",
+      "target": "assistant-309"
+    },
+    {
+      "id": "eassistant-309-telegram-338-1756557378391-171",
+      "source": "assistant-309",
+      "target": "telegram-338"
+    },
+    {
+      "id": "etrigger-74-assistant-309-1756557378391-658",
+      "source": "trigger-74",
+      "target": "assistant-309"
+    },
+    {
+      "id": "egoogledoc-114-assistant-309-1756557399963",
+      "source": "googledoc-114",
+      "target": "assistant-309"
+    }
+  ]
+}

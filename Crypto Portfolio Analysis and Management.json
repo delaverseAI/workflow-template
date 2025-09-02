@@ -1,0 +1,229 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-30T14:06:42.854Z",
+  "nodes": [
+    {
+      "id": "assistant-328",
+      "type": "assistant",
+      "position": {
+        "x": 897.736,
+        "y": 473.389
+      },
+      "data": {
+        "label": "دستیار  کریپتو",
+        "instructions": "You perform crypto portfolio analysis and management by integrating user portfolio data with live market data and news, providing actionable insights and recommendations.\n\nData Sources:\n- Google Sheet ID:  [Your Google Sheet ID], containing user portfolio data (columns represent crypto assets, amounts, transaction history, risk tolerance levels) using  read_google_sheet function, \n- API request access for live market data (prices, trading volume, market rank) and crypto news.\n\nStep-by-Step Logic:\n1. Market Analysis:\n   - Analyze price trends (e.g., 4.5% growth in BTC), trading volumes, and market ranks to identify key patterns.\n2. News Analysis:\n   - Evaluate recent news impacts (e.g., Coinbase’s acquisition of Deribit) on prices and market trends.\n3. Portfolio Analysis:\n   - Assess the user's current portfolio performance (e.g., BTC profit/loss) and risk tolerance based on Google Sheet data.\n4. Recommendations:\n   - Based on compiled analyses, suggest buy (e.g., ETH due to DeFi growth), hold (e.g., BTC for stability), or sell (e.g., Token X due to high risk) actions.\n5. Risks:\n   - Highlight potential market risks such as high volatility, new regulations, or negative news.\n\nOutput Format and Connection:\n- Connect via Frame Chat for app or website integration, or Telegram for direct user interaction.\n- Provide all analyses, recommendations, and risk warnings in a single message in Persian, using a professional and friendly tone.\n\nRules and Constraints:\n- Responses must be comprehensive yet concise.\n- Use only data from the specified sources.\n- Avoid speculation outside of given data.\n",
+        "model": "gpt-4.1-mini"
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-336",
+      "type": "analyzer",
+      "position": {
+        "x": -54.9437,
+        "y": -114.005
+      },
+      "data": {
+        "label": "تحلیلگر پیام کریپتو",
+        "instructions": "برای پیام‌های دستیار: \n\nشما یک دستیار هوش مصنوعی برای تحلیل جامع بازار کریپتو براساس پیام‌های دستیار هستید. \n\nهدف شما ارزیابی روندهای بازار، عملکرد پورتفو، و ارائه پیشنهادات استراتژیک است و لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n  - معیارهای کلیدی: رشد بازار (مثل ۱۰٪ افزایش)، عملکرد پورتفو، نرخ استفاده از توصیه‌ها.\n  - روندها: تغییرات بلندمدت (مثل رشد BTC یا DeFi).\n  - مشکلات: ریسک‌ها (مثل نوسانات یا اخبار منفی).\n  - پیشنهادات: استراتژی‌های بهبود (مثل تنوع‌بخشی به پورتفو).",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-228",
+      "type": "telegram",
+      "position": {
+        "x": 1227.4,
+        "y": 487.975
+      },
+      "data": {
+        "label": "Dela Portfo"
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "googlesheet-99",
+      "type": "googlesheet",
+      "position": {
+        "x": 897.9351317689529,
+        "y": 169.1293555956679
+      },
+      "data": {
+        "label": "پورتفوی من"
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "container-234",
+      "type": "container",
+      "position": {
+        "x": -535.281,
+        "y": -1443.98
+      },
+      "data": {
+        "label": "کانتینر تحلیل و مدیریت پورتفوی کریپتو",
+        "width": 1517.4,
+        "height": 1092
+      }
+    },
+    {
+      "id": "iframe-111",
+      "type": "iframe",
+      "position": {
+        "x": 880.999,
+        "y": 698.388
+      },
+      "data": {
+        "label": "دلاورس"
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "apidefinition-60",
+      "type": "apidefinition",
+      "position": {
+        "x": 49.5992,
+        "y": 395.479
+      },
+      "data": {
+        "label": "CoinGekoApi",
+        "baseUrl": "https://api.coingecko.com/api/v3",
+        "authType": "none",
+        "authData": {},
+        "defaultHeaders": {}
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "apidefinition-63",
+      "type": "apidefinition",
+      "position": {
+        "x": 55.4141,
+        "y": 719.764
+      },
+      "data": {
+        "label": "NewsApi",
+        "baseUrl": "https://api.coingecko.com/api/v3",
+        "authType": "none",
+        "authData": {},
+        "defaultHeaders": {}
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "request-54",
+      "type": "request",
+      "position": {
+        "x": 531.365,
+        "y": 438.293
+      },
+      "data": {
+        "label": "Crypto Request",
+        "method": "GET",
+        "endpoint": "/simple/price",
+        "headers": {},
+        "queryParams": {
+          "ids": "bitcoin,solana,ethereum,lido-dao",
+          "include_24hr_change": "true",
+          "include_24hr_vol": "true",
+          "include_market_cap": "true",
+          "vs_currencies": "usd"
+        },
+        "responseMapping": ""
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "request-56",
+      "type": "request",
+      "position": {
+        "x": 520.141,
+        "y": 814.513
+      },
+      "data": {
+        "label": "News Request",
+        "method": "GET",
+        "endpoint": "/news",
+        "headers": {},
+        "queryParams": {
+          "page": "1"
+        },
+        "responseMapping": "$.data[*].description"
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    },
+    {
+      "id": "scheduler-58",
+      "type": "scheduler",
+      "position": {
+        "x": 318.652,
+        "y": 617.935
+      },
+      "data": {
+        "label": "Scheduler"
+      },
+      "parentNode": "container-234",
+      "extent": "parent"
+    }
+  ],
+  "edges": [
+    {
+      "id": "eapidefinition-60-request-54-1756561161733-121",
+      "source": "apidefinition-60",
+      "target": "request-54"
+    },
+    {
+      "id": "escheduler-58-request-54-1756561161733-528",
+      "source": "scheduler-58",
+      "target": "request-54"
+    },
+    {
+      "id": "erequest-54-assistant-328-1756561161733-104",
+      "source": "request-54",
+      "target": "assistant-328"
+    },
+    {
+      "id": "eassistant-328-telegram-228-1756561161733-692",
+      "source": "assistant-328",
+      "target": "telegram-228"
+    },
+    {
+      "id": "eapidefinition-63-request-56-1756561161733-857",
+      "source": "apidefinition-63",
+      "target": "request-56"
+    },
+    {
+      "id": "erequest-56-assistant-328-1756561161733-618",
+      "source": "request-56",
+      "target": "assistant-328"
+    },
+    {
+      "id": "escheduler-58-request-56-1756561161733-52",
+      "source": "scheduler-58",
+      "target": "request-56"
+    },
+    {
+      "id": "eassistant-328-iframe-111-1756561161733-472",
+      "source": "assistant-328",
+      "target": "iframe-111"
+    },
+    {
+      "id": "econtainer-234-analyzer-336-1756561161733-464",
+      "source": "container-234",
+      "target": "analyzer-336"
+    },
+    {
+      "id": "egooglesheet-99-assistant-328-1756562014301",
+      "source": "googlesheet-99",
+      "target": "assistant-328"
+    }
+  ]
+}

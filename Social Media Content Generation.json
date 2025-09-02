@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-31T08:52:30.690Z",
+  "nodes": [
+    {
+      "id": "assistant-842",
+      "type": "assistant",
+      "position": {
+        "x": 605.828,
+        "y": 948.948
+      },
+      "data": {
+        "label": "دستیار تولید محتوا",
+        "instructions": "You automatically generate Instagram caption content by reading input from a specified Google Sheet, producing caption content based on brand tone and style guidelines, updating status, and writing the output to a Google Doc. You also generate and store a relevant image in the gallery.\n\nData Sources:\n- Google Sheet ID: [Your Google Sheet ID]\n  - Columns:\n    - A: ID\n    - B: Content Title\n    - C: Content Context and Platform\n    - D: Publication Status (\"to_do\", \"done\")\n- Google Doc ID:  [Your Google Doc ID] for brand tone guidelines\n- File ID: [Your File Database ID] from file repository for writing style guidelines \nGoogle Doc and File are inside the Vector Store with [Your Vector Store ID]\n\nStep-by-Step Logic:\n\n1. Read Data from Google Sheet:\n   - Call read_google_sheet function.\n   - Find the first row where Column D is \"to_do\".\n   - If multiple such rows exist, select the one with the smallest ID.\n   - Store the row number.\n   - Extract the content title and content context/platform.\n\n2. Generate Social Content:\n   - Retrieve brand tone guidelines from Google Doc.\n   - Retrieve writing style guidelines from File.\n   - Generate Instagram captions and post content based on the title and content context/platform.\n   - Ensure the content strictly follows brand tone and style.\n\n3. Update Status:\n   - Call update_google_sheet to change the status of the processed row in Column D from \"to_do\" to \"done\".\n   - This must be done regardless of any errors.\n\n4. Generate Image:\n   - Create a relevant image for the content.\n   - Store the image in the gallery for later use.\n\n5. Output:\n   - Write the generated content (caption and post) fully into Google Doc with ID  [Your Google Doc ID] using write_google_doc.\n\nRules and Constraints:\n- Follow the exact sequence of steps.\n- Ensure data integrity and proper error handling.\n- Provide output in Persian, suitable for the Instagram audience.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-490",
+      "type": "telegram",
+      "position": {
+        "x": 392.315,
+        "y": 1154.53
+      },
+      "data": {
+        "label": "Dela KBM"
+      }
+    },
+    {
+      "id": "vectorstore-369",
+      "type": "vectorstore",
+      "position": {
+        "x": 605.874,
+        "y": 671.469
+      },
+      "data": {
+        "label": "دیتابیس محتوا"
+      }
+    },
+    {
+      "id": "googledoc-296",
+      "type": "googledoc",
+      "position": {
+        "x": 885.319,
+        "y": 417.055
+      },
+      "data": {
+        "label": "راهنمای نگارش محتوا"
+      }
+    },
+    {
+      "id": "googledoc-297",
+      "type": "googledoc",
+      "position": {
+        "x": 886.52,
+        "y": 723.071
+      },
+      "data": {
+        "label": "خروجی محتوای سوشال"
+      }
+    },
+    {
+      "id": "googlesheet-259",
+      "type": "googlesheet",
+      "position": {
+        "x": 314.865,
+        "y": 722.299
+      },
+      "data": {
+        "label": "برنامه محتوای سوشال"
+      }
+    },
+    {
+      "id": "filedb-149",
+      "type": "filedb",
+      "position": {
+        "x": 555.271,
+        "y": 330.38
+      },
+      "data": {
+        "label": "سبک محتوای سوشال"
+      }
+    },
+    {
+      "id": "trigger-194",
+      "type": "trigger",
+      "position": {
+        "x": 1199.1,
+        "y": 827.327
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "imagegeneration-44",
+      "type": "imagegeneration",
+      "position": {
+        "x": 715.616,
+        "y": 1157.76
+      },
+      "data": {
+        "label": "تولید تصویر"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egoogledoc-296-vectorstore-369-1756630340293-296",
+      "source": "googledoc-296",
+      "target": "vectorstore-369"
+    },
+    {
+      "id": "efiledb-149-vectorstore-369-1756630340293-786",
+      "source": "filedb-149",
+      "target": "vectorstore-369"
+    },
+    {
+      "id": "evectorstore-369-assistant-842-1756630340293-750",
+      "source": "vectorstore-369",
+      "target": "assistant-842"
+    },
+    {
+      "id": "egoogledoc-297-assistant-842-1756630340293-311",
+      "source": "googledoc-297",
+      "target": "assistant-842"
+    },
+    {
+      "id": "egooglesheet-259-assistant-842-1756630340293-919",
+      "source": "googlesheet-259",
+      "target": "assistant-842"
+    },
+    {
+      "id": "etrigger-194-assistant-842-1756630340293-581",
+      "source": "trigger-194",
+      "target": "assistant-842"
+    },
+    {
+      "id": "eassistant-842-telegram-490-1756630340293-864",
+      "source": "assistant-842",
+      "target": "telegram-490"
+    },
+    {
+      "id": "eassistant-842-imagegeneration-44-1756630340293-811",
+      "source": "assistant-842",
+      "target": "imagegeneration-44"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-31T08:05:04.345Z",
+  "nodes": [
+    {
+      "id": "assistant-838",
+      "type": "assistant",
+      "position": {
+        "x": 1139.14,
+        "y": 916.891
+      },
+      "data": {
+        "label": "Content Creation API Assistant",
+        "instructions": "You automatically generate SEO-optimized news content using input title, full text, and news link from a Node API. It also creates and attaches a relevant featured image for WordPress publishing.\n\nData Sources:\n- Request API from a Node, providing:\n  - News title\n  - Full news text \n  - News link URL\n\nStep-by-Step Logic:\n1. Content Generation:\n   - Produce a 1000-word news article in Persian with a formal and journalistic tone.\n   - Include the main keyword with a density of 1-2% throughout the text.\n   - Structure the content as follows:\n     - Line 1: News title in plain text containing the main keyword.\n     - Introduction paragraph (100-150 words) introducing the topic without a heading.\n     - Main body with multiple paragraphs, organized using precise HTML heading tags (, , etc.) for automatic WordPress recognition.\n     - Diverse and engaging paragraphs.\n     - Conclusion paragraph (100-150 words) summarizing key points and including a clear, motivational call-to-action.\n     - Source of news as a hyperlink tagged correctly () for WordPress recognition.\n\n2. Image Generation:\n   - Generate a relevant featured image based on the article's topic.\n   - Output the generated image in JSON format:\n     {\n       \"generated_images\": [[\"generated_image\"]]\n     }\n   - This image will be used as the WordPress post’s index/featured image.\n\n3. Publishing:\n   - Send the complete generated content along with the generated image to WordPress for publishing.\n\nOutput Format and Connection:\n- Publish the full SEO-optimized post in WordPress with generated text and featured image.\n- Use precise HTML tags for headings and links to ensure correct WordPress formatting.\n\nRules and Constraints:\n- The content must be exactly 1000 words.\n- Use Persian language with a formal, news-style tone.\n- Maintain keyword density of 1-2%.\n- Include explicit call-to-action in the conclusion.\n- Generate and include one relevant featured image.\n- No summaries or deviations from the structure.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-489",
+      "type": "telegram",
+      "position": {
+        "x": 1305.89,
+        "y": 1190.05
+      },
+      "data": {
+        "label": "WordPress news bot"
+      }
+    },
+    {
+      "id": "apidefinition-162",
+      "type": "apidefinition",
+      "position": {
+        "x": 980.797,
+        "y": 396.046
+      },
+      "data": {
+        "label": "NewsAPI",
+        "baseUrl": "https://content.guardianapis.com",
+        "authType": "apiKey",
+        "authData": {
+          "apiKey": "49bf4a27-adac-4753-9672-10a98d0e026f",
+          "apiKeyIn": "query",
+          "apiKeyName": "api-key"
+        },
+        "defaultHeaders": {
+          "Accept": "application/json"
+        }
+      }
+    },
+    {
+      "id": "request-171",
+      "type": "request",
+      "position": {
+        "x": 1139.5,
+        "y": 728.352
+      },
+      "data": {
+        "label": "News Request",
+        "method": "GET",
+        "endpoint": "/search",
+        "headers": {},
+        "queryParams": {
+          "page-size": "1",
+          "section": "technology",
+          "show-fields": "headline,shortUrl,bodyText"
+        },
+        "responseMapping": ""
+      }
+    },
+    {
+      "id": "wordpress-88",
+      "type": "wordpress",
+      "position": {
+        "x": 957.437,
+        "y": 1191
+      },
+      "data": {
+        "label": "وردپرس جدید"
+      }
+    },
+    {
+      "id": "scheduler-129",
+      "type": "scheduler",
+      "position": {
+        "x": 1364.07,
+        "y": 508.256
+      },
+      "data": {
+        "label": "اسکجولر"
+      }
+    },
+    {
+      "id": "imagegeneration-42",
+      "type": "imagegeneration",
+      "position": {
+        "x": 1629.0058945909107,
+        "y": 1185.9412822315396
+      },
+      "data": {
+        "label": "تولید تصویر"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eapidefinition-162-request-171-1756627465800-182",
+      "source": "apidefinition-162",
+      "target": "request-171"
+    },
+    {
+      "id": "escheduler-129-request-171-1756627465800-456",
+      "source": "scheduler-129",
+      "target": "request-171"
+    },
+    {
+      "id": "erequest-171-assistant-838-1756627465800-968",
+      "source": "request-171",
+      "target": "assistant-838"
+    },
+    {
+      "id": "eassistant-838-telegram-489-1756627465800-260",
+      "source": "assistant-838",
+      "target": "telegram-489"
+    },
+    {
+      "id": "eassistant-838-wordpress-88-1756627465800-322",
+      "source": "assistant-838",
+      "target": "wordpress-88"
+    },
+    {
+      "id": "eassistant-838-imagegeneration-42-1756627489681",
+      "source": "assistant-838",
+      "target": "imagegeneration-42"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-27T13:28:55.798Z",
+  "nodes": [
+    {
+      "id": "assistant-455",
+      "type": "assistant",
+      "position": {
+        "x": 349.923,
+        "y": 353.009
+      },
+      "data": {
+        "label": "دستیار بازخورد کارکنان",
+        "instructions": "Role Definition:\nYou facilitate the collection of employee feedback regarding the company specifically following the company's sales team policies and survey form. It exclusively operates within this scope, providing interactions through chat and Telegram.\nData Sources:\n1. Vector Store ID:  [Your Vector Store ID]\n   - File Storage ID:  [Your File Storage ID]\n     * Contains: Company policies related to sales team\n   - Google Doc ID: [Your Google Doc ID]\n     * Contains: Employee survey form\nData is statically stored in Vector Store  [Your Vector Store ID].\nStep-by-Step Logic:\n1. Receive message from employee via chat interface or Telegram.\n2. Determine user's intent:\n   - If user submits direct feedback about the company:\n     * Store the feedback securely.\n     * Reply with confirmation message acknowledging receipt and thanking the user.\n   - If user requests the survey form:\n     * Retrieve the survey form content from Google Doc.\n     * Send the full survey form text to the user in one message.\n     * Collect the survey responses from the user.\n     * Store the collected feedback securely.\n     * Confirm receipt and thank the user.\n3. Do not engage beyond employee feedback collection scope.\nOutput Formatting:\n- Output channel 1: Chat frame embedded in website or app, full text interactions.\n- Output channel 2: Telegram messages, full text interactions.\nRules and Constraints:\n- Only respond within feedback collection context.\n- Store all feedback securely.\n- Provide polite and professional acknowledgements..\n- Use data from static sources only.\n- Do not mention backend storage or data source details.\nFinal Output:\n- Full conversational text messages via chat frame and Telegram.\n- Confirmation messages upon feedback receipt.",
+        "model": "gpt-4.1-mini"
+      },
+      "parentNode": "container-250",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-457",
+      "type": "analyzer",
+      "position": {
+        "x": 1769.94,
+        "y": 916.228
+      },
+      "data": {
+        "label": "تحلیلگر پیام کارکنان",
+        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل بازخورد کارکنان و مکالمات کاربران هستید. \nهدف شما تحلیل بازخوردهای کارکنان برای ارائه گزارش‌های دقیق و حرفه‌ای برای ارائه به مدیران است. \nشما به موارد زیر دسترسی دارید:  \n- داده‌ها و مکالمات از نود کانتینر (شامل مکالمات در تلگرام و فریم چت)\nشما لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n- معیارهای کلیدی را محاسبه کنید:\n - نرخ پاسخ‌دهی: درصد کاربرانی که بازخورد ارائه کردند.\n - سطح رضایت: تحلیل حس و حال (مثبت، خنثی، منفی) بر اساس کلمات کلیدی یا امتیازات.\n- انواع بازخورد: دسته‌بندی بازخورد (مثل شکایت، پیشنهاد، رضایت).\n- روندهای بازخورد: شناسایی موضوعات پرتکرار (مثل مشکلات محصول یا محیط کار).\n- اگر مدیر معیار خاصی (مثل رضایت در بازه زمانی خاص) بخواهد، آن را اولویت دهید.\n- پاسخ‌ها را به فارسی، با لحن حرفه‌ای و دوستانه بنویسید و از اموجی (😊) استفاده کنید.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-295",
+      "type": "telegram",
+      "position": {
+        "x": 36.1611,
+        "y": 110.809
+      },
+      "data": {
+        "label": "delafeedbacktest"
+      },
+      "parentNode": "container-250",
+      "extent": "parent"
+    },
+    {
+      "id": "vectorstore-237",
+      "type": "vectorstore",
+      "position": {
+        "x": 640.943,
+        "y": 356.238
+      },
+      "data": {
+        "label": "دیتابیس بازخورد کارکنان"
+      },
+      "parentNode": "container-250",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-144",
+      "type": "googledoc",
+      "position": {
+        "x": 638.658,
+        "y": 65.4917
+      },
+      "data": {
+        "label": "فرم نظرسنجی از کارکنان"
+      },
+      "parentNode": "container-250",
+      "extent": "parent"
+    },
+    {
+      "id": "container-250",
+      "type": "container",
+      "position": {
+        "x": 767.816,
+        "y": 617.86
+      },
+      "data": {
+        "label": "کانتینر جمع‌آوری بازخورد",
+        "width": 937,
+        "height": 635
+      }
+    },
+    {
+      "id": "iframe-140",
+      "type": "iframe",
+      "position": {
+        "x": 10,
+        "y": 274.972
+      },
+      "data": {
+        "label": "دلاورس"
+      },
+      "parentNode": "container-250",
+      "extent": "parent"
+    },
+    {
+      "id": "filedb-72",
+      "type": "filedb",
+      "position": {
+        "x": 350.877,
+        "y": 70.3522
+      },
+      "data": {
+        "label": "سیاست‌های شرکت"
+      },
+      "parentNode": "container-250",
+      "extent": "parent"
+    }
+  ],
+  "edges": [
+    {
+      "id": "egoogledoc-144-vectorstore-237-1756301325501-255",
+      "source": "googledoc-144",
+      "target": "vectorstore-237"
+    },
+    {
+      "id": "efiledb-72-vectorstore-237-1756301325501-734",
+      "source": "filedb-72",
+      "target": "vectorstore-237"
+    },
+    {
+      "id": "evectorstore-237-assistant-455-1756301325501-957",
+      "source": "vectorstore-237",
+      "target": "assistant-455"
+    },
+    {
+      "id": "eassistant-455-telegram-295-1756301325501-112",
+      "source": "assistant-455",
+      "target": "telegram-295"
+    },
+    {
+      "id": "eassistant-455-iframe-140-1756301325501-70",
+      "source": "assistant-455",
+      "target": "iframe-140"
+    },
+    {
+      "id": "econtainer-250-analyzer-457-1756301325501-358",
+      "source": "container-250",
+      "target": "analyzer-457"
+    }
+  ]
+}

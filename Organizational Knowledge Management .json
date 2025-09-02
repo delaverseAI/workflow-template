@@ -1,0 +1,144 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-30T13:33:27.605Z",
+  "nodes": [
+    {
+      "id": "assistant-345",
+      "type": "assistant",
+      "position": {
+        "x": 390.423,
+        "y": 616.056
+      },
+      "data": {
+        "label": "دستیار مدیریت دانش",
+        "instructions": "You manage organizational knowledge by providing quick, accurate, and relevant answers to user queries about internal organizational procedures, using a vector store as its knowledge base.\n\nData Sources:\n- Vector Store ID: [Your Vector Store ID]\n- Within the vector store, it references:\n  - Google Doc with ID [Your Google Doc ID] containing the behavioral guidelines for organizational employees.\n  - File with ID [Your File Database ID] from the file repository containing IT unit rules and regulations.\n\nStep-by-Step Logic:\n1. Extraction and Classification:\n   - Extract key information (title, content, category) from the referenced documents in the vector store.\n   - Organize the extracted information into categories: Technical, Educational, and Support.\n\n2. Searchability and Response Generation:\n   - Based on the indexed vector database content, provide precise and relevant answers to user questions.\n   - Answers are strictly based on existing organizational knowledge (FAQs, technical documents, training).\n   - Respond in Persian with a professional and friendly tone.\n   - Only answer user questions without providing personal analysis or suggestions.\n\nOutput Format and Connection:\n- The assistant connects via Frame Chat for integration into an app or website.\n- Alternatively, it connects via Telegram for user interaction.\n- Responses are delivered as full text messages in Persian.\n\nRules and Constraints:\n- Do not offer summaries or unrelated information.\n- Responses must be concise, focused solely on user questions.\n- Maintain a professional and friendly tone in all responses.\n\n",
+        "model": "gpt-4.1-mini"
+      },
+      "parentNode": "container-233",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-346",
+      "type": "analyzer",
+      "position": {
+        "x": 2802.29,
+        "y": -746.529
+      },
+      "data": {
+        "label": "تحلیلگر پیام دانش سازمانی",
+        "instructions": "برای پیام‌های کاربر: \n\nشما یک دستیار هوش مصنوعی برای تحلیل جامع دانش سازمانی براساس پیام‌ها و مکالمات کاربران هستید.  \nهدف شما ارزیابی دانش موجود، شناسایی شکاف‌ها، و ارائه گزارش‌ها و پیشنهادات به مدیران برای بهبود دانش سازمانی است.  \n\nشما لازم است اقدامات زیر را انجام دهید:  \n- تحلیل‌های زیر را انجام دهید:  \n  - معیارهای کلیدی: تعداد اسناد، پوشش دسته‌بندی‌ها، نرخ استفاده (سؤالات پاسخ‌داده‌شده)  \n  - روندها: تغییرات در استفاده از دانش (مثل افزایش سؤالات فنی)  \n  - شکاف‌ها: موضوعات بدون پوشش (مثل نبود آموزش برای ابزار X)  \n  - پیشنهادات: راهکارهای بهبود (مثل افزودن FAQ یا ویدئو آموزشی)  \n- خروجی را به‌صورت متنی و با لحن حرفه‌ای و دوستانه ارائه دهید.  ",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "vectorstore-194",
+      "type": "vectorstore",
+      "position": {
+        "x": 389.986,
+        "y": 431.971
+      },
+      "data": {
+        "label": "دیتابیس  دانش سازمانی"
+      },
+      "parentNode": "container-233",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-111",
+      "type": "googledoc",
+      "position": {
+        "x": 591.823,
+        "y": 159.471
+      },
+      "data": {
+        "label": "دستورالعمل رفتاری کارکنان سازمان"
+      },
+      "parentNode": "container-233",
+      "extent": "parent"
+    },
+    {
+      "id": "container-233",
+      "type": "container",
+      "position": {
+        "x": 1533.19,
+        "y": -1202.32
+      },
+      "data": {
+        "label": "کانتینر مدیریت دانش سازمانی",
+        "width": 1078,
+        "height": 957
+      }
+    },
+    {
+      "id": "iframe-116",
+      "type": "iframe",
+      "position": {
+        "x": 732.453,
+        "y": 421.56
+      },
+      "data": {
+        "label": "دلاورس"
+      },
+      "parentNode": "container-233",
+      "extent": "parent"
+    },
+    {
+      "id": "filedb-47",
+      "type": "filedb",
+      "position": {
+        "x": 154.53,
+        "y": 100.488
+      },
+      "data": {
+        "label": "قوانین و مقررات IT"
+      },
+      "parentNode": "container-233",
+      "extent": "parent"
+    },
+    {
+      "id": "telegram-486",
+      "type": "telegram",
+      "position": {
+        "x": 58.79223826714815,
+        "y": 532.9907515952415
+      },
+      "data": {
+        "label": "اتصال به تلگرام"
+      },
+      "parentNode": "container-233",
+      "extent": "parent"
+    }
+  ],
+  "edges": [
+    {
+      "id": "efiledb-47-vectorstore-194-1756560233536-951",
+      "source": "filedb-47",
+      "target": "vectorstore-194"
+    },
+    {
+      "id": "egoogledoc-111-vectorstore-194-1756560233536-571",
+      "source": "googledoc-111",
+      "target": "vectorstore-194"
+    },
+    {
+      "id": "evectorstore-194-assistant-345-1756560233536-958",
+      "source": "vectorstore-194",
+      "target": "assistant-345"
+    },
+    {
+      "id": "eassistant-345-iframe-116-1756560233536-320",
+      "source": "assistant-345",
+      "target": "iframe-116"
+    },
+    {
+      "id": "econtainer-233-analyzer-346-1756560233536-650",
+      "source": "container-233",
+      "target": "analyzer-346"
+    },
+    {
+      "id": "eassistant-345-telegram-486-1756560251744",
+      "source": "assistant-345",
+      "target": "telegram-486"
+    }
+  ]
+}

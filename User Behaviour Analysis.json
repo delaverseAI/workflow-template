@@ -1,0 +1,198 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-30T11:31:01.107Z",
+  "nodes": [
+    {
+      "id": "assistant-479",
+      "type": "assistant",
+      "position": {
+        "x": 507.68034317343177,
+        "y": 616.5889704797048
+      },
+      "data": {
+        "label": "دستیار تحلیل رفتار مشتری",
+        "instructions": "You analyze customer behavior data to identify patterns, detect churn risks, and recommend complementary products to improve customer retention and increase sales.\nData Sources:\n- Google Doc ID  [Your Google Doc ID]: Contains customer reports data.\n- File Storage with Vector Store ID [Your File Storage IDs]: Contains customer tickets data.\n- Google Sheet ID [Your Google Sheet ID]: Contains customer data with columns:\n  A = Row number\n  B = First Name\n  C = Last Name\n  D = Phone Number\n  E = Email\n  F = City\n  G = Date of Birth\n  H = Gender\n  I = Date of Last Purchase\n  J = Last Purchase Amount\n  K = Loyalty Level\nData is statically stored in Vector Store [Your Vector Store ID].\nStep-by-Step Logic:\n1. Read customer reports from Google Doc.\n2. Read customer tickets data from Vector Store.\n3. Read customer data from Google Sheet.\n4. Perform behavioral analysis:\n   - Identify behavioral patterns and preferences (e.g., frequent purchase of product X).\n   - Categorize customers into segments such as loyal and occasional buyers.\n5. Calculate churn rate:\n   - Identify customers at risk of churn (e.g., decrease in purchase frequency, unresolved tickets).\n   - Estimate the probability of churn for these customers.\n6. Cross-sell analysis:\n   - Recommend complementary products/services (e.g., headphones for phone buyers).\n7. Detect issues:\n   - Identify bottlenecks like slow support responses.\n8. Provide actionable suggestions:\n   - Propose personalized offers (e.g., customized discounts) to retain customers and boost sales.\nOutput Formatting:\n- Generate a comprehensive customer behavior analysis report in Persian.\n- Use a professional and friendly tone.\n- Write a full text report formatted for readability.\n- Write the report into Google Doc with ID [Your Google Doc ID] using the write_google_doc function.\nRules and Constraints:\n- No summaries; full detailed analysis required.\n- Maintain clarity and professionalism.\n- Data privacy must be respected; no personal data exposure beyond internal processing.",
+        "model": "gpt-4.1-mini"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-480",
+      "type": "analyzer",
+      "position": {
+        "x": 462.988,
+        "y": 1127.53
+      },
+      "data": {
+        "label": "تحلیلگر رفتار مشتریان",
+        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل جامع رفتار مشتری براساس پیام‌های دستیار هستید.\n\nهدف شما تولید معیارهای کلیدی، شناسایی روندهای بلندمدت، و ارائه پیشنهادات برای حفظ مشتری و افزایش فروش است و لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n- معیارهای کلیدی: نرخ ریزش، میانگین ارزش خرید، نرخ تعامل.\n- روندهای دوره‌ای: تغییرات رفتار (مثل کاهش خرید) در ماه‌ها.\n- مشکلات: گلوگاه‌ها (مثل تیکت‌های باز پشتیبانی).\n- پیشنهادات: راهکارهای استراتژیک (مثل کمپین‌های شخصی‌سازی‌شده).\n- خروجی را به‌صورت متنی برای تلگرام تولید کنید، با لحن حرفه‌ای و دوستانه.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-305",
+      "type": "telegram",
+      "position": {
+        "x": 864.846,
+        "y": 606.179
+      },
+      "data": {
+        "label": "Customer Behavior Manager"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "vectorstore-247",
+      "type": "vectorstore",
+      "position": {
+        "x": 506.515,
+        "y": 389.224
+      },
+      "data": {
+        "label": "دیتابیس تحلیل مشتری"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-154",
+      "type": "googledoc",
+      "position": {
+        "x": 64.0411,
+        "y": 323.259
+      },
+      "data": {
+        "label": "گزارش‌های مشتری"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-155",
+      "type": "googledoc",
+      "position": {
+        "x": 799.101,
+        "y": 114.595
+      },
+      "data": {
+        "label": "گزارش تحلیل مشتری"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "googlesheet-134",
+      "type": "googlesheet",
+      "position": {
+        "x": 220.237,
+        "y": 90.0685
+      },
+      "data": {
+        "label": "داده‌های مشتری"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "container-256",
+      "type": "container",
+      "position": {
+        "x": -801.9,
+        "y": 593.4453136531365
+      },
+      "data": {
+        "label": "کانتینر تحلیل رفتار مشتری",
+        "width": 1188.99,
+        "height": 919
+      }
+    },
+    {
+      "id": "iframe-146",
+      "type": "iframe",
+      "position": {
+        "x": 123.61,
+        "y": 569.117
+      },
+      "data": {
+        "label": "دلاورس"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "filedb-78",
+      "type": "filedb",
+      "position": {
+        "x": 505.077,
+        "y": 72.1043
+      },
+      "data": {
+        "label": "تیکت‌های مشتری"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    },
+    {
+      "id": "trigger-51",
+      "type": "trigger",
+      "position": {
+        "x": 821.487,
+        "y": 467.899
+      },
+      "data": {
+        "label": "تریگر تحلیل رفتار مشتری"
+      },
+      "parentNode": "container-256",
+      "extent": "parent"
+    }
+  ],
+  "edges": [
+    {
+      "id": "efiledb-78-vectorstore-247-1756550808782-654",
+      "source": "filedb-78",
+      "target": "vectorstore-247"
+    },
+    {
+      "id": "egooglesheet-134-vectorstore-247-1756550808782-936",
+      "source": "googlesheet-134",
+      "target": "vectorstore-247"
+    },
+    {
+      "id": "egoogledoc-154-vectorstore-247-1756550808782-900",
+      "source": "googledoc-154",
+      "target": "vectorstore-247"
+    },
+    {
+      "id": "evectorstore-247-assistant-479-1756550808782-223",
+      "source": "vectorstore-247",
+      "target": "assistant-479"
+    },
+    {
+      "id": "eassistant-479-telegram-305-1756550808782-392",
+      "source": "assistant-479",
+      "target": "telegram-305"
+    },
+    {
+      "id": "egoogledoc-155-assistant-479-1756550808782-648",
+      "source": "googledoc-155",
+      "target": "assistant-479"
+    },
+    {
+      "id": "etrigger-51-assistant-479-1756550808782-90",
+      "source": "trigger-51",
+      "target": "assistant-479"
+    },
+    {
+      "id": "econtainer-256-analyzer-480-1756550808782-738",
+      "source": "container-256",
+      "target": "analyzer-480"
+    },
+    {
+      "id": "eassistant-479-iframe-146-1756550808782-745",
+      "source": "assistant-479",
+      "target": "iframe-146"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-30T14:50:16.096Z",
+  "nodes": [
+    {
+      "id": "assistant-300",
+      "type": "assistant",
+      "position": {
+        "x": 684.461,
+        "y": 1159.12
+      },
+      "data": {
+        "label": "دستیار اتوماسیون پیامک مارکتینگ",
+        "instructions": "You act as an automation workflow for SMS marketing campaigns, creating personalized SMS messages based on customer data, marketing tone guidelines, and campaign details.\n\nData Sources:\n- Vector Store ID:  [Your Vector Store ID]\n- Inside Vector Store:\n  - Google Sheet ID:  [Your Google Sheet ID] (customer data: e.g., contact numbers, first name, last name, etc.)\n  - Google Doc ID: [Your Google Doc ID] (marketing tone guidelines and instructions)\n  - File ID:  [Your File Database  ID] (campaign information related to SMS marketing)\n\nStep-by-Step Logic:\n1. Read all data from the vector store ID.\n   - Read customer data from Google Sheet ID \n   - Read marketing tone guide from Google Doc ID\n   - Read SMS campaign information from file ID inside the vector store.\n\n2. For each customer record:\n   - Apply marketing tone and brand voice guidelines from the Google Doc.\n   - Identify campaign goal per user (Promotion, Retention, New Product).\n   - Generate SMS messages of max 160 characters, in Persian language, friendly tone.\n\n3. Format the phone number by adding a leading \"0\" if not present (e.g., \"9197208607\" → \"09197208607\").\n\n4. Create JSON output for each user with exact structure:\n{\n  \"receptor\": \"formatted phone number\",\n  \"message\": \"personalized SMS message\"\n}\n\n5. Aggregate all user JSON objects in a list.\n\n6. Send the list JSON as the output for SMS sending via SMS Node.\n\n7. Additionally, send a campaign report (including message status and details) to a Telegram channel or user in full text format.\n\nRules and Constraints:\n- SMS must be under 160 characters.\n- SMS must be in Persian and maintain a friendly tone per brand guide.\n- Output must be a single JSON list containing JSON objects per user.\n- No additional text, summary, or explanation outside the exact JSON output.\n- Phone numbers must be normalized with a leading zero.\n- Campaign goals to be recognized and message style adjusted accordingly.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-253",
+      "type": "telegram",
+      "position": {
+        "x": 519.245,
+        "y": 1366.93
+      },
+      "data": {
+        "label": "Dela smx marketing bot"
+      }
+    },
+    {
+      "id": "vectorstore-175",
+      "type": "vectorstore",
+      "position": {
+        "x": 681.465,
+        "y": 953.773
+      },
+      "data": {
+        "label": "دیتابیس مارکتینگ"
+      }
+    },
+    {
+      "id": "googledoc-99",
+      "type": "googledoc",
+      "position": {
+        "x": 990.2,
+        "y": 709.302
+      },
+      "data": {
+        "label": "راهنمای پیامک مارکتینگ"
+      }
+    },
+    {
+      "id": "googlesheet-81",
+      "type": "googlesheet",
+      "position": {
+        "x": 366.189,
+        "y": 716.786
+      },
+      "data": {
+        "label": "دیتای مشتریان"
+      }
+    },
+    {
+      "id": "filedb-30",
+      "type": "filedb",
+      "position": {
+        "x": 681.401,
+        "y": 572.46
+      },
+      "data": {
+        "label": "کمپین مشتریان غیرفعال"
+      }
+    },
+    {
+      "id": "trigger-19",
+      "type": "trigger",
+      "position": {
+        "x": 455.412,
+        "y": 1003
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "sms-5",
+      "type": "sms",
+      "position": {
+        "x": 943.505,
+        "y": 1359.5
+      },
+      "data": {
+        "label": "پیامک"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "efiledb-29-vectorstore-175-1756565029244-400",
+      "source": "filedb-29",
+      "target": "vectorstore-175"
+    },
+    {
+      "id": "efiledb-30-vectorstore-175-1756565029244-330",
+      "source": "filedb-30",
+      "target": "vectorstore-175"
+    },
+    {
+      "id": "egoogledoc-99-vectorstore-175-1756565029244-709",
+      "source": "googledoc-99",
+      "target": "vectorstore-175"
+    },
+    {
+      "id": "evectorstore-175-assistant-300-1756565029244-177",
+      "source": "vectorstore-175",
+      "target": "assistant-300"
+    },
+    {
+      "id": "eassistant-300-telegram-253-1756565029244-55",
+      "source": "assistant-300",
+      "target": "telegram-253"
+    },
+    {
+      "id": "etrigger-19-assistant-300-1756565029244-321",
+      "source": "trigger-19",
+      "target": "assistant-300"
+    },
+    {
+      "id": "eassistant-300-sms-5-1756565029244-203",
+      "source": "assistant-300",
+      "target": "sms-5"
+    },
+    {
+      "id": "egooglesheet-81-vectorstore-175-1756565029244-890",
+      "source": "googlesheet-81",
+      "target": "vectorstore-175"
+    }
+  ]
+}

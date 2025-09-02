@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-08-31T08:26:23.664Z",
+  "nodes": [
+    {
+      "id": "telegram-236",
+      "type": "telegram",
+      "position": {
+        "x": 2340.490027651683,
+        "y": 1782.7117631578872
+      },
+      "data": {
+        "label": "Dela Warehouse"
+      }
+    },
+    {
+      "id": "trigger-4",
+      "type": "trigger",
+      "position": {
+        "x": 2901.8957937240098,
+        "y": 1340.183443063924
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "filedb-148",
+      "type": "filedb",
+      "position": {
+        "x": 2586.6480352879435,
+        "y": 918.1634771646129
+      },
+      "data": {
+        "label": "راهنمای محتوا"
+      }
+    },
+    {
+      "id": "googledoc-295",
+      "type": "googledoc",
+      "position": {
+        "x": 2876.146176311851,
+        "y": 993.0086897249178
+      },
+      "data": {
+        "label": "راهنمای نگارش محتوا"
+      }
+    },
+    {
+      "id": "googlesheet-258",
+      "type": "googlesheet",
+      "position": {
+        "x": 2296.1684560446165,
+        "y": 1244.9645271731056
+      },
+      "data": {
+        "label": "تقویم محتوا"
+      }
+    },
+    {
+      "id": "vectorstore-368",
+      "type": "vectorstore",
+      "position": {
+        "x": 2585.7201988534543,
+        "y": 1276.9322259106011
+      },
+      "data": {
+        "label": "دیتابیس تولید محتوا"
+      }
+    },
+    {
+      "id": "assistant-841",
+      "type": "assistant",
+      "position": {
+        "x": 2607.748779531814,
+        "y": 1522.4478338176204
+      },
+      "data": {
+        "label": "دستیار تولید محتوا",
+        "instructions": "You automatically generate SEO-optimized WordPress content by reading data from a specified Google Sheet, utilizing brand tone and content style guidelines from designated files, updating the sheet status, and generating a relevant featured image.\n\nData Sources:\n- Google Sheet ID: [Your Google Sheet ID]\n  - Columns:\n    - A: Article ID\n    - B: Article Title\n    - C: Main Keyword\n    - D: Publication Status (e.g., \"to_do\", \"done\")\n- Google Doc ID: [Your Google Doc ID] for brand tone guidelines (read_google_doc)\n- File ID: [Your File Database ID] from file repository for writing style guidelines\nGoogle Doc and File are inside the Vector Store with [Your Vector Store ID]\n\nStep-by-Step Logic:\n\n1. Read Data from Google Sheet:\n   - Call function read_google_sheet to load sheet data.\n   - Find the first row where Column D = \"to_do\".\n   - If multiple \"to_do\" entries exist, select the row with the smallest ID.\n   - Store this row number for later steps.\n   - Extract the article title and main keyword from columns B and C respectively.\n\n2. Generate WordPress Content with SEO Optimization:\n   - Read brand tone guidelines from Google Doc.\n   - Read writing style guidelines from File.\n   - Generate content using the article title and main keyword.\n   - SEO Requirements:\n     - Natural and repeated usage of the main keyword throughout content (2-4% density).\n     - Include the main keyword in the main title.\n     - Balanced keyword distribution in subheadings.\n     - Use related and LSI keywords.\n     - Logical and hierarchical content structure.\n     - Valuable, original, user-focused content.\n     - Paragraph length about 2-4 lines.\n     - Use diverse sentence lengths.\n   - Content Structure:\n     - Main Title (with main keyword)\n     - Introduction paragraph including the main keyword naturally.\n     - Main heading 1 with detailed content including main and related keywords.\n       - Key points as a bullet list.\n     - Subheading with supplementary information.\n     - Main heading 2 continuing content with value for readers.\n\n3. Update Status:\n   - Call update_google_sheet (row_number, \"done\") to update Column D status.\n   - This update must happen regardless of success or failure.\n\n4. Generate Image:\n   - Create a relevant featured image based on the article title.\n   - Include in output JSON:\n     {\n      \"generated_images\": [[\"generated_image\"]]\n     }\n\n5. Output:\n   - Present the generated content as a plain text SEO-optimized article.\n   - Include the generated image data as described.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "imagegeneration-43",
+      "type": "imagegeneration",
+      "position": {
+        "x": 2608.982625342884,
+        "y": 1792.3453783009838
+      },
+      "data": {
+        "label": "تولید تصویر"
+      }
+    },
+    {
+      "id": "wordpress-89",
+      "type": "wordpress",
+      "position": {
+        "x": 2927.1658204795904,
+        "y": 1801.9357113454287
+      },
+      "data": {
+        "label": "وردپرس جدید"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egoogledoc-295-vectorstore-368-1756628671998",
+      "source": "googledoc-295",
+      "target": "vectorstore-368"
+    },
+    {
+      "id": "egooglesheet-258-assistant-841-1756628677236",
+      "source": "googlesheet-258",
+      "target": "assistant-841"
+    },
+    {
+      "id": "etrigger-4-assistant-841-1756628685897",
+      "source": "trigger-4",
+      "target": "assistant-841"
+    },
+    {
+      "id": "efiledb-148-vectorstore-368-1756628692539",
+      "source": "filedb-148",
+      "target": "vectorstore-368"
+    },
+    {
+      "id": "evectorstore-368-assistant-841-1756628742775",
+      "source": "vectorstore-368",
+      "target": "assistant-841"
+    },
+    {
+      "id": "eassistant-841-telegram-236-1756628749013",
+      "source": "assistant-841",
+      "target": "telegram-236"
+    },
+    {
+      "id": "eassistant-841-imagegeneration-43-1756628753003",
+      "source": "assistant-841",
+      "target": "imagegeneration-43"
+    },
+    {
+      "id": "eassistant-841-wordpress-89-1756628775489",
+      "source": "assistant-841",
+      "target": "wordpress-89"
+    }
+  ]
+}

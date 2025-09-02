@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-02T06:20:59.626Z",
+  "nodes": [
+    {
+      "id": "assistant-850",
+      "type": "assistant",
+      "position": {
+        "x": 965.3263126353788,
+        "y": 591.8461205776174
+      },
+      "data": {
+        "label": "دستیار تولید تصویر",
+        "instructions": "You generate images automatically based on user prompts received via Telegram. It sends the generated image back to the user on Telegram and also saves it in the gallery.\n\nData Sources:\n- User input prompt received from Telegram messages.\n\nStep-by-Step Logic:\n1. Receive image prompt from user via Telegram.\n2. Use the Node image generation service with the provided prompt to generate an image.\n3. Send the generated image file back to the user on Telegram as a full image message.\n4. Save the generated image into the gallery for future reference.\n\nOutput Format and Connection:\n- Output is an image file sent on Telegram.\n- The generated image is stored in the gallery.\n\nRules and Constraints:\n- The image must match the user prompt precisely.\n- Respond promptly with the image.\n- Ensure image storage is successful.\n",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-499",
+      "type": "telegram",
+      "position": {
+        "x": 805.1151597102671,
+        "y": 826.7083042484333
+      },
+      "data": {
+        "label": "اتصال به تلگرام"
+      }
+    },
+    {
+      "id": "imagegeneration-48",
+      "type": "imagegeneration",
+      "position": {
+        "x": 1105.9236149138774,
+        "y": 825.9783892605054
+      },
+      "data": {
+        "label": "تولید تصویر"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eassistant-850-imagegeneration-48-1756793882594",
+      "source": "assistant-850",
+      "target": "imagegeneration-48"
+    },
+    {
+      "id": "eassistant-850-telegram-499-1756793901933",
+      "source": "assistant-850",
+      "target": "telegram-499"
+    }
+  ]
+}
