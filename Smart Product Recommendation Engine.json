@@ -1,0 +1,144 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T13:44:13.813Z",
+  "nodes": [
+    {
+      "id": "vectorstore-387",
+      "type": "vectorstore",
+      "position": {
+        "x": 400.9160606519133,
+        "y": 359.6051961272153
+      },
+      "data": {
+        "label": "دیتابیس برداری جدید"
+      },
+      "parentNode": "container-297",
+      "extent": "parent"
+    },
+    {
+      "id": "assistant-870",
+      "type": "assistant",
+      "position": {
+        "x": 399.1560423500989,
+        "y": 556.5346507553274
+      },
+      "data": {
+        "label": "دستیار جدید",
+        "instructions": "1. Assistant Role:\nRead the Google Sheet and automate personalized product recommendations for e-commerce and content platforms, leveraging data retrieval, AI-generated suggestions, multi-channel delivery via Telegram and Frame Chat, and advanced analytics for optimization.\n2. Data Sources:\n\nGoogle Sheets:\n\nSheet ID: Configured product data sheet with full product characteristics.\nColumns: Defined per product features (e.g., A=Product ID, B=Name, C=Category, D=Attributes).\nFunction: read_google_sheet to fetch product data from vector store: vs_68b8373d7b408191bd005ef9bc9b5213\n\n\nFrame Chat:\n\nChat domain and bot title configured to provide real-time interactive recommendations.\n\n\nContainer Node:\n\nFor organizing nodes and feeding aggregated data into AI Analyzer.\n\n\nAI Analyzer Node:\n\nFor analyzing recommendation data and generating insights.\n\n\n\n3. Step-by-Step Logic:\n\nRead the Google Sheet and fetch product data from the Google Sheets Node (read operation).\n(Optional) Pass data through the Vector Store Node to utilize embeddings for static data context.\nAI Assistant Node processes product data (from Vector Store or Google Sheets) with an AI model (e.g., OpenAI) to generate personalized product recommendations based on user preferences or query.\nSend recommendations as personalized Telegram messages via the Telegram Node to users.\nProvide a real-time chat interface with product recommendations through the Frame Chat Node, utilizing the configured chat domain and theme.\nUse the Container Node to group and organize workflow components; output connected to the AI Analyzer Node.\nAI Analyzer Node analyzes aggregated recommendation data and user interactions to generate performance insights for continuous optimization.\n\n4. Output Formatting:\n\nTelegram: Personalized messages including product names, descriptions, and links.\nFrame Chat: Interactive chat UI presenting recommendations and allowing user engagement.\nAI Analyzer: Analytical reports or insights delivered via its configured interfaces.\n\n5. Rules and Constraints:\n\nEnsure Google Sheets data is accurate, updated, and formatted correctly when reading.\nMaintain security and access tokens for the Telegram Bot and Frame Chat domain.\nTest both static vector-based and dynamic data feeding methods for AI input.\nValidate messaging formats meet Telegram’s requirements.\nOrganize nodes logically within the Container for clarity and smooth data flow.\nMonitor the analytics dashboard regularly to fine-tune recommendation accuracy.\n\n6. Connecting Nodes Summary:\n\nGoogle Sheets Node → Vector Store Node (optional) → AI Assistant Node → Telegram Node & Frame Chat Node\nContainer Node → AI Analyzer Node",
+        "model": "gpt-4.1-mini"
+      },
+      "parentNode": "container-297",
+      "extent": "parent"
+    },
+    {
+      "id": "telegram-520",
+      "type": "telegram",
+      "position": {
+        "x": 189.9138975683727,
+        "y": 812.4173616277451
+      },
+      "data": {
+        "label": "اتصال به تلگرام"
+      },
+      "parentNode": "container-297",
+      "extent": "parent"
+    },
+    {
+      "id": "iframe-225",
+      "type": "iframe",
+      "position": {
+        "x": 660.6207739646995,
+        "y": 808.6344682821309
+      },
+      "data": {
+        "label": "فریم چت جدید"
+      },
+      "parentNode": "container-297",
+      "extent": "parent"
+    },
+    {
+      "id": "container-297",
+      "type": "container",
+      "position": {
+        "x": 1550.0260348842,
+        "y": 185.9346477392005
+      },
+      "data": {
+        "label": "کانتینر جدید",
+        "width": 1145,
+        "height": 1200
+      }
+    },
+    {
+      "id": "googlesheet-276",
+      "type": "googlesheet",
+      "position": {
+        "x": 401.2839862875446,
+        "y": 99.11504793798792
+      },
+      "data": {
+        "label": "گوگل شیت"
+      },
+      "parentNode": "container-297",
+      "extent": "parent"
+    },
+    {
+      "id": "trigger-219",
+      "type": "trigger",
+      "position": {
+        "x": 776.2199390092107,
+        "y": 416.343399248061
+      },
+      "data": {
+        "label": "تریگر جدید"
+      },
+      "parentNode": "container-297",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-875",
+      "type": "analyzer",
+      "position": {
+        "x": 1995.2130499033033,
+        "y": 1469.932500562109
+      },
+      "data": {
+        "label": "تحلیلگر پیام",
+        "instructions": "",
+        "model": "gpt-4o"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egooglesheet-276-vectorstore-387-1756904313868",
+      "source": "googlesheet-276",
+      "target": "vectorstore-387"
+    },
+    {
+      "id": "evectorstore-387-assistant-870-1756904340987",
+      "source": "vectorstore-387",
+      "target": "assistant-870"
+    },
+    {
+      "id": "eassistant-870-iframe-225-1756904681596",
+      "source": "assistant-870",
+      "target": "iframe-225"
+    },
+    {
+      "id": "eassistant-870-telegram-520-1756904762022",
+      "source": "assistant-870",
+      "target": "telegram-520"
+    },
+    {
+      "id": "etrigger-219-assistant-870-1756904821846",
+      "source": "trigger-219",
+      "target": "assistant-870"
+    },
+    {
+      "id": "econtainer-297-analyzer-875-1756904945923",
+      "source": "container-297",
+      "target": "analyzer-875"
+    }
+  ]
+}
