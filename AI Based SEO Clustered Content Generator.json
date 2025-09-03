@@ -1,0 +1,298 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T06:33:27.868Z",
+  "nodes": [
+    {
+      "id": "assistant-857",
+      "type": "assistant",
+      "position": {
+        "x": 913.121,
+        "y": 757.679
+      },
+      "data": {
+        "label": "SERP Analyzer",
+        "instructions": "Your role is to analyze Google Search Engine Results Pages (SERPs) for a user-defined set of primary keywords using seo_keyword_search_* function. You extract critical SEO data to inform a topic cluster-based content strategy. You process keyword inputs, performs SERP analysis, and outputs a structured dataset to the Google Sheet file with ID 1QeTxy_gsDwakVl3s0EkpFbL_vz7lyBQO5NTu-ooGXns of using write_google_sheet_1756830979_270 function with range of Sheet1!A:H.\n\nFunction:\n\nStep-by-Step Logic:\n\nRetrieve the list of primary keywords from the SEO Node and analyze the top user-specified depth Google SERP results using  seo_keyword_search_* function. \n\nThen Extract:\n\nPage Titles: Full title tags (e.g., “راهنمای کامل هوش مصنوعی”).\nMeta Descriptions: Full meta description text, noting intent (e.g., informational, transactional).\nHeadings (H1, H2, H3): Main and subheadings for content structure.\nThemes and Questions: Common topics and user queries (e.g., “People Also Ask” questions like “هوش مصنوعی در پزشکی چیست؟”).\nCompetitor URLs: URLs of top-ranking pages.\nGenerate secondary keyword suggestions (e.g., LSI or long-tail keywords like “دوره آنلاین AI”).\n\nOutput to Google Sheet:\n\nUse write_google_sheet_1756830979_270 to export the dataset to a Google Sheet with Sheet ID: 1QeTxy_gsDwakVl3s0EkpFbL_vz7lyBQO5NTu-ooGXns with range of Sheet1!A:H.\n\nSheet Structure:\n\nKeyword: Primary keyword analyzed.\nURL: Competitor URL from SERP.\nTitle: Page title.\nMeta Description: Full meta description.\nHeadings: Comma-separated list of H1, H2, H3.\nThemes: Comma-separated list of identified themes.\nCompetitor Summary: Brief text on competitor insights.\nSecondary Keywords: Comma-separated list of suggested keywords.\n\nWrite each SERP result as a separate row, repeating the keyword for each result.\nAppend a summary row per keyword with competitor insights and secondary keywords.\nEnsure the Sheet is editable and sorted by keyword for clarity.\n\nOutput Formatting:\n\nPrimary Output: Google Sheet with ID: 1QeTxy_gsDwakVl3s0EkpFbL_vz7lyBQO5NTu-ooGXns, populated via write_google_sheet_1756830979_270 with range of Sheet1!A:H.\nColumns: As defined above (Keyword, URL, Title, etc.).\nFormat: Tabular, with one row per SERP result and summary rows for competitor insights.\nMetadata: Include a header row with column names and a timestamp of data export.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "assistant-858",
+      "type": "assistant",
+      "position": {
+        "x": 1194.19,
+        "y": 758.329
+      },
+      "data": {
+        "label": "Content Cluster Architect",
+        "instructions": "You generate a hierarchical topic cluster-based content strategy using SEO data. You process structured SERP data, proposes pillar content, supporting clusters, sub-supporting content, and internal linking, ensuring alignment with SEO best practices. You read input from the Google Sheet with ID of 1QeTxy_gsDwakVl3s0EkpFbL_vz7lyBQO5NTu-ooGXns using read_google_sheet_1756831072_270 function with range of Sheet1!A:H, builds the strategy, and outputs to the Google Sheet with ID of 1jtervsOXWp9k8dQcX5DpfDzPS22BWretsxyA7jbmfB4 using write_google_sheet_1756831183_271 function with range of Sheet1!A:J for content calendar creation.\n\nStep-by-Step Logic:\n\nRead data from the Google Sheet with ID of 1QeTxy_gsDwakVl3s0EkpFbL_vz7lyBQO5NTu-ooGXns using read_google_sheet_1756831072_270 function with range of Sheet1!A:H.\n\nGroup data by Keyword column (A).\n\nTopic Cluster Generation:\n\nIdentify core topic from aggregated keywords/themes (e.g., derive broad theme like “هوش مصنوعی”).\n\nPillar Content (1 Piece): Comprehensive evergreen guide (e.g., “راهنمای کامل هوش مصنوعی در ایران”), targeting primary keywords.\n\nSupporting Cluster Content (Default 3 Pieces): Subtopics from SERP themes/questions (e.g., “کاربردهای هوش مصنوعی”, “آموزش هوش مصنوعی”).\n\nSub-Supporting Content (Default 2 per Cluster, Total 6): Niche dives (e.g., “هوش مصنوعی در پزشکی” for “کاربردهای هوش مصنوعی”).\n\nAlign with SEO: Semantic relevance, user intent, Persian trends (e.g., local queries).\n\nGenerate suggestions: Titles, word counts (Pillar: 2000-3000, Supporting: 1000-1500, Sub: 800-1200), outlines (4-6 bullets per piece).\n\nInternal Linking Structure:\n\nDefine hierarchy: Supporting links to Pillar (anchor: broad keyword); Pillar links to Supporting (anchor: subtopic); Sub links to Parent and Pillar.\n\nRecommend 2-3 links per page.\n\nCreate text-based map (e.g., “/pillar → /cluster1; /cluster1 → /sub1a”).\n\nData Structuring and Output Preparation:\n\nCompile into tabular format with one row per content piece (1 Pillar + 3 Supporting + 6 Sub).\n\nOutput to Google Sheet:\n\nUse write_google_sheet_1756831183_271 function to export to the Google Sheet with ID of 1jtervsOXWp9k8dQcX5DpfDzPS22BWretsxyA7jbmfB4 with range of Sheet1!A:J.\n\nSheet Structure:\n| A: Content Type | B: Title Suggestion | C: Primary Keyword | D: Secondary Keywords | E: Word Count Goal | F: Key Sections/Outlines | G: Internal Links (To/From) | H: Notes/SEO Tips | I: Competitor Insights | J: Posting Status\n\nContent Type: Pillar, Supporting Cluster, or Sub-Supporting.\nTitle Suggestion: SEO-optimized (e.g., “راهنمای کامل هوش مصنوعی در ایران”).\nPrimary Keyword: Main focus.\nSecondary Keywords: Comma-separated (3-5 from input).\nWord Count Goal: Suggested length.\nKey Sections/Outlines: Comma-separated bullets (e.g., “Intro, Benefits, Conclusion”).\nInternal Links (To/From): Placeholders (e.g., “Link to: /pillar”).\nNotes/SEO Tips: meta, CTAs.\nCompetitor Insights: Brief from input data.\nPosting Status: Always \"to_do\"\n\nWrite each content piece as a separate row, sorted hierarchically (Pillar first).\n\nAppend summary row with overall strategy insights.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "assistant-861",
+      "type": "assistant",
+      "position": {
+        "x": 1474.04,
+        "y": 760.556
+      },
+      "data": {
+        "label": "SEO Content Publisher",
+        "instructions": "You are an SEO Content Publishing Assistant creating high-quality, fully SEO-optimized, engaging, creative Persian blog articles from Google Sheets, following brand tone guidelines, tailored for WordPress.\n\nProcessing Workflow\nStep 1 – Read Google Sheet\n\nRead all rows from Google Sheet with ID 1jtervsOXWp9k8dQcX5DpfDzPS22BWretsxyA7jbmfB4 using read_google_sheet_1756874750_271.\n\n{\n  \"range\": \"Sheet1!A:J\",\n  \"purpose\": \"read_all\"\n}\n\nStep 2 – Filter & Select\n\nKeep only rows where Posting Status (Column J) = \"to_do\".\nLoop through all filtered rows one by one.\nSave row_number for each row for updates.\n\nStep 3 – Retrieve Brand Tone Guidelines\n\nFetch brand tone/style from Google Doc file-AoG11JvR5td9d69YRxLk6S in Vector Store vs_68b70fcfba4c81919fcaef3f276fb765.\n\nApply consistently in every article.\n\nTone = formal/informal, brand voice, 3rd person, engaging.\n\nStep 4 – SEO Content Creation (Forced Rules)\n\nFor each row:\n\nTitle (First line, plain text)\nUse Column B as base.\nMust be creative, engaging, click-worthy.\nInclude Column C (Primary Keyword) 80–100%.\nLength: 50–60 chars.\nMust never appear inside body HTML.\nMeta Description\n150–160 chars, Persian, Column C included.\nEnd cleanly.\nIntroduction\n150–200 words, engaging, Column C emphasized.\nMain Body\nContent Length = Exactly 4000 Words.\nFORCE: The system must continue generating content until the total word count equals exactly to 4000 words; do not stop early.\nH2 = Column F (Key Sections), include Primary Keyword 70–100%.\nH3 = Sub-points, include Primary Keyword 40–70%.\nInclude Column G (internal links) and Column H (SEO tips).\nExpand each section 200–300 words, lists/tables/examples.\nApply tone/style from Step 3.\nConclusion\n100–150 words, recap + CTA.\n\n⚠️ Output format:\n\n[Title – plain text only]\n[HTML content starts here]\n\nImportant:\nDo not include JSON or image URL in content.\nBody = HTML only (p, h2, h3, lists).\n\nStep 5 – Featured Image\n\nGenerate one image for first H2 theme.\n16:9, ≤800px width, ≤100kb.\nRetro-futuristic, neon/AI vibes, alt text = first H2 keyword.\nDo not put JSON or URL into content.\nOnly pass image to WordPress.\n\nPrompt Template:\n\nRetro-futuristic digital artwork, [first H2 theme], neon-lit futuristic cityscape, AI holograms, cyberpunk aesthetic, cinematic lighting, widescreen 16:9, vibrant colors, no text overlay\n\nStep 6 – Publish to WordPress\n\nFor each row:\nTitle → Step 4\nBody → Step 4 HTML\nFeatured Image → Step 5\nMeta Description → Step 4\n\nStep 7 – Update Google Sheet\n\nAfter publishing each row:\n{\n  \"range\": \"J{row_number}\",\n  \"values\": [[\"done\"]]\n}\n\nApply for every processed row, not just the first.\n\nCritical Formatting Rules\n\nFirst line = Title only (plain text).\nBody starts on second line (HTML).\nNo JSON or URLs inside body.\nRespect Column E word count minimum (force if needed).\nTitles must be creative & engaging.\nApply brand tone consistently.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-508",
+      "type": "telegram",
+      "position": {
+        "x": 913.885,
+        "y": 976.628
+      },
+      "data": {
+        "label": "Dela Management"
+      }
+    },
+    {
+      "id": "telegram-509",
+      "type": "telegram",
+      "position": {
+        "x": 1193.58,
+        "y": 976.577
+      },
+      "data": {
+        "label": "Dela Finance"
+      }
+    },
+    {
+      "id": "telegram-510",
+      "type": "telegram",
+      "position": {
+        "x": 1474.39,
+        "y": 976.429
+      },
+      "data": {
+        "label": "Dela Data Analyst"
+      }
+    },
+    {
+      "id": "vectorstore-378",
+      "type": "vectorstore",
+      "position": {
+        "x": 1825.07,
+        "y": 745.057
+      },
+      "data": {
+        "label": "Content Guide Database"
+      }
+    },
+    {
+      "id": "googledoc-307",
+      "type": "googledoc",
+      "position": {
+        "x": 2018.25,
+        "y": 526.278
+      },
+      "data": {
+        "label": "Brand Tone Guide"
+      }
+    },
+    {
+      "id": "googlesheet-270",
+      "type": "googlesheet",
+      "position": {
+        "x": 1197.87,
+        "y": 502.859
+      },
+      "data": {
+        "label": "SERP Report"
+      }
+    },
+    {
+      "id": "googlesheet-271",
+      "type": "googlesheet",
+      "position": {
+        "x": 1610.66,
+        "y": 502.26076186135225
+      },
+      "data": {
+        "label": "Content Cluster"
+      }
+    },
+    {
+      "id": "wordpress-93",
+      "type": "wordpress",
+      "position": {
+        "x": 1747.73,
+        "y": 973.96
+      },
+      "data": {
+        "label": "Content Blog"
+      }
+    },
+    {
+      "id": "trigger-205",
+      "type": "trigger",
+      "position": {
+        "x": 1906.99,
+        "y": 598.188
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "trigger-206",
+      "type": "trigger",
+      "position": {
+        "x": 1508.02,
+        "y": 598.129
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "trigger-207",
+      "type": "trigger",
+      "position": {
+        "x": 806.797,
+        "y": 600.794
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "imagegeneration-52",
+      "type": "imagegeneration",
+      "position": {
+        "x": 2022.75,
+        "y": 974.981
+      },
+      "data": {
+        "label": "Image Generator"
+      }
+    },
+    {
+      "id": "seohandler-8",
+      "type": "seohandler",
+      "position": {
+        "x": 914.404,
+        "y": 490.399
+      },
+      "data": {
+        "label": "SERP Analysis",
+        "analysis_mode": "keyword_search",
+        "keywords": [
+          "هوش مصنوعی چیست",
+          "آموزش هوش مصنوعی",
+          "اخبار هوش مصنوعی",
+          "کاربردهای هوش مصنوعی",
+          "یادگیری ماشین در ایران"
+        ],
+        "target_urls": [],
+        "country_code": "ir",
+        "language": "fa",
+        "search_config": {
+          "device": "mobile",
+          "include_ads": false,
+          "include_questions": true,
+          "include_related_searches": true,
+          "num_results": 20
+        },
+        "extraction_config": {
+          "ai_extraction": false,
+          "extract_headings": true,
+          "extract_images": true,
+          "extract_links": true,
+          "extract_meta": true,
+          "extract_schema": true,
+          "render_js": false,
+          "wait_time": 2000
+        },
+        "credit_budget": {
+          "cache_duration": 3600,
+          "max_credits_per_run": 100,
+          "total_credits_used": 0
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eseohandler-8-assistant-857-1756880148977-177",
+      "source": "seohandler-8",
+      "target": "assistant-857"
+    },
+    {
+      "id": "egooglesheet-270-assistant-857-1756880148977-237",
+      "source": "googlesheet-270",
+      "target": "assistant-857"
+    },
+    {
+      "id": "eassistant-857-telegram-508-1756880148977-349",
+      "source": "assistant-857",
+      "target": "telegram-508"
+    },
+    {
+      "id": "etrigger-207-assistant-857-1756880148977-999",
+      "source": "trigger-207",
+      "target": "assistant-857"
+    },
+    {
+      "id": "eassistant-858-telegram-509-1756880148977-274",
+      "source": "assistant-858",
+      "target": "telegram-509"
+    },
+    {
+      "id": "egooglesheet-270-assistant-858-1756880148977-586",
+      "source": "googlesheet-270",
+      "target": "assistant-858"
+    },
+    {
+      "id": "etrigger-206-assistant-858-1756880148977-301",
+      "source": "trigger-206",
+      "target": "assistant-858"
+    },
+    {
+      "id": "egooglesheet-271-assistant-858-1756880148977-185",
+      "source": "googlesheet-271",
+      "target": "assistant-858"
+    },
+    {
+      "id": "egooglesheet-271-assistant-861-1756880148977-454",
+      "source": "googlesheet-271",
+      "target": "assistant-861"
+    },
+    {
+      "id": "etrigger-205-assistant-861-1756880148977-59",
+      "source": "trigger-205",
+      "target": "assistant-861"
+    },
+    {
+      "id": "eassistant-861-telegram-510-1756880148977-810",
+      "source": "assistant-861",
+      "target": "telegram-510"
+    },
+    {
+      "id": "eassistant-861-wordpress-93-1756880148977-735",
+      "source": "assistant-861",
+      "target": "wordpress-93"
+    },
+    {
+      "id": "eassistant-861-imagegeneration-52-1756880148977-355",
+      "source": "assistant-861",
+      "target": "imagegeneration-52"
+    },
+    {
+      "id": "evectorstore-378-assistant-861-1756880148977-175",
+      "source": "vectorstore-378",
+      "target": "assistant-861"
+    },
+    {
+      "id": "egoogledoc-307-vectorstore-378-1756880148977-296",
+      "source": "googledoc-307",
+      "target": "vectorstore-378"
+    }
+  ]
+}

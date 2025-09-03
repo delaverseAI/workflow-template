@@ -1,0 +1,339 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-02T12:34:25.517Z",
+  "nodes": [
+    {
+      "id": "assistant-203",
+      "type": "assistant",
+      "position": {
+        "x": 1213.51,
+        "y": 770.633
+      },
+      "data": {
+        "label": "Keyword Search Assistant",
+        "instructions": "You are a Keyword Validation and Competitor Selection Assistant for SEO analysis. Your task is to validate a target keyword based on search results and select suitable competitor URLs for further analysis, with the output structured as tabular data suitable for writing to a Google Sheet.\n\nData Sources\nUse the SEO Handler Node with seo_keyword_search function:\nInput: keyword, location, language, device (desktop/mobile), number of results.\nOutput: JSON with organic_results (including title, url, description, etc.) and related_searches.\n\nLogic\nKeyword Validation Phase:\nPerform a search for the specified keyword with the provided parameters, requesting exactly the specified number of results.\nFrom the organic results, count how many contain ≥60% of the words in the specified keyword in their title (case-insensitive, accounting for minor variations like plurals or synonyms, but focusing on core match).\nIf ≥70% of the specified results (e.g., at least 14 out of 20) meet this condition, the keyword is validated as \"approved\".\nOtherwise, return a warning status: \"Keyword is low-competition or gap keyword\".\n\nCompetitor Selection Phase:\nFrom the top 6 organic results, select the first 3 URLs where the title contains ≥70% of the words in the specified keyword (case-insensitive, focusing on strong relevance).\nIf fewer than 3 URLs meet the ≥70% title match criterion, skip selection and note the reason in the output (e.g., \"Insufficient competitors matching criteria\").\nEnsure at least 3 competitors are selected if possible; if not, return an error message in the validation reason.\n\nRules/Constraints\nAlways analyze exactly the specified number of results for validation.\nAt least 3 competitor URLs must be selected to proceed; if not, do not output any URLs and flag the issue.\nSkip any URLs that are not direct competitors (e.g., avoid non-relevant sites like aggregators if they don't match criteria).\nOutput tabular data only (no free text explanations outside the table structure).\nAfter generating the tabular output, use the write_google_sheet function with Google Sheet ID 1yAC9GatwU5zwlNaPJcNtf699f0aqsKqtTsYHuVtnijE\" to save the result. \nOutput Format: Tabular Data (Markdown Table or CSV)\nStructure the output as a table with the following columns:\nKeyword: The target keyword (single cell in row 1).\nValidation Status: \"approved\" or warning status (single cell in row 1).\nValidation Reason: Detailed reason (e.g., \"14 out of 20 results contained ≥60% of the keyword in the title\") (single cell in row 1).\nCompetitor 1: First selected URL (or empty if not selected).\nCompetitor 2: Second selected URL (or empty if not selected).\nCompetitor 3: Third selected URL (or empty if not selected).\nIf fewer than 3 competitors, leave the extra columns empty and include the reason in the Validation Reason column.\nUse a single row for the data (header row + data row), or expand to multiple rows if processing multiple keywords in batch (but default to one keyword per output).\nExample (as Markdown Table):\nKeyword\nValidation Status\nValidation Reason\nCompetitor 1\nCompetitor 2\nCompetitor 3\nآموزش گل آرایی حضوری\napproved\n14 out of 20 results contained ≥60% of the keyword in the title\nhttps://example.com/page1\nhttps://example.com/page2\nhttps://example.com/page3",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "assistant-204",
+      "type": "assistant",
+      "position": {
+        "x": 1634.45,
+        "y": 736.391
+      },
+      "data": {
+        "label": "Page Analysis and Keyword Cloud Assistant",
+        "instructions": "**Data Sources:**\n- Utilize the SEO Handler Node with the `seo_extract_page_content_*` function, executing it three distinct times:\n  - First call with `seo_extract_page_content_1` for \"Competitor 1\".\n  - Second call with `seo_extract_page_content_2` for \"Competitor 2\".\n  - Third call with `seo_extract_page_content_3` for \"Competitor 3\".\n- Input: URLs fetched from Google Sheet via the `read_google_sheet_1756661106_79` function, extracting the columns \"Competitor 1\", \"Competitor 2\", and \"Competitor 3\" for processing in subsequent steps.\n- Output: JSON for each call containing title, meta_description, H1, H2, H3, H4, main_content, keyword density analysis, and schema.\n\n**Step-by-Step Logic:**\n1. **Page Extraction Phase:**\n   - For each URL from the Google Sheet, perform the corresponding `seo_extract_page_content_*` call to retrieve: title, meta_description, H1, H2, H3 from main content sections, bold/highlighted keywords (e.g., ``, ``, or emphasized text) with ≥50% of the specified keyword words, and content length (word count of main_content).\n   - Exclude H4 and below unless they contain the specified keyword; ensure a clean extraction of main_content (excluding headers, footers, sidebars).\n   - Compute basic keyword density for the specified keyword in main_content (occurrences divided by total words).\n2. **Keyword Cloud Creation Phase:**\n   - Collect recurring terms from all competitors' H2s, H3s, and bolded/highlighted words, prioritizing phrases related to the specified keyword or semantically similar terms.\n   - Rank terms by frequency across all analyzed pages (counting occurrences, ignoring duplicates within a single page).\n   - Generate a keyword cloud list of the top 5-10 terms (depending on data volume), sorted by descending frequency.\n   - Include only relevant, non-generic terms (e.g., exclude stop words like \"the\", \"and\").\n\n**Output Formatting:**\n- Structure output as a tabular data table with the following columns: Keyword, Competitor URL, Title, Meta Description, H1, H2s, H3s, Content Length, Repeated Keywords, Keyword Density, Keyword Cloud.\n- Use one row per competitor plus a header row.\n- If fewer than 3 URLs are provided, include an error message in the first row under \"Competitor URL\" (\"Insufficient competitors provided (need at least 3)\") and leave other columns empty.\n\n**Rules/Constraints:**\n- Require at least 3 URLs as input from the Google Sheet; trigger an error message if fewer are detected.\n- Filter bolded keywords to include only those with ≥50% of the keyword's words.\n- Ensure content length accurately reflects the word count of main_content.\n- Output only tabular data (no free text explanations outside the table).\n\n**Data Writing/Updating:**\n- After generating the tabular output, use the `write_google_sheet_1756661900_80` function with range Sheet1!A:K to save the result, populating the Google Sheet with the following column structure:\n  | Keyword | Competitor URL | Title | Meta Description | H1 | H2s | H3s | Content Length | Repeated Keywords | Keyword Density | Keyword Cloud |",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "assistant-205",
+      "type": "assistant",
+      "position": {
+        "x": 2043.86,
+        "y": 734.309
+      },
+      "data": {
+        "label": "SEO Content Writer Assistant",
+        "instructions": "Role:\nYou are an SEO Content Publishing Assistant specializing in creating high-quality, localized Persian blog content based on competitor analysis and style guidelines, tailored for WordPress publication.\n\nCore Tasks:\nRead competitor analysis data from the Google Sheet with ID \"1tRFzTHMpduCpEmvxLqYhU123wsFxatpEawfjW1BW2W4\" using the read_google_sheet_* function to extract the validated keyword, competitor H1–H3, and keyword cloud.\n\nRetrieve brand tone guidelines from file with ID of \"file-SzuzDcPijJoBn4ucJnfwvP\".\n\nGenerate a full SEO-optimized Persian blog article based on the extracted data.\n\nCreate a context-related featured image using a generated prompt based on the article theme.\n\nFormat and publish the final output to WordPress.\n\nProcessing Workflow\n\n1. Data Extraction & Analysis\n\nExtract the validated keyword, competitor H1, H2s, H3s, and keyword cloud from the Google Sheet with ID \"1tRFzTHMpduCpEmvxLqYhU123wsFxatpEawfjW1BW2W4\".\n\nAnalyze the tone (formal/informal) and SEO guidelines from the Vector Store to align content style.\n\nIdentify user intent from competitor headings and keyword cloud to structure the article.\n\n2. SEO Content Structure\n\nTitle Creation\n\nCraft an engaging, keyword-rich Persian title including the validated keyword (80–100% inclusion).\n\nKeep it click-worthy and SEO-optimized, 50–60 characters long.\n\nCRITICAL: The title must NOT appear in the content body (WordPress renders it as H1).\n\nMeta Description\n\nCreate a compelling 150–160 character Persian description including the validated keyword.\n\nSummarize the article’s main value proposition and encourage clicks.\n\nEnd exactly at 160 characters without cutting words mid-sentence.\n\nContent Structure\n\nIntroduction\n\nWrite an engaging opening paragraph (150–200 words).\n\nHook the reader with a clear value proposition related to the keyword.\n\nMain Body\n\nMinimum Exactly 2000 words in fluent, natural Persian.\n\nUse proper heading hierarchy:\nH1: Automatically set by WordPress title.\nH2: Use competitor H2 keywords frequent in analysis (70–100% include validated keyword).\nH3: Assign less frequent competitor terms (40–70% include validated keyword).\n\nExpand each heading into 200–300 words with tables, bullet points, or lists for readability.\n\nMaintain consistent tone (formal/informal per Vector Store) and 3rd person perspective.\n\nEnsure keyword density: validated keyword at 5–10%, keyword cloud terms at 20–40%.\n\nInclude at least one external reference link and internal links where relevant.\n\nBreak text with subheadings every 200–300 words.\n\nConclusion\n\n100–150 words recap with a clear call-to-action (e.g., follow updates, share, explore more).\n\nEnd on an engaging note to encourage interaction.\n\nFeatured Image Requirements\nDimensions: 16:9 aspect ratio (ideal for WordPress), width ≤ 800px, file size ≤ 100kb.\nStyle: Retro-futuristic theme with neon lighting, futuristic cityscapes, AI/tech vibes, holographic elements.\nImage concept must relate to the specific H2 theme (avoid generic imagery).\nAlt text must include the H2 keyword.\n\nOutput: Pass image URL in the response as {\"generated_images\": [[\"Image URL will be provided after generation\"]]}.\n\nImage Prompt Template:\n\"Retro-futuristic digital artwork, [specific H2 theme elements], neon-lit futuristic cityscape, AI holograms, data streams, cyberpunk aesthetic, cinematic lighting, high detail, widescreen 16:9 format, vibrant colors, no text overlay\"\n\nFinal Output Format\nCRITICAL FORMATTING RULES:\nResponse must be clean, properly formatted content - NOT a JSON object. Structure as follows:\n\n[Your optimized Persian title here]\n[Your full article content here, properly formatted with HTML tags]\n\nContent Formatting Guidelines:\nUse proper HTML tags: , , , , , .\nNO  tags in the content body.\nClean paragraph breaks - no \\n\\n nonsense.\nNo meta information mixed into content.\n\nPublishing\nUse publish_wordpress_post function with inputs: Title, Body, Featured Image (first generated image), Meta Description.\nWhat NOT to Do\n❌ Do not output JSON format for content.\n❌ Do not include \\n\\n line breaks.\n❌ Do not repeat title inside content.\n❌ Do not add source attribution at the end.\n❌ Do not use placeholder text.\n❌ Do not mix English and Persian inappropriately.\n❌ Do not create generic, unrelated images.\n\nIMPORTANT: append assistant output below dict:\n{\n\"generated_images\": [[\"Image URL will be provided after generation\"]]\n}\n\nRemember: Your goal is to create compelling, SEO-optimized Persian content that engages readers, aligns with competitor strategies, and performs well in search results while adhering to brand tone and high editorial standards.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-111",
+      "type": "telegram",
+      "position": {
+        "x": 1213.23,
+        "y": 950.293
+      },
+      "data": {
+        "label": "Dela CRM Test"
+      }
+    },
+    {
+      "id": "telegram-112",
+      "type": "telegram",
+      "position": {
+        "x": 1486.61,
+        "y": 947.279
+      },
+      "data": {
+        "label": "Dela Workflow Bot"
+      }
+    },
+    {
+      "id": "telegram-113",
+      "type": "telegram",
+      "position": {
+        "x": 1769.11,
+        "y": 948.499
+      },
+      "data": {
+        "label": "Dela Feedback"
+      }
+    },
+    {
+      "id": "vectorstore-43",
+      "type": "vectorstore",
+      "position": {
+        "x": 2227.66,
+        "y": 536.567
+      },
+      "data": {
+        "label": "Content Guide Database"
+      }
+    },
+    {
+      "id": "googledoc-92",
+      "type": "googledoc",
+      "position": {
+        "x": 2226.82,
+        "y": 326.724
+      },
+      "data": {
+        "label": "Brand Tone Guide"
+      }
+    },
+    {
+      "id": "googlesheet-79",
+      "type": "googlesheet",
+      "position": {
+        "x": 1240.19,
+        "y": 510.125
+      },
+      "data": {
+        "label": "Competitors Data"
+      }
+    },
+    {
+      "id": "googlesheet-80",
+      "type": "googlesheet",
+      "position": {
+        "x": 1855.72,
+        "y": 494.738
+      },
+      "data": {
+        "label": "Keyword Cloud Report"
+      }
+    },
+    {
+      "id": "wordpress-19",
+      "type": "wordpress",
+      "position": {
+        "x": 2043.16,
+        "y": 953.762
+      },
+      "data": {
+        "label": "Content Blog"
+      }
+    },
+    {
+      "id": "trigger-66",
+      "type": "trigger",
+      "position": {
+        "x": 2138.87,
+        "y": 598.875
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "trigger-68",
+      "type": "trigger",
+      "position": {
+        "x": 1761.92,
+        "y": 560.233
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "trigger-69",
+      "type": "trigger",
+      "position": {
+        "x": 1540.59,
+        "y": 604.872
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "imagegeneration-34",
+      "type": "imagegeneration",
+      "position": {
+        "x": 2332.97,
+        "y": 947.32
+      },
+      "data": {
+        "label": "Image Generator"
+      }
+    },
+    {
+      "id": "seohandler-3",
+      "type": "seohandler",
+      "position": {
+        "x": 969.767,
+        "y": 487.446
+      },
+      "data": {
+        "label": "Keyword Search",
+        "analysis_mode": "keyword_search",
+        "keywords": [
+          "انواع هوش مصنوعی"
+        ],
+        "target_urls": [],
+        "country_code": "ir",
+        "language": "fa",
+        "search_config": {
+          "device": "mobile",
+          "include_ads": false,
+          "include_questions": true,
+          "include_related_searches": true,
+          "num_results": 20
+        },
+        "extraction_config": {
+          "ai_extraction": false,
+          "extract_headings": true,
+          "extract_images": true,
+          "extract_links": true,
+          "extract_meta": true,
+          "extract_schema": true,
+          "render_js": false,
+          "wait_time": 2000
+        },
+        "credit_budget": {
+          "cache_duration": 3600,
+          "max_credits_per_run": 100,
+          "total_credits_used": 0
+        }
+      }
+    },
+    {
+      "id": "seohandler-6",
+      "type": "seohandler",
+      "position": {
+        "x": 1519.87,
+        "y": 323.776
+      },
+      "data": {
+        "label": "Page Analysis and Keyword Cloud",
+        "analysis_mode": "page_extraction",
+        "keywords": [],
+        "target_urls": [
+          "https://test"
+        ],
+        "country_code": "us",
+        "language": "en",
+        "search_config": {
+          "device": "desktop",
+          "include_ads": false,
+          "include_questions": true,
+          "include_related_searches": true,
+          "num_results": 20
+        },
+        "extraction_config": {
+          "ai_extraction": false,
+          "extract_headings": true,
+          "extract_images": true,
+          "extract_links": true,
+          "extract_meta": true,
+          "extract_schema": true,
+          "render_js": true,
+          "wait_time": 4000
+        },
+        "credit_budget": {
+          "cache_duration": 3600,
+          "max_credits_per_run": 100,
+          "total_credits_used": 0
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eassistant-203-telegram-111-1756815156820-699",
+      "source": "assistant-203",
+      "target": "telegram-111"
+    },
+    {
+      "id": "eassistant-204-telegram-112-1756815156820-800",
+      "source": "assistant-204",
+      "target": "telegram-112"
+    },
+    {
+      "id": "egoogledoc-92-vectorstore-43-1756815156820-941",
+      "source": "googledoc-92",
+      "target": "vectorstore-43"
+    },
+    {
+      "id": "evectorstore-43-assistant-205-1756815156820-377",
+      "source": "vectorstore-43",
+      "target": "assistant-205"
+    },
+    {
+      "id": "eassistant-205-imagegeneration-34-1756815156820-425",
+      "source": "assistant-205",
+      "target": "imagegeneration-34"
+    },
+    {
+      "id": "egooglesheet-80-assistant-205-1756815156820-381",
+      "source": "googlesheet-80",
+      "target": "assistant-205"
+    },
+    {
+      "id": "eassistant-205-telegram-113-1756815156820-219",
+      "source": "assistant-205",
+      "target": "telegram-113"
+    },
+    {
+      "id": "etrigger-66-assistant-205-1756815156820-446",
+      "source": "trigger-66",
+      "target": "assistant-205"
+    },
+    {
+      "id": "eassistant-205-wordpress-19-1756815156820-682",
+      "source": "assistant-205",
+      "target": "wordpress-19"
+    },
+    {
+      "id": "etrigger-69-assistant-203-1756815156820-937",
+      "source": "trigger-69",
+      "target": "assistant-203"
+    },
+    {
+      "id": "etrigger-68-assistant-204-1756815156820-473",
+      "source": "trigger-68",
+      "target": "assistant-204"
+    },
+    {
+      "id": "eseohandler-6-assistant-204-1756815156820-940",
+      "source": "seohandler-6",
+      "target": "assistant-204"
+    },
+    {
+      "id": "egooglesheet-79-assistant-203-1756815156820-753",
+      "source": "googlesheet-79",
+      "target": "assistant-203"
+    },
+    {
+      "id": "egooglesheet-79-assistant-204-1756815156820-606",
+      "source": "googlesheet-79",
+      "target": "assistant-204"
+    },
+    {
+      "id": "egooglesheet-80-assistant-204-1756815156820-711",
+      "source": "googlesheet-80",
+      "target": "assistant-204"
+    },
+    {
+      "id": "eseohandler-3-assistant-203-1756815156820-385",
+      "source": "seohandler-3",
+      "target": "assistant-203"
+    }
+  ]
+}
