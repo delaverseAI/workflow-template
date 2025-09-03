@@ -1,0 +1,144 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T06:55:29.372Z",
+  "nodes": [
+    {
+      "id": "assistant-839",
+      "type": "assistant",
+      "position": {
+        "x": 569.594,
+        "y": 554.283
+      },
+      "data": {
+        "label": "دستیار جدید",
+        "instructions": "System Role:\nYou are an AI assistant that recommends perfumes to customers based on their chat messages, using structured product data and descriptive text sources.\n\nPrimary Purpose:\n\nProvide personalized perfume recommendations in chat.\n\nUse customer’s input (keywords, budget, preferences) to suggest the most relevant perfume.\n\nData Sources:\n\nGoogle Sheet (Sheet ID: 1RlA8aplL1ACw9aYBQwCDWXAp99J3PVh_yUvQ5kN1YXM)\n\nColumns:\n\nPerfume Name\n\nPrice\n\nStock (Available / Not Available)\n\nGoogle Doc (Doc ID: 1EAnMlAnw4KuepE9tYG5Eg71rRK0OIlaZCvNEZgWNZDw)\n\nContains descriptions of each perfume (notes, style, longevity, suitable occasions, etc.).\n\nUsed for keyword matching with customer queries.\n\n(Optional) Vector Database: Index Google Doc content for semantic keyword matching.\n\nProcessing Rules:\n\nAnalyze customer’s message\n\nDetect keywords: scent types (sweet, fresh, woody, citrus, oriental), gender (male/female/unisex), occasions (gift, daily, formal, party), budget (numeric values like \"under 2M\").\n\nMatch perfumes from Google Doc\n\nFind perfumes with the closest descriptive match to extracted keywords.\n\nFilter results using Google Sheet\n\nOnly suggest perfumes that are in stock.\n\nApply price filter if the customer mentions a budget.\n\nFallback rule\n\nIf the top match is out of stock, suggest the closest available alternative.\n\nPersonalization (optional)\n\nIf customer history exists, prioritize recommendations similar to their past purchases.\n\nOutputs:\n\nChat reply to customer, including:\n\nPerfume name\n\nPrice\n\nStock status\n\nShort description (from Google Doc)\n\nAlternative suggestion if needed\n\nMessage Format Example:\n\n Recommended Perfume: Dior Sauvage  \n Price: 3,500,000 Toman  \n Availability: In Stock  \n Description: A fresh and masculine fragrance with long-lasting projection, perfect for daily and formal wear.  \n Alternative option: Bleu de Chanel  \n\n\nOptional Outputs:\n\nLog customer query + detected keywords + recommended perfume in a Google Sheet.\n\nSend recommendation via Telegram or SMS for multi-channel support.",
+        "model": "gpt-4.1-mini"
+      },
+      "parentNode": "container-293",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-840",
+      "type": "analyzer",
+      "position": {
+        "x": 7496.21,
+        "y": -636.682
+      },
+      "data": {
+        "label": "تحلیلگر پیام",
+        "instructions": "You are an AI assistant that analyzes user questions or assistant responses.For user messages:Summarize frequent concerns and repeated issues, highlight negative feedback and service weaknesses, identify common questions and key topics of interest, and provide suggestions for service improvement. Avoid quoting user questions verbatim. Only provide analysis and summary.For assistant messages:Summarize the most important and key points in the responses, outline the main topics the assistant addressed, assess the quality and comprehensiveness of the responses, and identify response patterns, strengths, and weaknesses. Provide in-depth and constructive analysis. Do not quote responses directly; focus on summarizing insights.All analysis should be in Persian.",
+        "model": "gpt-4o"
+      }
+    },
+    {
+      "id": "vectorstore-367",
+      "type": "vectorstore",
+      "position": {
+        "x": 570.03,
+        "y": 343.479
+      },
+      "data": {
+        "label": "دیتابیس برداری جدید"
+      },
+      "parentNode": "container-293",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-294",
+      "type": "googledoc",
+      "position": {
+        "x": 236.276,
+        "y": 97.7464
+      },
+      "data": {
+        "label": "گوگل داک"
+      },
+      "parentNode": "container-293",
+      "extent": "parent"
+    },
+    {
+      "id": "googlesheet-257",
+      "type": "googlesheet",
+      "position": {
+        "x": 843.166,
+        "y": 95.9
+      },
+      "data": {
+        "label": "گوگل شیت"
+      },
+      "parentNode": "container-293",
+      "extent": "parent"
+    },
+    {
+      "id": "container-293",
+      "type": "container",
+      "position": {
+        "x": 6970.71,
+        "y": -1888.35
+      },
+      "data": {
+        "label": "کانتینر جدید",
+        "width": 1312,
+        "height": 1176
+      }
+    },
+    {
+      "id": "iframe-222",
+      "type": "iframe",
+      "position": {
+        "x": 552.857,
+        "y": 777.216
+      },
+      "data": {
+        "label": "Dela"
+      },
+      "parentNode": "container-293",
+      "extent": "parent"
+    },
+    {
+      "id": "trigger-193",
+      "type": "trigger",
+      "position": {
+        "x": 983.218,
+        "y": 368.49
+      },
+      "data": {
+        "label": "تریگر جدید"
+      },
+      "parentNode": "container-293",
+      "extent": "parent"
+    }
+  ],
+  "edges": [
+    {
+      "id": "egooglesheet-257-vectorstore-367-1756882510404-134",
+      "source": "googlesheet-257",
+      "target": "vectorstore-367"
+    },
+    {
+      "id": "egoogledoc-294-vectorstore-367-1756882510404-275",
+      "source": "googledoc-294",
+      "target": "vectorstore-367"
+    },
+    {
+      "id": "evectorstore-367-assistant-839-1756882510404-983",
+      "source": "vectorstore-367",
+      "target": "assistant-839"
+    },
+    {
+      "id": "eassistant-839-iframe-222-1756882510404-160",
+      "source": "assistant-839",
+      "target": "iframe-222"
+    },
+    {
+      "id": "etrigger-193-assistant-839-1756882510404-271",
+      "source": "trigger-193",
+      "target": "assistant-839"
+    },
+    {
+      "id": "econtainer-293-analyzer-840-1756882510404-190",
+      "source": "container-293",
+      "target": "analyzer-840"
+    }
+  ]
+}

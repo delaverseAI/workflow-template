@@ -1,0 +1,133 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T06:59:05.844Z",
+  "nodes": [
+    {
+      "id": "assistant-836",
+      "type": "assistant",
+      "position": {
+        "x": 5233.23,
+        "y": 816.214
+      },
+      "data": {
+        "label": "دستیار جدید",
+        "instructions": "Assistant Role:  \nYou are a News Aggregation and Distribution Assistant tasked with:  \n- Fetching latest news from trusted News APIs (e.g., Guardian API, NewsAPI.org, or RSS feeds).  \n- Presenting curated news articles to users via Telegram bot as rich text/JSON messages (headline, summary, link).  \n- Upon explicit user confirmation in Telegram, publishing selected full news articles as posts in WordPress using the WordPress REST API.  \n- Generating concise summaries of user-selected articles and saving them in a specified Google Doc for archival and editorial review.  \n\nData Sources:  \n- News API (fetch latest news).  \n- Telegram Bot (user interaction and commands).  \n- Google Docs (Doc ID: 1iGgNgPfi84SIDQHrWD0smVf_A7-xJdIptVyUA1u0onk– store article summaries).  \n- Optional Vector Store (news-similarity-store) for article deduplication via embedding similarity.  \n- WordPress CMS (publish full articles).  \n\nWorkflow & Logic:  \n1. Every 2 hours, fetch the latest news from trusted sources only.  \n2. Filter out duplicate articles by comparing titles or embedding similarity via the vector store.  \n3. Personalize Telegram news feed by prioritizing user preferred topics (politics, sports, tech).  \n4. Send latest filtered news as JSON messages to Telegram users with headline, short description, and link.  \n5. Skip sending articles older than a configured threshold in Telegram.  \n6. When a user requests or selects a specific news article, send a confirmation request: “Post this to WordPress”.  \n7. Only after explicit user confirmation, publish the full article content as a WordPress post with metadata (author: “News Bot”, tags, categories).  \n8. Create a summary of the published article and append it to the Google Doc with date, headline, summary, and source link.  \n9. Skip publishing or summarizing if already done previously (to avoid duplicates).  \n10. Push summaries to Google Docs daily at midnight.  \n\nOutputs:  \n- Telegram messages: JSON with headline, summary, link formatted for readability.  \n- WordPress posts: full article content with author metadata.  \n- Google Docs entries: formatted summaries with date and source.  \n\nRules & Constraints:  \n- Do not publish without user confirmation.  \n- Maintain data integrity and avoid duplicate content.  \n- Format all outputs clearly and consistently.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-511",
+      "type": "telegram",
+      "position": {
+        "x": 5528.8,
+        "y": 1040.48
+      },
+      "data": {
+        "label": "Newsdela"
+      }
+    },
+    {
+      "id": "googledoc-292",
+      "type": "googledoc",
+      "position": {
+        "x": 5586.05,
+        "y": 578.767
+      },
+      "data": {
+        "label": "گوگل داک"
+      }
+    },
+    {
+      "id": "apidefinition-161",
+      "type": "apidefinition",
+      "position": {
+        "x": 5232.72,
+        "y": 292.515
+      },
+      "data": {
+        "label": "API",
+        "baseUrl": "https://content.guardianapis.com",
+        "authType": "apiKey",
+        "authData": {
+          "apiKey": "49bf4a27-adac-4753-9672-10a98d0e026f",
+          "apiKeyName": "api-key"
+        },
+        "defaultHeaders": {}
+      }
+    },
+    {
+      "id": "request-170",
+      "type": "request",
+      "position": {
+        "x": 5233.45,
+        "y": 550.431
+      },
+      "data": {
+        "label": "درخواست API",
+        "method": "GET",
+        "endpoint": "/search",
+        "headers": {},
+        "queryParams": {
+          "page-size": "1",
+          "section": "technology",
+          "show-fields": "headline,shortUrl,bodyText"
+        },
+        "responseMapping": "$.response.results[*].fields['headline', 'bodyText', 'shortUrl']"
+      }
+    },
+    {
+      "id": "wordpress-86",
+      "type": "wordpress",
+      "position": {
+        "x": 5146.82,
+        "y": 1041.72
+      },
+      "data": {
+        "label": "وردپرس جدید"
+      }
+    },
+    {
+      "id": "scheduler-128",
+      "type": "scheduler",
+      "position": {
+        "x": 5624.94,
+        "y": 377.524
+      },
+      "data": {
+        "label": "اسکجولر"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eapidefinition-161-request-170-1756882744041-894",
+      "source": "apidefinition-161",
+      "target": "request-170"
+    },
+    {
+      "id": "erequest-170-assistant-836-1756882744041-861",
+      "source": "request-170",
+      "target": "assistant-836"
+    },
+    {
+      "id": "egoogledoc-292-assistant-836-1756882744041-238",
+      "source": "googledoc-292",
+      "target": "assistant-836"
+    },
+    {
+      "id": "eassistant-836-telegram-511-1756882744041-538",
+      "source": "assistant-836",
+      "target": "telegram-511"
+    },
+    {
+      "id": "escheduler-128-request-170-1756882744041-880",
+      "source": "scheduler-128",
+      "target": "request-170"
+    },
+    {
+      "id": "eassistant-836-wordpress-86-1756882744041-654",
+      "source": "assistant-836",
+      "target": "wordpress-86"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T07:05:01.385Z",
+  "nodes": [
+    {
+      "id": "assistant-761",
+      "type": "assistant",
+      "position": {
+        "x": 1130.749539016303,
+        "y": -634.9255995079982
+      },
+      "data": {
+        "label": "دستیار جدید",
+        "instructions": "1. Data Sources:\n- What are the exact Google Doc IDs for the “price” and “purchase/shipping” logs?\n- What is the Google Sheet ID where phone numbers and statuses are appended? Please specify the meaning of each column, especially Column C.\n\n2. SMS Sending:\n- Please specify the SMS provider or API used.\n- What is the exact JSON format or function call for sending the SMS?\n- Any personalization rules for the SMS content (e.g., name, tone)?\n\n3. Input Format:\n- How is the user submitting the phone number? Via text message in Telegram or another platform?\n- Confirm cleaning rules: only digits, must end with 10-12 digits after cleaning. Should any formatting characters (spaces, +, -, parentheses) be removed?\n\n4. Error Logging:\n- Where should errors be logged? To a separate Google Doc? If so, please provide ID.\n- What format should error logs have? Include timestamp, user ID or anonymized data?\n\n5. Additional Processing:\n- Should any filtering be done beyond phone number validation? For example, skip if phone number already processed recently?\n\nOnce confirmed or provided, I will write the full detailed instruction in the required Google Doc.\n\nThe detailed instruction for the assistant role, data sources, logic, outputs, and rules has been documented and saved in the Google Doc ID: 1k-KKaEy-JFeZiTegjfAB27pAuiRWHM59H4boBCraxOQ.\n\nSummary of instruction content:\n- Assistant acts as a Persian-language chatbot for a cosmetic and hygiene online store.\n- Uses three Google Docs for knowledge and logging sensitive queries.\n- Uses one Google Sheet for phone number and query status tracking.\n- Responds to general queries from knowledge doc.\n- Requests phone for sensitive queries (price, purchase, shipping).\n- Validates and formats phone numbers.\n- Logs sensitive queries with timestamps and phone in appropriate docs.\n- Appends query and user info to Google Sheet with pending status.\n- Sends SMS acknowledgment and updates status accordingly.\n- Provides designated user messages in Persian with privacy assurance.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-446",
+      "type": "telegram",
+      "position": {
+        "x": 1132.9359201644093,
+        "y": -246.0088729506312
+      },
+      "data": {
+        "label": "Managementdela"
+      }
+    },
+    {
+      "id": "googledoc-265",
+      "type": "googledoc",
+      "position": {
+        "x": 1304.4738549895887,
+        "y": -977.8902364405392
+      },
+      "data": {
+        "label": "ارسال"
+      }
+    },
+    {
+      "id": "googledoc-266",
+      "type": "googledoc",
+      "position": {
+        "x": 917.8730603357271,
+        "y": -978.1531210978259
+      },
+      "data": {
+        "label": "مالی"
+      }
+    },
+    {
+      "id": "googledoc-267",
+      "type": "googledoc",
+      "position": {
+        "x": 1631.5195185212783,
+        "y": -980.3866608832716
+      },
+      "data": {
+        "label": "گوگل داک"
+      }
+    },
+    {
+      "id": "googlesheet-237",
+      "type": "googlesheet",
+      "position": {
+        "x": 577.7279364750752,
+        "y": -975.8794909473487
+      },
+      "data": {
+        "label": "گوگل شیت"
+      }
+    },
+    {
+      "id": "iframe-204",
+      "type": "iframe",
+      "position": {
+        "x": 1545.1625362113814,
+        "y": -245.96964967589062
+      },
+      "data": {
+        "label": "Dela"
+      }
+    },
+    {
+      "id": "trigger-161",
+      "type": "trigger",
+      "position": {
+        "x": 1226.6360235658915,
+        "y": -1058.0736634281961
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "sms-76",
+      "type": "sms",
+      "position": {
+        "x": 745.388492459549,
+        "y": -252.3116549727262
+      },
+      "data": {
+        "label": "پیامک"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egoogledoc-266-assistant-761-1756882971744-981",
+      "source": "googledoc-266",
+      "target": "assistant-761"
+    },
+    {
+      "id": "egoogledoc-265-assistant-761-1756882971744-122",
+      "source": "googledoc-265",
+      "target": "assistant-761"
+    },
+    {
+      "id": "egooglesheet-237-assistant-761-1756882971744-427",
+      "source": "googlesheet-237",
+      "target": "assistant-761"
+    },
+    {
+      "id": "egoogledoc-267-assistant-761-1756882971744-463",
+      "source": "googledoc-267",
+      "target": "assistant-761"
+    },
+    {
+      "id": "eassistant-761-telegram-446-1756882971744-274",
+      "source": "assistant-761",
+      "target": "telegram-446"
+    },
+    {
+      "id": "eassistant-761-iframe-204-1756882971744-699",
+      "source": "assistant-761",
+      "target": "iframe-204"
+    },
+    {
+      "id": "etrigger-161-assistant-761-1756882971744-505",
+      "source": "trigger-161",
+      "target": "assistant-761"
+    },
+    {
+      "id": "eassistant-761-sms-76-1756882971744-353",
+      "source": "assistant-761",
+      "target": "sms-76"
+    }
+  ]
+}

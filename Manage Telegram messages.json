@@ -1,0 +1,144 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T07:08:33.489Z",
+  "nodes": [
+    {
+      "id": "assistant-758",
+      "type": "assistant",
+      "position": {
+        "x": 3170.57,
+        "y": -440.606
+      },
+      "data": {
+        "label": "دستیار جدید",
+        "instructions": "Read every text message that a user sends in Telegram.\n\nIf the message contains #blog, take the full text and append it into the Google Document with ID = 1i7VRzLesQGVpm_bKznVGbARx30phq83yEDIBACZ9lXk.\n\nIf the message contains #news, take the full text and append it into the Google Document with ID = \n134-SrAQKIFfD5Jn3jRThzJChpz2rC-w8epT7FYx9khg.\n\nIf the message contains #product, take the full text and append it into the Google Document with ID = 1Ma9lNi3JCRc_Msw7uNHCyzKnJxgAOZBUVpuL-oXaSpI.\n\nAfter appending, send a confirmation message back to the user in Telegram indicating which document the text was saved to.\n\nAfter posting the message in the correct Google Doc, log the action in a Google Sheet with this ID:\n1DV32nhAtChPx0-lF9bm3OU5sgS9IWGAna19xjCw9C0w\n\nSpreadsheet ID: 1DV32nhAtChPx0-lF9bm3OU5sgS9IWGAna19xjCw9C0w\n\nRange: AI Playground Sheet1!A:B\n\nValues:\n\nIn the column title, write a short summary of what the message was about or what action was taken (e.g., “Added to Blog Doc”).\n\nIn the column date, write the current date and time when the action was performed.\n\nExample:\ntitle → Added in Blog Doc\ndate → 2025. Aug. 23\n\nOptionally, send a confirmation message back to the user in Telegram indicating which document the text was saved to and that it has been logged.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-443",
+      "type": "telegram",
+      "position": {
+        "x": 2896.4620500000005,
+        "y": -240.6517875
+      },
+      "data": {
+        "label": "Managementdela (قطع شده)"
+      }
+    },
+    {
+      "id": "googledoc-259",
+      "type": "googledoc",
+      "position": {
+        "x": 3496.14,
+        "y": -810.704
+      },
+      "data": {
+        "label": "product doc"
+      }
+    },
+    {
+      "id": "googledoc-260",
+      "type": "googledoc",
+      "position": {
+        "x": 3171.05,
+        "y": -809.241
+      },
+      "data": {
+        "label": "news doc"
+      }
+    },
+    {
+      "id": "googledoc-261",
+      "type": "googledoc",
+      "position": {
+        "x": 2853.56,
+        "y": -810.024
+      },
+      "data": {
+        "label": "blog doc"
+      }
+    },
+    {
+      "id": "request-154",
+      "type": "request",
+      "position": {
+        "x": 9004.5,
+        "y": -1346.33
+      },
+      "data": {
+        "label": "درخواست API",
+        "method": "GET",
+        "endpoint": "",
+        "headers": {},
+        "queryParams": {},
+        "responseMapping": ""
+      }
+    },
+    {
+      "id": "wordpress-73",
+      "type": "wordpress",
+      "position": {
+        "x": 3169.36,
+        "y": -101.137
+      },
+      "data": {
+        "label": "وردپرس جدید"
+      }
+    },
+    {
+      "id": "trigger-159",
+      "type": "trigger",
+      "position": {
+        "x": 3667.93,
+        "y": -626.556
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    },
+    {
+      "id": "imagegeneration-32",
+      "type": "imagegeneration",
+      "position": {
+        "x": 3459.86,
+        "y": -230.286
+      },
+      "data": {
+        "label": "تولید تصویر"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egoogledoc-261-assistant-758-1756883257001-759",
+      "source": "googledoc-261",
+      "target": "assistant-758"
+    },
+    {
+      "id": "egoogledoc-260-assistant-758-1756883257001-297",
+      "source": "googledoc-260",
+      "target": "assistant-758"
+    },
+    {
+      "id": "egoogledoc-259-assistant-758-1756883257001-54",
+      "source": "googledoc-259",
+      "target": "assistant-758"
+    },
+    {
+      "id": "etrigger-159-assistant-758-1756883257001-75",
+      "source": "trigger-159",
+      "target": "assistant-758"
+    },
+    {
+      "id": "eassistant-758-wordpress-73-1756883257001-415",
+      "source": "assistant-758",
+      "target": "wordpress-73"
+    },
+    {
+      "id": "eassistant-758-imagegeneration-32-1756883257001-266",
+      "source": "assistant-758",
+      "target": "imagegeneration-32"
+    }
+  ]
+}

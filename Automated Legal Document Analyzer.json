@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T09:05:37.783Z",
+  "nodes": [
+    {
+      "id": "googledoc-309",
+      "type": "googledoc",
+      "position": {
+        "x": 958.1685629089641,
+        "y": 447.0842814544819
+      },
+      "data": {
+        "label": "Legal Document Retrieval"
+      }
+    },
+    {
+      "id": "filedb-156",
+      "type": "filedb",
+      "position": {
+        "x": 1313.690322151829,
+        "y": 450.05805796224377
+      },
+      "data": {
+        "label": "Legal Files Repository"
+      }
+    },
+    {
+      "id": "vectorstore-380",
+      "type": "vectorstore",
+      "position": {
+        "x": 1151.557298884411,
+        "y": 798.5527911334597
+      },
+      "data": {
+        "label": "Legal Document Vector Store"
+      }
+    },
+    {
+      "id": "assistant-863",
+      "type": "assistant",
+      "position": {
+        "x": 1151.5925851984166,
+        "y": 1033.1425949962832
+      },
+      "data": {
+        "label": "Legal Document Analyzer",
+        "instructions": "You are an AI-powered Legal Document Analyzer integrated with Delaverse for automated contract and legal document review. Your role is to retrieve, analyze, and summarize legal documents, ensuring accuracy, error detection, and compliance with legal standards. Follow these instructions:\n\nRetrieve legal documents from specified sources (Google Docs or File Database)(\nvs_68b7f293f7588191947d601529be61c4) or a Vector Store containing pre-processed legal texts.\n\nAnalyze documents using natural language processing (NLP) to:\n\nIdentify key clauses, terms, and parties.\n\nDetect potential errors, inconsistencies, or risks (e.g., missing provisions, non-compliant clauses).\n\nCompare clauses against industry standards or regulatory frameworks (e.g., GDPR, CCPA).\n\nGenerate a concise summary of findings, highlighting critical insights, risks, and recommendations.\n\nFormat the analysis as a structured report with sections: Summary, Key Clauses, Risks/Issues, Recommendations.\n\nOutput the report to a Google Doc (write_google_doc_*)and send a notification with the report summary via Telegram.\n\nEnsure compliance with data privacy laws (e.g., GDPR, CCPA) by anonymizing sensitive data and securing document storage.\n\nIf triggered dynamically, process new documents in real-time; if using static mode, rely on Vector Store data.\n\nProvide citations to original documents or legal references for transparency.\n\nHandle errors gracefully, logging issues and notifying users via Telegram if documents are inaccessible or malformed.\n\nPrioritize accuracy, clarity, and legal compliance in all outputs. Tailor summaries for law firms, corporations, startups, or consultants based on user context.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "googledoc-310",
+      "type": "googledoc",
+      "position": {
+        "x": 759.4117908619855,
+        "y": 791.4478941285273
+      },
+      "data": {
+        "label": "Legal Analysis Report"
+      }
+    },
+    {
+      "id": "telegram-514",
+      "type": "telegram",
+      "position": {
+        "x": 1152.2818911198078,
+        "y": 1221.459486227226
+      },
+      "data": {
+        "label": "Legal Report Bot"
+      }
+    },
+    {
+      "id": "trigger-209",
+      "type": "trigger",
+      "position": {
+        "x": 1606.6975346016175,
+        "y": 815.4506181121271
+      },
+      "data": {
+        "label": "Legal Document Review Trigger"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "efiledb-156-vectorstore-380-1756886479200",
+      "source": "filedb-156",
+      "target": "vectorstore-380"
+    },
+    {
+      "id": "egoogledoc-309-vectorstore-380-1756886481649",
+      "source": "googledoc-309",
+      "target": "vectorstore-380"
+    },
+    {
+      "id": "egoogledoc-310-assistant-863-1756886491502",
+      "source": "googledoc-310",
+      "target": "assistant-863"
+    },
+    {
+      "id": "evectorstore-380-assistant-863-1756886493459",
+      "source": "vectorstore-380",
+      "target": "assistant-863"
+    },
+    {
+      "id": "eassistant-863-telegram-514-1756889999953",
+      "source": "assistant-863",
+      "target": "telegram-514"
+    },
+    {
+      "id": "etrigger-209-assistant-863-1756890012632",
+      "source": "trigger-209",
+      "target": "assistant-863"
+    }
+  ]
+}

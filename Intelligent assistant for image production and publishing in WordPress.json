@@ -1,0 +1,123 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-03T07:14:49.414Z",
+  "nodes": [
+    {
+      "id": "assistant-114",
+      "type": "assistant",
+      "position": {
+        "x": 2651.39,
+        "y": 585.912
+      },
+      "data": {
+        "label": "دستیار جدید",
+        "instructions": "You are tasked with creating a WordPress blog post in Persian, based on data from an API node, accompanied by a generated image. The output should include a plain text title, an HTML-formatted blog post, and an image, in that order. Follow these steps:\n\nFetch Data 📡:\n\nRetrieve data from the provided API node to shape the blog post content.\nUse the data to craft a narrative centered on snowy nights in a city, highlighting the ambiance and setting.\n\n\nGenerate Blog Post 📝:\n\nLanguage: Write the entire post in Persian.\nWord Count: Ensure the post is 1000–2000 words.\nTone: Friendly, engaging, and descriptive to evoke a cozy, wintery atmosphere.\nStructure:\n\nStart with a catchy plain text title (no HTML tags) including an emoji ❄️.\nFormat the blog body using HTML tags (, , , , ) for headings, paragraphs, and bullet points to enhance readability.\nInclude a vivid story about a snowy night cityscape, inspired by the API data, describing city lights, snow-covered streets, and a warm evening vibe.\nUse emojis sparingly (e.g., 😊❄️) to reinforce the friendly tone.\nExclude any JSON data from the output; deliver only the rendered HTML content.\n\n\n\n\nGenerate Image 🖼️:\n\nCall the generate_image_* function to create an image based on this description: A beautiful snowy night with a cityscape, featuring city lights, snow-covered streets, and a cozy evening atmosphere.\nUse only the provided image description, not the blog content, for image generation.\n\n\nIntegrate Image 📸:\n\nEmbed the image in the blog post body using a WordPress-compatible HTML placeholder (e.g., ).\nReference the image in the narrative to connect it to the snowy night theme.\n\n\nOutput Format 📑:\n\nProvide the output in this order:\n\nPlain text title (no HTML tags).\nHTML-formatted blog post, ready for WordPress, using , , , , , and  tags for structure and the image placeholder.\nImage generation (handled via the generate_image_* function, with the result referenced in the blog).\n\n\nWrap the blog post content (title and HTML body) in an  tag with a unique UUID, titled \"blog_post.html\", and contentType \"text/html\".\nWrap the image reference, if needed as a separate artifact, in a second  tag with a unique UUID, titled \"snowy_cityscape.jpg\", and contentType \"image/jpeg\".\n\n\nError Handling ⚠️:\n\nIf image or content generation fails, respond only with:\n\n«با عرض پوزش، نتوانستم تصویر یا مقاله را بسازم، لطفاً دوباره امتحان کنید.» 😔\n\n\n\n\nImprovements Made:\n\nClarified the sequence: plain text title, HTML blog post, then image generation.\nRemoved redundant HTML tag mentions and fixed incomplete tag references (e.g., empty `` tags in the original).\nStreamlined wording for conciseness while maintaining all requirements.\nEnsured consistent emoji usage for a cohesive tone.\nSpecified that the title should be plain text (no HTML) to align with your request.\nAvoided technical jargon and ensured the instruction is actionable for the AI.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-49",
+      "type": "telegram",
+      "position": {
+        "x": 2658.836287323944,
+        "y": 887.1477535861322
+      },
+      "data": {
+        "label": "wordpressdela (قطع شده)"
+      }
+    },
+    {
+      "id": "apidefinition-21",
+      "type": "apidefinition",
+      "position": {
+        "x": 2404.15,
+        "y": -77.8827
+      },
+      "data": {
+        "label": "API",
+        "baseUrl": "https://content.guardianapis.com",
+        "authType": "apiKey",
+        "authData": {
+          "apiKey": "49bf4a27-adac-4753-9672-10a98d0e026f",
+          "apiKeyName": "api-key"
+        },
+        "defaultHeaders": {}
+      }
+    },
+    {
+      "id": "request-23",
+      "type": "request",
+      "position": {
+        "x": 2653.59,
+        "y": 264.658
+      },
+      "data": {
+        "label": "درخواست API",
+        "method": "GET",
+        "endpoint": "/search",
+        "headers": {},
+        "queryParams": {
+          "page-size": "۱",
+          "section": "technology",
+          "show-fields": "headline,shortUrl,bodyText"
+        },
+        "responseMapping": "$.response.results[*].fields['headline', 'bodyText', 'shortUrl']"
+      }
+    },
+    {
+      "id": "wordpress-10",
+      "type": "wordpress",
+      "position": {
+        "x": 2086.22,
+        "y": 825.232
+      },
+      "data": {
+        "label": "وردپرس جدید"
+      }
+    },
+    {
+      "id": "scheduler-16",
+      "type": "scheduler",
+      "position": {
+        "x": 2958.21,
+        "y": -81.8232
+      },
+      "data": {
+        "label": "اسکجولر"
+      }
+    },
+    {
+      "id": "imagegeneration-21",
+      "type": "imagegeneration",
+      "position": {
+        "x": 3284.3672394662817,
+        "y": 820.7972624773323
+      },
+      "data": {
+        "label": "تولید تصویر"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eapidefinition-21-request-23-1756883638838-546",
+      "source": "apidefinition-21",
+      "target": "request-23"
+    },
+    {
+      "id": "erequest-23-assistant-114-1756883638838-681",
+      "source": "request-23",
+      "target": "assistant-114"
+    },
+    {
+      "id": "eassistant-114-imagegeneration-21-1756883638838-685",
+      "source": "assistant-114",
+      "target": "imagegeneration-21"
+    },
+    {
+      "id": "eassistant-114-wordpress-10-1756883638838-512",
+      "source": "assistant-114",
+      "target": "wordpress-10"
+    }
+  ]
+}
