@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-06T14:14:13.640Z",
+  "nodes": [
+    {
+      "id": "googlesheet-319",
+      "type": "googlesheet",
+      "position": {
+        "x": 1053.1078877758653,
+        "y": 503.2394766674863
+      },
+      "data": {
+        "label": "Customer Data Source"
+      }
+    },
+    {
+      "id": "googledoc-349",
+      "type": "googledoc",
+      "position": {
+        "x": 751.345719213678,
+        "y": 548.1722148501763
+      },
+      "data": {
+        "label": "Segmentation Report Writer"
+      }
+    },
+    {
+      "id": "assistant-920",
+      "type": "assistant",
+      "position": {
+        "x": 1053.1136480983612,
+        "y": 794.4791118595477
+      },
+      "data": {
+        "label": "Segmentation & Insights Engine",
+        "instructions": "1. Role / Purpose of the Assistant:\nThe assistant’s primary role is Customer Segmentation & Risk Analysis. It processes customer data, groups customers into segments (High Value, Medium Value, At-Risk), and provides targeted marketing and retention recommendations.\n\n2. Data Sources:\n\nGoogle Sheets: YOUR GOOGLE SHEET ID\n\nColumns: YOUR GOOGLE SHEET COLUMNS\n\nPurpose: Source of raw customer data.\n\nGoogle Docs: YOUR GOOGLE DOC ID\n\nTo write a formatted segmentation report.\n\nTelegram Node: To deliver summarized insights and alerts directly to marketing/sales teams.\n\n3. Outputs:\n\nGoogle Docs: Full customer segmentation report (categorized by High Value, Medium Value, At-Risk).\n\nTelegram Messages: Short summaries (e.g., Top 3 high-value customers, At-risk clients needing retention action).\n\nGoogle Sheets (optional): New tab or sheet update with segment labels added next to each customer.\n\n4. Processing & Logical Rules:\n\nSegmentation Rules:\n\nHigh Value: Top 20% CLV or High frequency + Avg Order > $200, Risk  70.\n\nOutput Formatting:\n\nProvide customer lists under each category.\n\nInclude recommendations for each segment.\n\nPersonalization Rules:\n\nHigh Value → Suggest loyalty rewards / upsell packages.\n\nMedium Value → Suggest personalized offers.\n\nAt-Risk → Suggest retention or recovery campaigns.\n\n\nReport generated automatically, delivered via Telegram and stored in Google Docs.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "trigger-278",
+      "type": "trigger",
+      "position": {
+        "x": 1410.9245229234787,
+        "y": 614.3293936832921
+      },
+      "data": {
+        "label": "Segmentation Trigger"
+      }
+    },
+    {
+      "id": "telegram-591",
+      "type": "telegram",
+      "position": {
+        "x": 1052.7064204424266,
+        "y": 1022.2428348456842
+      },
+      "data": {
+        "label": "Segmentation Alert Bot"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egooglesheet-319-assistant-920-1757166687834",
+      "source": "googlesheet-319",
+      "target": "assistant-920"
+    },
+    {
+      "id": "egoogledoc-349-assistant-920-1757166704183",
+      "source": "googledoc-349",
+      "target": "assistant-920"
+    },
+    {
+      "id": "eassistant-920-telegram-591-1757166712694",
+      "source": "assistant-920",
+      "target": "telegram-591"
+    },
+    {
+      "id": "etrigger-278-assistant-920-1757166744400",
+      "source": "trigger-278",
+      "target": "assistant-920"
+    }
+  ]
+}
