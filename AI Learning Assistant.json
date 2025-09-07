@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-07T09:57:44.625Z",
+  "nodes": [
+    {
+      "id": "googledoc-359",
+      "type": "googledoc",
+      "position": {
+        "x": 751.2056608746819,
+        "y": 533.3317066452064
+      },
+      "data": {
+        "label": "Learning Docs Retriever"
+      }
+    },
+    {
+      "id": "filedb-165",
+      "type": "filedb",
+      "position": {
+        "x": 1286.4331601578472,
+        "y": 448.21105776217576
+      },
+      "data": {
+        "label": "Learning Docs Storage"
+      }
+    },
+    {
+      "id": "vectorstore-416",
+      "type": "vectorstore",
+      "position": {
+        "x": 1020.8390573518927,
+        "y": 785.5947922745755
+      },
+      "data": {
+        "label": "Learning Vector Store"
+      }
+    },
+    {
+      "id": "assistant-945",
+      "type": "assistant",
+      "position": {
+        "x": 1018.3736773815954,
+        "y": 991.5535286025498
+      },
+      "data": {
+        "label": "Learning AI Assistant",
+        "instructions": "Purpose:\nYou are an AI Learning Assistant. Your task is to automatically retrieve, analyze, and summarize all available learning content from Google Docs and File Database, then write structured reports directly into a designated Google Docs document every time the workflow runs. You do not wait for any user command or Telegram input; execution is fully automated.\n\nData Sources:\n\nGoogle Docs Node: Retrieves learning documents (Document ID: [YOUR GOOGLE DOC ID]) for dynamic content analysis.\n\nFile Database Node: Retrieves PDFs, Word files, or other uploaded learning materials.\n\nVector Store Node: Aggregates content for faster access and analysis.\n\nVector Store ID :YOUR VECTOR STOR ID\n\nOutputs:\n\nGoogle Docs: Write a full report directly into the designated document (Destination ID: [YOUR GOOGLE DOC ID FOR REPORT])\n\nReport must include:\n\nIntroduction / Overview of all content\n\nAnalysis of learning materials\n\nLearner performance summary (if data exists)\n\nRecommendations / next steps\n\nSummary / actionable insights\n\nOptional Telegram Message: Send summary or notification (can be skipped if undesired).\n\nProcessing / Logical Rules:\n\nAutomatic execution: Every time the workflow runs, the assistant must generate and write the report without prompting the user.\n\nContent aggregation: Include all available documents, no time filters; analyze full history of materials.\n\nFormatting:\n\nClear headings for each section\n\nBulleted or numbered lists for recommendations\n\nStructured paragraphs for analysis and summaries\n\nSkip conditions: If no new content exists, still write a minimal report noting “No new content available” in the Google Doc.\n\nConsistency: Each report must overwrite or append to the Google Doc consistently, ensuring the document always contains the latest analysis.\n\nOptional personalization: If user or learner data is available, include their names and performance context in the report.\n\nExample Instruction (AI Node Use Case):\n\n\"Every time new or existing learning content is retrieved, analyze it and write a structured report to Google Docs. Include overview, content analysis, recommendations, and a summary. Do not wait for user commands. Append or overwrite the Google Doc (Document ID: [Insert]). Use clear headings, bullet points, and structured paragraphs.\"",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-623",
+      "type": "telegram",
+      "position": {
+        "x": 1021.0752931796555,
+        "y": 1175.8762444686713
+      },
+      "data": {
+        "label": "Learning Notifications Bot"
+      }
+    },
+    {
+      "id": "googledoc-362",
+      "type": "googledoc",
+      "position": {
+        "x": 640.7775579644211,
+        "y": 768.8576901999074
+      },
+      "data": {
+        "label": "Learning Output"
+      }
+    },
+    {
+      "id": "trigger-311",
+      "type": "trigger",
+      "position": {
+        "x": 1412.1576333586822,
+        "y": 830.7618357328829
+      },
+      "data": {
+        "label": "Learning Trigger"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eassistant-945-telegram-623-1757234824709",
+      "source": "assistant-945",
+      "target": "telegram-623"
+    },
+    {
+      "id": "evectorstore-416-assistant-945-1757234832209",
+      "source": "vectorstore-416",
+      "target": "assistant-945"
+    },
+    {
+      "id": "efiledb-165-vectorstore-416-1757234851266",
+      "source": "filedb-165",
+      "target": "vectorstore-416"
+    },
+    {
+      "id": "egoogledoc-359-vectorstore-416-1757237404461",
+      "source": "googledoc-359",
+      "target": "vectorstore-416"
+    },
+    {
+      "id": "egoogledoc-362-assistant-945-1757238049185",
+      "source": "googledoc-362",
+      "target": "assistant-945"
+    },
+    {
+      "id": "etrigger-311-assistant-945-1757238108645",
+      "source": "trigger-311",
+      "target": "assistant-945"
+    }
+  ]
+}
