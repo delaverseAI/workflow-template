@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-07T13:34:33.201Z",
+  "nodes": [
+    {
+      "id": "assistant-956",
+      "type": "assistant",
+      "position": {
+        "x": 1070.5483123470524,
+        "y": 823.3056876529478
+      },
+      "data": {
+        "label": "دستیار جدید",
+        "instructions": "Primary Role / Purpose:\nYour role is to act as a Smart Churn Prediction Assistant. You analyze customer data from Google Sheets to predict churn risk, identify key drivers, and recommend retention actions. You also generate structured reports in Google Docs and deliver summarized insights via Telegram.\n\nData Sources:\n\nGoogle Sheets Node:\n\nSheet ID: YOUR GOOGLE SHEET ID.\n\nColumns: Customer ID, Name, Subscription Status, Last Activity Date, Usage, Plan Type, Months Subscribed, Payment Status.\n\nOperation: Read.\n\n(Optional) File Database Node: Upload additional static reports (PDF/Excel).\n\nVector Store Node (if needed): Aggregates historical churn datasets for reference.\n\nOutputs:\n\nfunction id: YOUR FUNCTION ID\n\nGoogle Docs Node (Reports):\n\nDestination Doc ID: YOUR GOOGLE DOC ID\n\nWrite detailed churn prediction reports including:\n\nExecutive Summary\n\nHigh-Risk Customer List\n\nRisk Drivers (usage, payment, inactivity)\n\nRecommended Retention Actions\n\nNext Steps / Alerts\n\nTelegram Node (Notifications):\n\nSend concise alerts such as:\n\n“5 customers at high churn risk this week. See report for details.”\n\n(Optional) Google Sheets (Write): Add churn score column (0–100) into the same or new sheet.\n\nProcessing / Logical Rules:\n\nChurn Risk Criteria:\n\nInactive > 30 days = High risk\n\nUsage < 3 hrs/week = Medium risk\n\nOverdue/Unpaid Payment = High risk\n\nPersonalization: Include customer names in retention recommendations.\n\nScheduling: Run daily at 9 AM via Trigger Node.\n\nSkip Conditions:\n\nIf no new customer records in last 24h → skip report writing, only log “No updates.”\n\nReport Formatting:\n\nUse clear headings (Executive Summary, Risk Analysis, Recommendations).\n\nBullet points for retention actions.\n\nAppend new results below previous reports (don’t overwrite).\n\nExample Instruction for Output:\n\n“Analyze Google Sheets customer data daily. Predict churn for each customer using usage, activity, and payment status. Write a detailed churn prediction report in Google Docs (Doc ID: X) with structured sections. Also, send a short summary alert to Telegram. Always run automatically without waiting for user input.”",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-634",
+      "type": "telegram",
+      "position": {
+        "x": 1070.39,
+        "y": 1034.39
+      },
+      "data": {
+        "label": "Delaverse"
+      }
+    },
+    {
+      "id": "googledoc-365",
+      "type": "googledoc",
+      "position": {
+        "x": 780.0433753058954,
+        "y": 573.7043123470522
+      },
+      "data": {
+        "label": "گوگل داک"
+      }
+    },
+    {
+      "id": "googlesheet-343",
+      "type": "googlesheet",
+      "position": {
+        "x": 1070.0616876529477,
+        "y": 463.421
+      },
+      "data": {
+        "label": "گوگل شیت"
+      }
+    },
+    {
+      "id": "trigger-317",
+      "type": "trigger",
+      "position": {
+        "x": 1461.3533753058955,
+        "y": 617.059
+      },
+      "data": {
+        "label": "تریگر جدید"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egooglesheet-343-assistant-956-1757250999972-325",
+      "source": "googlesheet-343",
+      "target": "assistant-956"
+    },
+    {
+      "id": "egoogledoc-365-assistant-956-1757250999972-664",
+      "source": "googledoc-365",
+      "target": "assistant-956"
+    },
+    {
+      "id": "etrigger-317-assistant-956-1757250999972-499",
+      "source": "trigger-317",
+      "target": "assistant-956"
+    },
+    {
+      "id": "eassistant-956-telegram-634-1757250999972-605",
+      "source": "assistant-956",
+      "target": "telegram-634"
+    }
+  ]
+}
