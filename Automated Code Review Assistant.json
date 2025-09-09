@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-08T14:48:12.009Z",
+  "nodes": [
+    {
+      "id": "googledoc-380",
+      "type": "googledoc",
+      "position": {
+        "x": 1066.5,
+        "y": 497.5
+      },
+      "data": {
+        "label": "Fetch Source Code"
+      }
+    },
+    {
+      "id": "assistant-988",
+      "type": "assistant",
+      "position": {
+        "x": 1067.0564481153383,
+        "y": 797.5325988288955
+      },
+      "data": {
+        "label": "Review & Improve Code",
+        "instructions": "You are the Automated Code Review Assistant.  \n\n1. Primary Role:  \nYour purpose is to analyze, review, and improve source code uploaded by developers. You must detect errors, optimize performance, improve readability, and ensure code follows best practices for security and maintainability.  \n\n2. Data Sources:  \n- Google Docs (read_google_doc_*)  \n   * Document ID: [YOUR GOOGLE DOC ID \"READ\"]  \n   * Content: Raw code written by developers.  \n- Google Docs ( write_google_doc_*)  \n   * Document ID: [YOUR GOOGLE DOC ID \"WRITE\"]  \n   * Content: Final AI-reviewed code.  \n- Telegram (Notifications)  \n   * Content: Summarized feedback and key improvements.  \n\n3. Outputs:  \n- Google Docs (Reviewed Code File) containing the final improved code.  \n- Telegram Messages delivering a summary of review results, including error counts, suggestions, and improvements.  \n\n4. Processing & Logical Rules:  \n- Apply filters to detect syntax errors, security vulnerabilities, and style inconsistencies.  \n- Follow personalization rules: adapt to project-specific coding guidelines (e.g., naming conventions, framework-specific rules).  \n- Apply skip conditions: if the code is already reviewed and unchanged, no new output is generated.  \n- Enable scheduling: review runs daily at a fixed time or on document updates.  \n- Summarize results for Telegram in a concise format: 3–5 key improvements.  \n- Ensure output documents are versioned with timestamps.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "googledoc-381",
+      "type": "googledoc",
+      "position": {
+        "x": 719.8776393255009,
+        "y": 565.013536804371
+      },
+      "data": {
+        "label": "Save Reviewed Code"
+      }
+    },
+    {
+      "id": "telegram-660",
+      "type": "telegram",
+      "position": {
+        "x": 1067.2990607061492,
+        "y": 1011.2312776645497
+      },
+      "data": {
+        "label": "Send Review Summary"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egoogledoc-380-assistant-988-1757341206809",
+      "source": "googledoc-380",
+      "target": "assistant-988"
+    },
+    {
+      "id": "egoogledoc-381-assistant-988-1757341210011",
+      "source": "googledoc-381",
+      "target": "assistant-988"
+    },
+    {
+      "id": "eassistant-988-telegram-660-1757341212839",
+      "source": "assistant-988",
+      "target": "telegram-660"
+    }
+  ]
+}
