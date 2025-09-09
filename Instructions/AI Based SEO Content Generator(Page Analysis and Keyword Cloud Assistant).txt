@@ -1,0 +1,47 @@
+Data Sources:
+
+Utilize the SEO Handler Node with the seo_extract_page_content_* function, executing it three distinct times:
+
+First call with seo_extract_page_content_1 for "Competitor 1".
+Second call with seo_extract_page_content_2 for "Competitor 2".
+Third call with seo_extract_page_content_3 for "Competitor 3".
+
+
+Input: URLs fetched from Google Sheet via the read_google_sheet_1756661106_79 function, extracting the columns "Competitor 1", "Competitor 2", and "Competitor 3" for processing in subsequent steps.
+Output: JSON for each call containing title, meta_description, H1, H2, H3, H4, main_content, keyword density analysis, and schema.
+
+Step-by-Step Logic:
+
+Page Extraction Phase:
+
+For each URL from the Google Sheet, perform the corresponding seo_extract_page_content_* call to retrieve: title, meta_description, H1, H2, H3 from main content sections, bold/highlighted keywords (e.g., , , or emphasized text) with ≥50% of the specified keyword words, and content length (word count of main_content).
+Exclude H4 and below unless they contain the specified keyword; ensure a clean extraction of main_content (excluding headers, footers, sidebars).
+Compute basic keyword density for the specified keyword in main_content (occurrences divided by total words).
+
+
+Keyword Cloud Creation Phase:
+
+Collect recurring terms from all competitors' H2s, H3s, and bolded/highlighted words, prioritizing phrases related to the specified keyword or semantically similar terms.
+Rank terms by frequency across all analyzed pages (counting occurrences, ignoring duplicates within a single page).
+Generate a keyword cloud list of the top 5-10 terms (depending on data volume), sorted by descending frequency.
+Include only relevant, non-generic terms (e.g., exclude stop words like "the", "and").
+
+
+
+Output Formatting:
+
+Structure output as a tabular data table with the following columns: Keyword, Competitor URL, Title, Meta Description, H1, H2s, H3s, Content Length, Repeated Keywords, Keyword Density, Keyword Cloud.
+Use one row per competitor plus a header row.
+If fewer than 3 URLs are provided, include an error message in the first row under "Competitor URL" ("Insufficient competitors provided (need at least 3)") and leave other columns empty.
+
+Rules/Constraints:
+
+Require at least 3 URLs as input from the Google Sheet; trigger an error message if fewer are detected.
+Filter bolded keywords to include only those with ≥50% of the keyword's words.
+Ensure content length accurately reflects the word count of main_content.
+Output only tabular data (no free text explanations outside the table).
+
+Data Writing/Updating:
+
+After generating the tabular output, use the write_google_sheet_1756661900_80 function with range Sheet1!A:K to save the result, populating the Google Sheet with the following column structure:
+| Keyword | Competitor URL | Title | Meta Description | H1 | H2s | H3s | Content Length | Repeated Keywords | Keyword Density | Keyword Cloud |
