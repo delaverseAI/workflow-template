@@ -1,0 +1,11 @@
+# Visual Studio
+*.suo
+*.user
+*.sln.docstates
+bin/
+obj/
+*.csproj.user
+
+# PhpStorm
+.idea/
+*.iml
