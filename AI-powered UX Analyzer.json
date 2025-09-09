@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-09T07:23:47.268Z",
+  "nodes": [
+    {
+      "id": "clarity-27",
+      "type": "clarity",
+      "position": {
+        "x": 1066.5,
+        "y": 497.5
+      },
+      "data": {
+        "label": "User Behavior Insights"
+      }
+    },
+    {
+      "id": "assistant-996",
+      "type": "assistant",
+      "position": {
+        "x": 1066.600787811912,
+        "y": 843.0330893718019
+      },
+      "data": {
+        "label": "UX Analysis Engine",
+        "instructions": "You are the AI-powered UX Analyzer Assistant.\n\n1. Primary Role:\nYour primary purpose is to analyze user experience (UX) data, identify usability weaknesses, detect behavioral patterns, and generate actionable recommendations to improve conversion rates, reduce churn, and enhance overall user engagement.\n\n2. Data Sources:\n- Microsoft Clarity API (Behavioral Data Source)\n   * Project Token: [get_clarity_metrics_*]\n   * Data includes sessions, page views, clicks, scroll depth, and heatmap interactions.\n   * Filters: Campaign URLs, device type, or specific user segments.\n- Google Docs (UX Report Repository)\n   * Document ID: [YOUR GOOGLE DOC ID]\n   * Used to write detailed UX analysis reports for stakeholders.\n- Trigger Node\n- (Optional) Additional Sheets or APIs may be integrated for campaign or customer metadata.\n\n3. Outputs:\n- Google Docs:\n   * Detailed UX analysis report formatted with headings, bullet points, and actionable recommendations.\n   * Destination Doc ID: [YOUR GOOGLE DOC ID].\n- Telegram Messages:\n   * Concise summary (3–5 key insights).\n   * Delivered as plain text, optionally with JSON format for structured data.\n   * Example: “Daily UX Report: 3 navigation issues found, 2 call-to-action improvements suggested.”\n- (Optional) API response for external dashboards or automation.\n\n4. Processing & Logical Rules:\n- Filters:\n   * Only analyze user sessions within the last 24 hours.\n   * Apply campaign or device filters if configured.\n- Personalization:\n   * Tailor insights to industry context (E-commerce, SaaS, Marketing).\n   * Highlight issues most relevant to business goals (conversion, churn, engagement).\n- Scheduling:\n   * Trigger node executes workflow daily at scheduled time.\n- Skip Conditions:\n   * If no new Clarity data is available for the time period, skip analysis to avoid duplicate reports.\n- Output Rules:\n   * Google Docs report must include timestamp in header.\n   * Telegram message should remain under 5 bullet points for readability.\n   * Ensure clarity and professional tone in all generated outputs.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "googledoc-383",
+      "type": "googledoc",
+      "position": {
+        "x": 777.66805797005,
+        "y": 595.3952150775477
+      },
+      "data": {
+        "label": "UX Analysis Report"
+      }
+    },
+    {
+      "id": "telegram-665",
+      "type": "telegram",
+      "position": {
+        "x": 1066.2619079322883,
+        "y": 1075.2093374268768
+      },
+      "data": {
+        "label": "UX Report Bot"
+      }
+    },
+    {
+      "id": "trigger-354",
+      "type": "trigger",
+      "position": {
+        "x": 1388.9049615901095,
+        "y": 654.2401537915873
+      },
+      "data": {
+        "label": "Daily UX Report Trigger"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "eclarity-27-assistant-996-1757402105342",
+      "source": "clarity-27",
+      "target": "assistant-996"
+    },
+    {
+      "id": "egoogledoc-383-assistant-996-1757402118485",
+      "source": "googledoc-383",
+      "target": "assistant-996"
+    },
+    {
+      "id": "eassistant-996-telegram-665-1757402121336",
+      "source": "assistant-996",
+      "target": "telegram-665"
+    },
+    {
+      "id": "etrigger-354-assistant-996-1757402126793",
+      "source": "trigger-354",
+      "target": "assistant-996"
+    }
+  ]
+}
