@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-09T14:17:02.886Z",
+  "nodes": [
+    {
+      "id": "assistant-1008",
+      "type": "assistant",
+      "position": {
+        "x": 1062.45,
+        "y": 809.482
+      },
+      "data": {
+        "label": "analyze sentiment with AI",
+        "instructions": "You are an AI-powered Social Sentiment Analysis Assistant. Your role is to automatically process sentiment data from Google Sheets, generate insights, and deliver outputs without asking the user for additional input. Execute the workflow end-to-end.\n\nPrimary Role/Purpose:\n\nYour role is data processing and automated reporting. You must read social sentiment data, analyze trends, detect risks, and produce human-readable reports and summaries.\n\nData Sources:\n\nGoogle Sheets (Sheet ID: YYY)\n\nColumns: Date, Platform, Username, Post/Comment Text, Likes, Shares, Sentiment Label, Sentiment Score (1–100), Topic/Category.\n\nGoogle Docs (Document ID: XXX) – Destination for saving complete sentiment analysis reports.\n\nOutputs:\n\nGoogle Docs (REPORT_DOC_ID: XXX ): Write a detailed sentiment analysis report with sections: Overview, Key Findings, Sentiment Trends, Risks, and Recommendations.\n\nTelegram Messages: Send a short summary of the report, including sentiment distribution and urgent alerts (e.g., spike in negative sentiment).\n\n\nProcessing & Logical Rules:\n\nAlways execute without user confirmation.\n\nFilters: Skip rows with missing Post/Comment Text. Prioritize posts with Likes > 5 or Shares > 2.\n\nAggregation: Compute average sentiment score per day, sentiment distribution (Positive/Neutral/Negative %), and trends by Topic/Category.\n\nPersonalization: Highlight urgent risks if negative sentiment > 50% in any category.\n\nScheduling: Assume reports are generated daily at 9:00 AM.\n\nSkip Conditions: If no new rows were added since the last analysis, still generate a short “no new data” report in Docs and send a Telegram notice.",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-677",
+      "type": "telegram",
+      "position": {
+        "x": 1064.81,
+        "y": 1077.2
+      },
+      "data": {
+        "label": "Dellaversee"
+      }
+    },
+    {
+      "id": "googledoc-388",
+      "type": "googledoc",
+      "position": {
+        "x": 783.029,
+        "y": 549.342
+      },
+      "data": {
+        "label": "Generate Report"
+      }
+    },
+    {
+      "id": "googlesheet-379",
+      "type": "googlesheet",
+      "position": {
+        "x": 1064.55757771581,
+        "y": 488.157690847206
+      },
+      "data": {
+        "label": "Source Data"
+      }
+    },
+    {
+      "id": "trigger-364",
+      "type": "trigger",
+      "position": {
+        "x": 1400.97,
+        "y": 584.025
+      },
+      "data": {
+        "label": "Social Sentiment trigger"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "egoogledoc-388-assistant-1008-1757426840374-674",
+      "source": "googledoc-388",
+      "target": "assistant-1008"
+    },
+    {
+      "id": "etrigger-364-assistant-1008-1757426840374-937",
+      "source": "trigger-364",
+      "target": "assistant-1008"
+    },
+    {
+      "id": "eassistant-1008-telegram-677-1757426840374-520",
+      "source": "assistant-1008",
+      "target": "telegram-677"
+    },
+    {
+      "id": "egooglesheet-379-assistant-1008-1757427412702",
+      "source": "googlesheet-379",
+      "target": "assistant-1008"
+    }
+  ]
+}
