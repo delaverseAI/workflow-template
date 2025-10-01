@@ -1,0 +1,162 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-09-08T12:45:47.201Z",
+  "nodes": [
+    {
+      "id": "assistant-976",
+      "type": "assistant",
+      "position": {
+        "x": 489.5212762062811,
+        "y": 706.678121727528
+      },
+      "data": {
+        "label": "Insight Generator & Report Drafting",
+        "instructions": "You are an AI Assistant for Employee Satisfaction Survey Automation.\n\n1. Primary Role/Purpose:\n\nYour main role is data processing, content generation, and insight extraction.\n\nYou analyze employee survey data from Google Docs and File Database sources to generate comprehensive reports.\n\nYour goal is to produce actionable insights and structured employee satisfaction reports that inform management decisions.\n\n2. Data Sources:\n\nGoogle Docs Node: Document ID XXX (read survey documents; dynamic feedback).\n\nFile Database Node: ID YYY (historical employee survey archives; trend analysis).\n\nGoogle Sheets: Sheet ID ZZZ with columns:\n\nA: Employee Name\n\nB: Department\n\nC: Survey Date\n\nD: Satisfaction Score\n\nE: Comments\n\nF: Priority Notes\n\n3. Outputs:\n\nGoogle Docs Node: Write comprehensive employee satisfaction reports; Document ID AAA\n\nTelegram Node (optional): Notifications to HR or management teams with summarized insights.\n\nReports include:\n\nExecutive Summary\n\nDepartment-level analysis\n\nTrends and comparisons\n\nRecommendations\n\nNotes from employee feedback\n\n4. Processing / Logical Rules:\n\nMerge historical and current survey data.\n\nFilter out surveys older than a specified date range.\n\nSkip records with incomplete feedback.\n\nPrioritize departments or teams flagged as high-priority in Google Sheets.\n\nMaintain consistent tone: formal, analytical, actionable.\n\nEnsure all generated reports are saved to Google Docs.\n\nOptional: Send Telegram notifications after each report is finalized.",
+        "model": "gpt-4.1-mini"
+      },
+      "parentNode": "container-303",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-977",
+      "type": "analyzer",
+      "position": {
+        "x": 6336.65879568243,
+        "y": 954.2866965855774
+      },
+      "data": {
+        "label": "Comprehensive Survey Insight Analyzer",
+        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل جامع گزارش‌های مدیریتی براساس پیام‌های دستیار هستید. \n\nهدف شما تحلیل داده‌های عملکرد برای تولید معیارهای کلیدی و گزارش‌های دوره‌ای است و لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n- معیارهای کلیدی: عملکرد تیم‌ها (مثل ROI مارکتینگ، پیشرفت پروژه‌ها).\n- روندهای دوره‌ای: تغییرات معیارها در هفته‌ها/ماه‌های گذشته.\n- مشکلات و گلوگاه‌ها: شناسایی مسائل (مثل کاهش فروش یا تأخیر پروژه).\n- پیشنهادات استراتژیک: راهکارهایی برای بهبود (مثل تغییر استراتژی مارکتینگ).",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "telegram-647",
+      "type": "telegram",
+      "position": {
+        "x": 488.21251263204795,
+        "y": 885.8648175746087
+      },
+      "data": {
+        "label": "HR Notification & Alert Dispatcher"
+      },
+      "parentNode": "container-303",
+      "extent": "parent"
+    },
+    {
+      "id": "vectorstore-426",
+      "type": "vectorstore",
+      "position": {
+        "x": 490.40360667630284,
+        "y": 445.316700047463
+      },
+      "data": {
+        "label": "Survey Data Indexing & Embedding"
+      },
+      "parentNode": "container-303",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-372",
+      "type": "googledoc",
+      "position": {
+        "x": 181.08955788230287,
+        "y": 173.07103991491272
+      },
+      "data": {
+        "label": "Survey Response Retrieval"
+      },
+      "parentNode": "container-303",
+      "extent": "parent"
+    },
+    {
+      "id": "container-303",
+      "type": "container",
+      "position": {
+        "x": 5859.684946536728,
+        "y": -246.45086027246327
+      },
+      "data": {
+        "label": "Workflow Orchestration Hub",
+        "width": 1208,
+        "height": 1131
+      }
+    },
+    {
+      "id": "filedb-171",
+      "type": "filedb",
+      "position": {
+        "x": 830.3725505034372,
+        "y": 63.958197271336076
+      },
+      "data": {
+        "label": "Historical Feedback Repository"
+      },
+      "parentNode": "container-303",
+      "extent": "parent"
+    },
+    {
+      "id": "googlesheet-366",
+      "type": "googlesheet",
+      "position": {
+        "x": 490.8809920373942,
+        "y": 178.74287149568727
+      },
+      "data": {
+        "label": "Advanced Survey Data Storage"
+      },
+      "parentNode": "container-303",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-379",
+      "type": "googledoc",
+      "position": {
+        "x": 135.54202317368436,
+        "y": 431.0225073102429
+      },
+      "data": {
+        "label": "Employee Satisfaction Report Writer"
+      },
+      "parentNode": "container-303",
+      "extent": "parent"
+    }
+  ],
+  "edges": [
+    {
+      "id": "efiledb-171-vectorstore-426-1757334488287",
+      "source": "filedb-171",
+      "target": "vectorstore-426"
+    },
+    {
+      "id": "egooglesheet-366-vectorstore-426-1757334493287",
+      "source": "googlesheet-366",
+      "target": "vectorstore-426"
+    },
+    {
+      "id": "egoogledoc-372-vectorstore-426-1757334496644",
+      "source": "googledoc-372",
+      "target": "vectorstore-426"
+    },
+    {
+      "id": "egoogledoc-379-assistant-976-1757334838814",
+      "source": "googledoc-379",
+      "target": "assistant-976"
+    },
+    {
+      "id": "evectorstore-426-assistant-976-1757334851492",
+      "source": "vectorstore-426",
+      "target": "assistant-976"
+    },
+    {
+      "id": "eassistant-976-telegram-647-1757335193447",
+      "source": "assistant-976",
+      "target": "telegram-647"
+    },
+    {
+      "id": "econtainer-303-analyzer-977-1757335470913",
+      "source": "container-303",
+      "target": "analyzer-977"
+    }
+  ]
+}
