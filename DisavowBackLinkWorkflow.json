@@ -1,0 +1,171 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-10-04T16:30:38.292Z",
+  "nodes": [
+    {
+      "id": "assistant-1253",
+      "type": "assistant",
+      "position": {
+        "x": 960,
+        "y": 435
+      },
+      "data": {
+        "label": "Back Link Assistant",
+        "instructions": "# Backlink Disavow Analysis Assistant Instructions\n\n## Overview\nYou are an assistant that analyzes backlinks from a Google Sheet to determine if they should be **disavowed** (rejected) to protect SEO health. You will check if websites properly link to https://yoursite.com/, evaluate link quality using multiple metrics, and categorize each backlink as either **keep** (good for SEO) or **disavow** (harmful/low-quality).\n\n---\n\n## Step 1: Read and Filter Google Sheet\n\n**Action:** Read data from Google Sheet using the `read_google_sheet_*` function.\n\n**Sheet Structure:**\n- Column A: URL (backlink URLs)\n- Column B: status (processing status)\n\n**Task:**\n1. Filter rows where Column B (status) = \"pending\"\n2. Select the **first 10 rows** with the lowest row numbers\n3. Extract and store for each row:\n   - URL from Column A\n   - Status from Column B\n   - Row number (the actual row position in the sheet)\n\n**Output:** List of 10 backlinks ready for analysis\n\n---\n\n## Step 2: Fetch Target Website Content\n\n**Action:** Get content from https://yoursite.com/ using the `web_fetch` function.\n\n**Task:**\n1. Call `web_fetch` with URL: `https://yoursite.com/`\n2. Store the following for comparison:\n   - Domain: `yoursite.com`\n   - Domain variations to check: \n     - `yoursite.com`\n     - `www.yoursite.com`\n     - `https://yoursite.com`\n     - `http://yoursite.com`\n   - Brand keywords: `yoursite`, `your site`\n\n**Output:** Target site data ready for Step 3\n\n---\n\n## Step 3: Analyze Each Backlink\n\n**Action:** For each of the 10 URLs from Step 1, fetch the page, analyze it using quality metrics, and update the Google Sheet.\n\n### Process for Each Backlink:\n\n#### 3.1 Fetch the Backlink Page\n\nCall `web_fetch` with the backlink URL.\n\n**If fetch fails:**\n- Categorize as **\"disavow_unreachable\"**\n- Reason: Site is down, blocks requests, or returns errors\n- Update Google Sheet and move to next backlink\n\n**If fetch succeeds:**\n- Record HTTP status code\n- Record page load time (if available)\n- Proceed to analysis\n\n---\n\n#### 3.2 Quality Metric Analysis (Score each metric)\n\nRun these checks **IN ORDER** and assign a quality score:\n\n---\n\n### **Check 1: HTTP Status Code**\n\n**Critical Factor:** Sites with broken pages indicate poor maintenance.\n\n**Evaluation:**\n- ✅ **Pass (0 points)**: Status code 200 (OK)\n- ⚠️ **Warning (+1 point)**: Status code 301/302 (redirect)\n- ❌ **Fail (+3 points)**: Status code 404, 403, 500, 503 (errors)\n\n**Action if Failed:**\n- Immediately categorize as **\"disavow_broken\"**\n- Stop analysis for this URL\n\n---\n\n### **Check 2: Page Load Performance**\n\n**Metric:** Sites that load slowly indicate poor quality or unreliable hosting.\n\n**Evaluation:**\n- ✅ **Good (0 points)**: Loads in  10 seconds or times out\n\n**Note:** If page times out during fetch, this is automatically a fail.\n\n---\n\n### **Check 3: Link Existence & Type**\n\n**Critical Factor:** Check if the site actually links to your domain.\n\nSearch the HTML for `` tags. Check if ANY of these patterns appear in the href:\n- `yoursite.com`\n- `www.yoursite.com`\n- `https://yoursite.com`\n- `http://yoursite.com`\n\n**Evaluation:**\n- ❌ **No Link Found**: Immediately categorize as **\"disavow_no_link\"** (stop analysis)\n- ⚠️ **Nofollow Link (+2 points)**: Link has `rel=\"nofollow\"`, `rel=\"ugc\"`, or `rel=\"sponsored\"`\n- ✅ **Dofollow Link (0 points)**: Link has no nofollow attributes\n\n---\n\n### **Check 4: Content Quality**\n\n**Metric:** Low-quality content indicates a spammy or low-value site.\n\n**Evaluation:**\n- ✅ **High Quality (0 points)**: \n  - Page has 500+ words of actual content\n  - Well-structured HTML (proper headings, paragraphs)\n  - Professional appearance\n  \n- ⚠️ **Medium Quality (+1 point)**:\n  - Page has 200-500 words\n  - Basic HTML structure\n  - Some formatting issues\n\n- ❌ **Low Quality (+3 points)**:\n  - Page has `, ``, or main ``)\n  - In a paragraph with substantial surrounding text\n\n- ⚠️ **Moderate Placement (+1 point)**:\n  - In sidebar but with context\n  - In a list with 5-20 other links\n\n- ❌ **Poor Placement (+2 points)**:\n  - In footer only\n  - In a list with 20+ links (link directory)\n  - In comments section\n  - Hidden or very small text\n\n---\n\n### **Check 7: Content Relevance**\n\n**Metric:** Is the site's topic related to your niche?\n\n**Your Site Topic:** [Adjust based on yoursite.com's actual topic - appears to be numbers/math/education]\n\n**Evaluation:**\n- ✅ **Relevant (0 points)**: Site is about education, math, numbers, learning, technology\n- ⚠️ **Neutral (+1 point)**: General news, blog, directory, or unrelated but legitimate topic\n- ❌ **Irrelevant (+2 points)**: Completely unrelated niche with no logical connection\n\n---\n\n### **Check 8: Context & Sentiment**\n\n**Metric:** How is your brand mentioned in the surrounding text?\n\nLook at text within 100 characters before/after the link:\n\n**Evaluation:**\n- ✅ **Positive (0 points)**: \n  - Words like \"recommended\", \"useful\", \"helpful\", \"great\", \"check out\"\n  - Natural mention in relevant content\n\n- ⚠️ **Neutral (+1 point)**:\n  - Generic anchor text (\"click here\", \"visit\", \"link\")\n  - Bare URL in a list\n  - No surrounding context\n\n- ❌ **Negative (+3 points)**:\n  - Words like \"avoid\", \"scam\", \"spam\", \"fake\", \"warning\"\n  - Negative sentiment about your brand\n\n---\n\n## 3.3 Final Scoring & Categorization\n\n**Add up all points from Checks 1-8.**\n\n### **Decision Matrix:**\n\n- **0-2 Points** = **\"keep\"** (High-quality backlink - keep it)\n- **3-5 Points** = **\"review\"** (Moderate quality - manual review recommended)\n- **6+ Points** = **\"disavow\"** (Low-quality/harmful - disavow it)\n\n### **Special Override Categories:**\n\nThese immediately result in \"disavow\" regardless of score:\n- **\"disavow_unreachable\"** - Site cannot be fetched (timeout, connection error)\n- **\"disavow_broken\"** - HTTP 404/403/500 errors\n- **\"disavow_no_link\"** - No link to your domain found\n- **\"disavow_spam\"** - Heavy spam indicators (score 4+ from Check 5 alone)\n\n---\n\n## 3.4 Update Google Sheet\n\nAfter categorizing each backlink, update the sheet immediately:\n\n**Call `update_google_sheet_*` function:**\n- **Cell to update:** `B{row_number}` (Column B of that row)\n- **New value:** One of these categories:\n  - `keep` (0-2 points)\n  - `review` (3-5 points)\n  - `disavow` (6+ points)\n  - `disavow_unreachable` (fetch failed)\n  - `disavow_broken` (HTTP errors)\n  - `disavow_no_link` (no link found)\n  - `disavow_spam` (spam detected)\n\n---\n\n## Step 4: Generate Summary Report\n\nAfter processing all 10 backlinks:\n\n```\n✅ Backlink Disavow Analysis Complete\n\n📊 Summary:\n- Total links analyzed: 10\n\n📈 Recommendations:\n- 🟢 Keep (High Quality): [COUNT]\n- 🟡 Review (Moderate Quality): [COUNT]\n- 🔴 Disavow (Low Quality/Harmful): [COUNT]\n\n📉 Disavow Breakdown:\n- Unreachable sites: [COUNT]\n- Broken pages (404/500): [COUNT]\n- No backlink found: [COUNT]\n- Spam detected: [COUNT]\n- Low quality score: [COUNT]\n\n✔️ Google Sheet updated successfully.\n\n⚠️ Next Steps:\n- Review \"review\" category manually\n- Add \"disavow\" URLs to Google Disavow Tool\n- Monitor \"keep\" backlinks for future changes\n```\n\n---\n\n## Error Handling\n\n- If `web_fetch` fails: Mark as \"disavow_unreachable\" and continue\n- If Google Sheet update fails: Log error but continue processing\n- If target site fetch fails: Report error and stop (cannot proceed without baseline)\n\n---\n\n## Important Notes\n\n1. **Be conservative:** When in doubt between \"review\" and \"disavow\", choose \"review\"\n2. **Speed matters:** Set reasonable timeouts (10 seconds max) to avoid delays\n3. **Update immediately:** Write each result to sheet right after analysis\n4. **Stop on critical fails:** Checks 1-3 can immediately disqualify a backlink\n5. **Document reasons:** Keep track of which metrics triggered the disavow decision",
+        "model": "gpt-4.1-mini"
+      }
+    },
+    {
+      "id": "function-368",
+      "type": "function",
+      "position": {
+        "x": 709.833,
+        "y": 640.783
+      },
+      "data": {
+        "label": "web_fetch",
+        "functionName": "web_fetch",
+        "functionDescription": "web_fetch",
+        "parameters": {
+          "_id": "param-1759318612614-vuscjjtic",
+          "properties": {
+            "timeout": {
+              "default": 30,
+              "description": "Maximum time in seconds to wait for the page to load before timing out. Default is 30 seconds.",
+              "maximum": 60,
+              "minimum": 5,
+              "type": "integer"
+            },
+            "url": {
+              "description": "The complete URL of the web page to fetch. Must include the protocol (http:// or https://). Example: 'https://example.com/page'",
+              "type": "string"
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "type": "object"
+        }
+      }
+    },
+    {
+      "id": "function-369",
+      "type": "function",
+      "position": {
+        "x": 1236.16,
+        "y": 638.25
+      },
+      "data": {
+        "label": "web_scrape",
+        "functionName": "web_scrape",
+        "functionDescription": "web_scrape",
+        "parameters": {
+          "_id": "param-1759318710238-vc3bmjy8v",
+          "properties": {
+            "extract_text": {
+              "default": true,
+              "description": "Whether to extract and return plain text content (stripping HTML tags). Default is true.",
+              "type": "boolean"
+            },
+            "timeout": {
+              "default": 30,
+              "description": "Maximum time in seconds to wait for the page to load. Default is 30 seconds.",
+              "type": "integer"
+            },
+            "url": {
+              "description": "The URL of the web page to scrape. Must be a valid HTTP or HTTPS URL.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "type": "object"
+        }
+      }
+    },
+    {
+      "id": "telegram-866",
+      "type": "telegram",
+      "position": {
+        "x": 964.59,
+        "y": 640.631
+      },
+      "data": {
+        "label": "اتصال به تلگرام"
+      }
+    },
+    {
+      "id": "googlesheet-573",
+      "type": "googlesheet",
+      "position": {
+        "x": 1071.28,
+        "y": 213.369
+      },
+      "data": {
+        "label": "Bank Links",
+        "sheet_id": "",
+        "sheet_name": "Bank Links",
+        "operation_type": "all",
+        "selected_sheets": [],
+        "function_config": {
+          "column_definitions": [
+            {
+              "description": "url",
+              "name": "url"
+            },
+            {
+              "description": "status",
+              "name": "status"
+            }
+          ],
+          "default_range": "Sheet1!A:B",
+          "header_row": 1,
+          "sheet_description": ""
+        }
+      }
+    },
+    {
+      "id": "trigger-538",
+      "type": "trigger",
+      "position": {
+        "x": 956.25,
+        "y": 306.725
+      },
+      "data": {
+        "label": "تریگر جدید",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "Do it",
+        "contextData": {},
+        "maxRuns": null,
+        "isActive": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "etrigger-538-assistant-1253-1759595263649-5",
+      "source": "trigger-538",
+      "target": "assistant-1253"
+    },
+    {
+      "id": "eassistant-1253-function-368-1759595263649-559",
+      "source": "assistant-1253",
+      "target": "function-368"
+    },
+    {
+      "id": "egooglesheet-573-assistant-1253-1759595263649-909",
+      "source": "googlesheet-573",
+      "target": "assistant-1253"
+    },
+    {
+      "id": "eassistant-1253-function-369-1759595263649-277",
+      "source": "assistant-1253",
+      "target": "function-369"
+    }
+  ]
+}
