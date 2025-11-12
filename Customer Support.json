@@ -1,180 +1,192 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-27T13:27:59.912Z",
+  "exportedAt": "2025-11-03T07:26:25.910Z",
   "nodes": [
     {
-      "id": "assistant-452",
+      "id": "assistant-2058",
       "type": "assistant",
       "position": {
-        "x": 365.62672707581214,
-        "y": 535.2007371841155
+        "x": 375.9441174500598,
+        "y": 589.6171606416609
       },
       "data": {
-        "label": "دستیار پشتیبانی مشتریان",
-        "instructions": "Role Definition:\nYou will act as a Customer Support AI, providing precise and helpful responses exclusively based on your data sources related to the business products, company vision, and policies. It does not disclose or refer to the data sources or storage systems in any user interaction.\nData Sources:\n1. Vector Store ID: [Your Vector Store ID]\n- Google Sheet ID: [Your Google Sheet ID]\nColumns: A = Row number, B = Product Title, C = Product Description, D = Product Features, E = Usage Instructions, F = Product Price\n- File Storage (PDF) ID: [Your File Storage ID]\n Contains: Company vision and business outlook text in PDF\n- Google Doc ID: [Your Google Doc ID]\nContains: Business laws and regulations text\n- File Repository ID: [Your File Repository ID]\n Contains: Company FAQs.\nAll data is stored statically in the Vector Store [Your Vector Store ID].\nStep-by-Step Logic:\n1. Receive user query via chat interface.\n2. Process query strictly against the data from the specified sources above.\n3. Search and filter relevant information from:\n  - Product details from Google Sheet.\n   - Business vision from PDF file.\n   - Policies and regulations from Google Doc\n4. Construct answers solely from these data pools without reference to data source names or mention of data origin.\n5. Respond professionally as a customer support assistant, ensuring clarity, accuracy, and helpfulness.\n6. Handle all queries related to product information, usage, pricing, company vision, and legal guidelines based on available data only.\nOutput Formatting:\n- Output channel 1: Chat frame embedded in website or app, full text response.\n- Output channel 2: Telegram messages, full text response.\nRules and Constraints:\n- Do not mention or hint at data source types or storage (Vector Store, Google Sheet, PDF, Docs).\n- Provide best possible support answers.\n- Use language and tone consistent with customer support.\n- No additional content outside query relevance.\nFinal Output:\n- Full textual answers to user queries via chat frame and Telegram.",
-        "model": "gpt-4.1-mini"
+        "label": "Customer Support AI Agent",
+        "instructions": "You will act as a Customer Support AI, providing precise and helpful responses exclusively based on your data sources related to the products/services, company procedures and all related data. It does not disclose or refer to the data sources or storage systems in any user interaction.\n\nData Sources:\n- Google Sheet ID: [Your Google Sheet ID]\nwith below columns:\nA = [Your Google Sheet Column A Name], \nB = [Your Google Sheet Column B Name], \nC = [Your Google Sheet Column C Name], \nD = [Your Google Sheet Column D Name], \nE = [Your Google Sheet Column E Name], \nF = [Your Google Sheet Column F Name]\n- File Storage ID: [Your File Storage ID]\n Contains: [Your File Storage files data description]\n- Google Doc ID: [Your Google Doc ID]\n Contains: [Your Google Docs data description]\n\nStep-by-Step Logic:\n1. Receive user query via chat interface.\n2. Process query strictly against the data from the specified sources above.\n3. Search and filter relevant information from:\n  - [Your Google Sheet Data Title] details from Google Sheet.\n  - [Your File Storage Data Title] details from File Storage.\n  - [Your Google Doc Data Title] details from Google Doc.\n4. Construct answers solely from these data pools without reference to data source names or mention of data origin.\n5. Respond professionally as a customer support assistant, ensuring clarity, accuracy, and helpfulness.\n6. Handle all queries related to products, company procedures and all related data based on available data only.\nOutput Formatting:\n- Output channel 1: Chat frame embedded in website or app, full text response.\n- Output channel 2: Telegram messages, full text response.\n\nRules and Constraints:\n- Do not mention or hint at data source types or storage (Google Sheet, Docs or Storage Files).\n- Provide best possible support answers.\n- Use language and tone consistent with customer support.\n- No additional content outside query relevance.\n\nFinal Output:\n- Full textual answers to user queries via chat frame and Telegram.",
+        "model": "grok-4-fast-reasoning",
+        "ai_provider": "grok",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": "low",
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [
+          "read_google_doc_1762152471_721",
+          "read_google_sheet_1762152464_871",
+          "search_company_files_1762152468_357"
+        ],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       },
-      "parentNode": "container-249",
+      "parentNode": "container-418",
       "extent": "parent"
     },
     {
-      "id": "analyzer-453",
+      "id": "analyzer-2059",
       "type": "analyzer",
       "position": {
-        "x": 3276.76543215439,
-        "y": 166.03039318060473
+        "x": 3591.104726206947,
+        "y": 475.9759082016577
       },
       "data": {
-        "label": "تحلیلگر پشتیبانی",
-        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل مکالمات کاربران هستید.  \nهدف شما ارائه گزارش‌های دقیق و حرفه‌ای برای پاسخ به سؤالات مدیران و بهبود فرآیند پشتیبانی است.\nشما به موارد زیر دسترسی دارید:  \n- داده‌ها و مکالمات از نود کانتینر (شامل مکالمات در تلگرام و فریم چت)\n- معیارهای کلیدی را محاسبه کنید:\n  - انواع سؤالات (مثل شکایت، درخواست اطلاعات، فنی).\n  - حس و حال مشتری (مثبت، منفی، خنثی) در صورت امکان.\n  - تعداد مکالمات و کاربران منحصربه‌فرد.\n- روندها و مشکلات را شناسایی کنید (مثل افزایش شکایات درباره محصول X).\n- پیشنهادات بهبود ارائه دهید (مثل افزودن FAQ جدید یا آموزش دستیار).\n- پاسخ‌ها را به فارسی، با لحن حرفه‌ای و دوستانه بنویسید.",
-        "model": "gpt-4.1-mini"
+        "label": "Message Analyzer",
+        "instructions": "You are an AI assistant for analyzing user conversations based on user messages.\n\nYour goal is to provide accurate and professional reports to answer managers' questions and improve the support process, and you need to perform the following actions and analyses:\n- Question Types: Categorize questions (e.g., complaints, information requests, technical).\n- Customer Sentiment: Analyze sentiment (positive, negative, neutral) when possible.\n- Conversation Count: Track number of conversations and unique users.\n- Identify Trends and Problems: Detect patterns (e.g., increased complaints about product X).\n- Provide Improvement Recommendations: Suggest solutions (e.g., adding new FAQ or training the assistant).\n- Write responses in the English language with a professional and friendly tone.",
+        "model": "gpt-5-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": "low",
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "conversation_analyzer",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-294",
+      "id": "telegram-1296",
       "type": "telegram",
       "position": {
-        "x": 58.19026281588458,
-        "y": 589.5611812274368
+        "x": 166.20345400706037,
+        "y": 975.1108437231205
       },
       "data": {
-        "label": "Dela Test Bot Finance"
+        "label": "Customer Support Bot"
       },
-      "parentNode": "container-249",
+      "parentNode": "container-418",
       "extent": "parent"
     },
     {
-      "id": "vectorstore-235",
-      "type": "vectorstore",
-      "position": {
-        "x": 30.7302,
-        "y": 327.35
-      },
-      "data": {
-        "label": "فایل‌های فروشگاه پوشاک"
-      },
-      "parentNode": "container-249",
-      "extent": "parent"
-    },
-    {
-      "id": "filerepository-314",
-      "type": "filerepository",
-      "position": {
-        "x": 333.503,
-        "y": 78.4996
-      },
-      "data": {
-        "label": "سوالات متداول پشتیبانی"
-      },
-      "parentNode": "container-249",
-      "extent": "parent"
-    },
-    {
-      "id": "googledoc-143",
+      "id": "googledoc-721",
       "type": "googledoc",
       "position": {
-        "x": 351.761,
-        "y": 301.663
+        "x": 626.6261989528793,
+        "y": 183.9939345549738
       },
       "data": {
-        "label": "قوانین و مقررات شرکت"
+        "label": "Company Procedures",
+        "doc_id": "",
+        "doc_name": "Company Procedures",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       },
-      "parentNode": "container-249",
+      "parentNode": "container-418",
       "extent": "parent"
     },
     {
-      "id": "googlesheet-126",
+      "id": "googlesheet-871",
       "type": "googlesheet",
       "position": {
-        "x": 29.3586,
-        "y": 69.3237
+        "x": 80.18209947643982,
+        "y": 200.6677429319371
       },
       "data": {
-        "label": "اطلاعات محصولات فروشگاه"
+        "label": "Product Data Files",
+        "sheet_id": "",
+        "sheet_name": "Product Data Files",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
       },
-      "parentNode": "container-249",
+      "parentNode": "container-418",
       "extent": "parent"
     },
     {
-      "id": "container-249",
+      "id": "container-418",
       "type": "container",
       "position": {
-        "x": 2148.62880866426,
-        "y": -206.58403465703975
+        "x": 2348.041850449044,
+        "y": -137.00186552343507
       },
       "data": {
-        "label": "کانتینر پشتیبانی مشتریان",
-        "width": 1000,
-        "height": 750
+        "label": "Customer Support Container",
+        "width": 947,
+        "height": 1377
       }
     },
     {
-      "id": "iframe-139",
+      "id": "iframe-376",
       "type": "iframe",
       "position": {
-        "x": 672.332,
-        "y": 395.064
+        "x": 544.864302795866,
+        "y": 976
       },
       "data": {
-        "label": "دلاورس"
+        "label": "Customer Support FrameChat"
       },
-      "parentNode": "container-249",
+      "parentNode": "container-418",
       "extent": "parent"
     },
     {
-      "id": "filedb-70",
+      "id": "filedb-357",
       "type": "filedb",
       "position": {
-        "x": 666.846,
-        "y": 88.7145
+        "x": 355.2710000000002,
+        "y": 80.70909947643977
       },
       "data": {
-        "label": "فایل‌های پشتیبانی"
+        "label": "Support Database Files"
       },
-      "parentNode": "container-249",
+      "parentNode": "container-418",
       "extent": "parent"
     }
   ],
   "edges": [
     {
-      "id": "efiledb-70-vectorstore-235-1756301220969-894",
-      "source": "filedb-70",
-      "target": "vectorstore-235"
+      "id": "egooglesheet-871-assistant-2058-1762152465838",
+      "source": "googlesheet-871",
+      "target": "assistant-2058"
     },
     {
-      "id": "egoogledoc-143-vectorstore-235-1756301220969-544",
-      "source": "googledoc-143",
-      "target": "vectorstore-235"
+      "id": "eassistant-2058-filedb-357",
+      "source": "filedb-357",
+      "target": "assistant-2058"
     },
     {
-      "id": "efilerepository-314-vectorstore-235-1756301220969-216",
-      "source": "filerepository-314",
-      "target": "vectorstore-235"
+      "id": "egoogledoc-721-assistant-2058-1762152472438",
+      "source": "googledoc-721",
+      "target": "assistant-2058"
     },
     {
-      "id": "egooglesheet-126-vectorstore-235-1756301220969-897",
-      "source": "googlesheet-126",
-      "target": "vectorstore-235"
+      "id": "eassistant-2058-iframe-376-1762152861599",
+      "source": "assistant-2058",
+      "target": "iframe-376"
     },
     {
-      "id": "evectorstore-235-assistant-452-1756301220969-621",
-      "source": "vectorstore-235",
-      "target": "assistant-452"
+      "id": "eassistant-2058-telegram-1296-1762153357932",
+      "source": "assistant-2058",
+      "target": "telegram-1296"
     },
     {
-      "id": "eassistant-452-iframe-139-1756301220969-619",
-      "source": "assistant-452",
-      "target": "iframe-139"
-    },
-    {
-      "id": "econtainer-249-analyzer-453-1756301220969-777",
-      "source": "container-249",
-      "target": "analyzer-453"
-    },
-    {
-      "id": "eassistant-452-telegram-294-1756301227536",
-      "source": "assistant-452",
-      "target": "telegram-294"
+      "id": "econtainer-418-analyzer-2059-1762153874694",
+      "source": "container-418",
+      "target": "analyzer-2059"
     }
   ]
 }
