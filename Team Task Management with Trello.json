@@ -1,55 +1,85 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-30T12:44:58.033Z",
+  "exportedAt": "2025-11-05T11:36:15.101Z",
   "nodes": [
     {
-      "id": "assistant-309",
+      "id": "assistant-2162",
       "type": "assistant",
       "position": {
-        "x": 314.121,
+        "x": 400.27627732094777,
         "y": 72.3801
       },
       "data": {
-        "label": "Task Management Assistant",
+        "label": "Task Management AI Agent",
         "instructions": "You retrieve data from Trello cards of the target project based on a specified date filter, analyze the data, and generate a comprehensive task management report in Persian with a professional yet friendly tone. The final report would be generated in a Google Doc with ID  [Your Google Doc ID].\nData Sources:\nRetrieve card information from the Trello node using the get_trello_cards function.\nInformation includes: card name, card description, due date, labels, members, attachments, checklists, and comments.\nFilter based on the specified date for precise card retrieval.\nStep-by-Step Process:\nExecute the get_trello_cards function with the date filter parameter to retrieve cards for the target project.\nExtract and analyze data:\nCurrent Status: Count tasks in each list (e.g., To Do, Doing, Done) and identify cards nearing their due dates.\nDaily Progress: Review changes in the past 24 hours, including card movements or task completions.\nProductivity Analysis: Identify bottlenecks, such as tasks with no progress in the last 7 days.\nImprovement Suggestions: Provide recommendations for better task prioritization and workload redistribution for improved coordination.\nPrepare the report in a professional and friendly tone, written in Persian.\nGenerate the complete report in a Google Doc with ID [Your Google Doc ID] using the write_google_doc function.\nOutput Format:\nComplete text of the comprehensive task management report.\nGenerate  in a Google Doc using the write_google_doc function.\nRules and Constraints:\nData must only be retrieved from the Trello node via the get_trello_cards function.\nThe report must be analytical, comprehensive, and include actionable suggestions.\nThe tone of the report should be professional yet friendly.\nEnsure accuracy in using card information (e.g., checklists, comments, attachments) for more precise analysis.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-5-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-338",
+      "id": "telegram-1360",
       "type": "telegram",
       "position": {
-        "x": 31.2417,
-        "y": 62.799
+        "x": 386.8613553247633,
+        "y": 440.4157474067074
       },
       "data": {
-        "label": "Trello Dela"
+        "label": "Trello Bot"
       }
     },
     {
-      "id": "googledoc-114",
+      "id": "googledoc-772",
       "type": "googledoc",
       "position": {
         "x": 589.731,
         "y": -189.938
       },
       "data": {
-        "label": "Tasks Report"
+        "label": "Tasks Report",
+        "doc_id": "",
+        "doc_name": "Tasks Report",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "trigger-74",
+      "id": "trigger-897",
       "type": "trigger",
       "position": {
         "x": 222.937,
         "y": -93.9462
       },
       "data": {
-        "label": "تریگر ترلو"
+        "label": "Trello Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     },
     {
-      "id": "trello-9",
+      "id": "trello-68",
       "type": "trello",
       "position": {
         "x": 313.815,
@@ -62,24 +92,24 @@
   ],
   "edges": [
     {
-      "id": "etrello-9-assistant-309-1756557378391-893",
-      "source": "trello-9",
-      "target": "assistant-309"
+      "id": "etrello-68-assistant-2162",
+      "source": "trello-68",
+      "target": "assistant-2162"
     },
     {
-      "id": "eassistant-309-telegram-338-1756557378391-171",
-      "source": "assistant-309",
-      "target": "telegram-338"
+      "id": "eassistant-2162-telegram-1360",
+      "source": "assistant-2162",
+      "target": "telegram-1360"
     },
     {
-      "id": "etrigger-74-assistant-309-1756557378391-658",
-      "source": "trigger-74",
-      "target": "assistant-309"
+      "id": "etrigger-897-assistant-2162",
+      "source": "trigger-897",
+      "target": "assistant-2162"
     },
     {
-      "id": "egoogledoc-114-assistant-309-1756557399963",
-      "source": "googledoc-114",
-      "target": "assistant-309"
+      "id": "egoogledoc-772-assistant-2162",
+      "source": "googledoc-772",
+      "target": "assistant-2162"
     }
   ]
 }

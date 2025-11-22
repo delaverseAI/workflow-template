@@ -1,144 +1,188 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-27T13:28:55.798Z",
+  "exportedAt": "2025-11-05T08:26:21.170Z",
   "nodes": [
     {
-      "id": "assistant-455",
-      "type": "assistant",
-      "position": {
-        "x": 349.923,
-        "y": 353.009
-      },
-      "data": {
-        "label": "دستیار بازخورد کارکنان",
-        "instructions": "Role Definition:\nYou facilitate the collection of employee feedback regarding the company specifically following the company's sales team policies and survey form. It exclusively operates within this scope, providing interactions through chat and Telegram.\nData Sources:\n1. Vector Store ID:  [Your Vector Store ID]\n   - File Storage ID:  [Your File Storage ID]\n     * Contains: Company policies related to sales team\n   - Google Doc ID: [Your Google Doc ID]\n     * Contains: Employee survey form\nData is statically stored in Vector Store  [Your Vector Store ID].\nStep-by-Step Logic:\n1. Receive message from employee via chat interface or Telegram.\n2. Determine user's intent:\n   - If user submits direct feedback about the company:\n     * Store the feedback securely.\n     * Reply with confirmation message acknowledging receipt and thanking the user.\n   - If user requests the survey form:\n     * Retrieve the survey form content from Google Doc.\n     * Send the full survey form text to the user in one message.\n     * Collect the survey responses from the user.\n     * Store the collected feedback securely.\n     * Confirm receipt and thank the user.\n3. Do not engage beyond employee feedback collection scope.\nOutput Formatting:\n- Output channel 1: Chat frame embedded in website or app, full text interactions.\n- Output channel 2: Telegram messages, full text interactions.\nRules and Constraints:\n- Only respond within feedback collection context.\n- Store all feedback securely.\n- Provide polite and professional acknowledgements..\n- Use data from static sources only.\n- Do not mention backend storage or data source details.\nFinal Output:\n- Full conversational text messages via chat frame and Telegram.\n- Confirmation messages upon feedback receipt.",
-        "model": "gpt-4.1-mini"
-      },
-      "parentNode": "container-250",
-      "extent": "parent"
-    },
-    {
-      "id": "analyzer-457",
-      "type": "analyzer",
-      "position": {
-        "x": 1769.94,
-        "y": 916.228
-      },
-      "data": {
-        "label": "تحلیلگر پیام کارکنان",
-        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل بازخورد کارکنان و مکالمات کاربران هستید. \nهدف شما تحلیل بازخوردهای کارکنان برای ارائه گزارش‌های دقیق و حرفه‌ای برای ارائه به مدیران است. \nشما به موارد زیر دسترسی دارید:  \n- داده‌ها و مکالمات از نود کانتینر (شامل مکالمات در تلگرام و فریم چت)\nشما لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n- معیارهای کلیدی را محاسبه کنید:\n - نرخ پاسخ‌دهی: درصد کاربرانی که بازخورد ارائه کردند.\n - سطح رضایت: تحلیل حس و حال (مثبت، خنثی، منفی) بر اساس کلمات کلیدی یا امتیازات.\n- انواع بازخورد: دسته‌بندی بازخورد (مثل شکایت، پیشنهاد، رضایت).\n- روندهای بازخورد: شناسایی موضوعات پرتکرار (مثل مشکلات محصول یا محیط کار).\n- اگر مدیر معیار خاصی (مثل رضایت در بازه زمانی خاص) بخواهد، آن را اولویت دهید.\n- پاسخ‌ها را به فارسی، با لحن حرفه‌ای و دوستانه بنویسید و از اموجی (😊) استفاده کنید.",
-        "model": "gpt-4.1-mini"
-      }
-    },
-    {
-      "id": "telegram-295",
-      "type": "telegram",
-      "position": {
-        "x": 36.1611,
-        "y": 110.809
-      },
-      "data": {
-        "label": "delafeedbacktest"
-      },
-      "parentNode": "container-250",
-      "extent": "parent"
-    },
-    {
-      "id": "vectorstore-237",
-      "type": "vectorstore",
-      "position": {
-        "x": 640.943,
-        "y": 356.238
-      },
-      "data": {
-        "label": "دیتابیس بازخورد کارکنان"
-      },
-      "parentNode": "container-250",
-      "extent": "parent"
-    },
-    {
-      "id": "googledoc-144",
-      "type": "googledoc",
-      "position": {
-        "x": 638.658,
-        "y": 65.4917
-      },
-      "data": {
-        "label": "فرم نظرسنجی از کارکنان"
-      },
-      "parentNode": "container-250",
-      "extent": "parent"
-    },
-    {
-      "id": "container-250",
+      "id": "container-444",
       "type": "container",
       "position": {
         "x": 767.816,
         "y": 617.86
       },
       "data": {
-        "label": "کانتینر جمع‌آوری بازخورد",
-        "width": 937,
-        "height": 635
+        "label": "Feedback Collection Container",
+        "width": 938,
+        "height": 789
       }
     },
     {
-      "id": "iframe-140",
+      "id": "assistant-2145",
+      "type": "assistant",
+      "position": {
+        "x": 363.7425871295552,
+        "y": 410.73577629653425
+      },
+      "data": {
+        "label": "Feedback AI Agent",
+        "instructions": "You are an AI assistant named … for collecting employee feedback for … company. You have sufficient information about the company from:
+- File Repository with ID(s): …
+- Google Docs with ID(s): …
+- Google Sheets with ID(s): …
+- File Database with ID(s): …
+in the Vector Database, and access to survey forms from:
+- File Repository with ID(s): …
+- Google Docs with ID(s): …
+- Google Sheets with ID(s): …
+- File Database with ID(s): …
+in the Vector Database.
+- If an employee provides feedback directly or via your survey form, store it and confirm receipt (e.g., Thank you for your feedback 😊).
+- Write responses in Persian with a polite, friendly tone.","model": "gpt-5-mini","ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
+      },
+      "parentNode": "container-444",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-2146",
+      "type": "analyzer",
+      "position": {
+        "x": 1816.585891233262,
+        "y": 912.0401436420449
+      },
+      "data": {
+        "label": "Employee Message Analyst",
+        "instructions": "You are an AI assistant to analyze employee feedback and user conversations.\nYour goal is to analyze employee feedback to provide accurate and professional reports to managers.\nYou have access to:\n- Data and conversations from the container node (including conversations in Telegram and Frame Chat)\nYou need to perform the following actions and analyses:\n- Calculate key metrics:\n- Response rate: Percentage of users who provided feedback.\n- Satisfaction level: Analyze sentiment (positive, neutral, negative) based on keywords or scores.\n- Feedback types: Categorize feedback (e.g. complaint, suggestion, satisfaction).\n- Feedback trends: Identify recurring topics (e.g. product or work environment issues).\n- If the manager asks for a specific metric (e.g. satisfaction within a specific time frame), prioritize it.\n- Write responses in Persian, in a professional and friendly tone, and use emoji (😊).",
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
+      }
+    },
+    {
+      "id": "telegram-1344",
+      "type": "telegram",
+      "position": {
+        "x": 36.16110000000003,
+        "y": 110.80899999999997
+      },
+      "data": {
+        "label": "delafeedbacktest"
+      },
+      "parentNode": "container-444",
+      "extent": "parent"
+    },
+    {
+      "id": "vectorstore-694",
+      "type": "vectorstore",
+      "position": {
+        "x": 640.943,
+        "y": 356.23799999999994
+      },
+      "data": {
+        "label": "Employee Feedback Database"
+      },
+      "parentNode": "container-444",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-761",
+      "type": "googledoc",
+      "position": {
+        "x": 638.6580000000001,
+        "y": 65.49170000000004
+      },
+      "data": {
+        "label": "Employee Survey Form",
+        "doc_id": "",
+        "doc_name": "Employee survey form",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
+      },
+      "parentNode": "container-444",
+      "extent": "parent"
+    },
+    {
+      "id": "iframe-407",
       "type": "iframe",
       "position": {
         "x": 10,
         "y": 274.972
       },
       "data": {
-        "label": "دلاورس"
+        "label": "deleverse"
       },
-      "parentNode": "container-250",
+      "parentNode": "container-444",
       "extent": "parent"
     },
     {
-      "id": "filedb-72",
+      "id": "filedb-393",
       "type": "filedb",
       "position": {
-        "x": 350.877,
-        "y": 70.3522
+        "x": 350.87699999999995,
+        "y": 70.35220000000004
       },
       "data": {
-        "label": "سیاست‌های شرکت"
+        "label": "Company Policies"
       },
-      "parentNode": "container-250",
+      "parentNode": "container-444",
       "extent": "parent"
     }
   ],
   "edges": [
     {
-      "id": "egoogledoc-144-vectorstore-237-1756301325501-255",
-      "source": "googledoc-144",
-      "target": "vectorstore-237"
+      "id": "egoogledoc-761-vectorstore-694",
+      "source": "googledoc-761",
+      "target": "vectorstore-694"
     },
     {
-      "id": "efiledb-72-vectorstore-237-1756301325501-734",
-      "source": "filedb-72",
-      "target": "vectorstore-237"
+      "id": "efiledb-393-vectorstore-694",
+      "source": "filedb-393",
+      "target": "vectorstore-694"
     },
     {
-      "id": "evectorstore-237-assistant-455-1756301325501-957",
-      "source": "vectorstore-237",
-      "target": "assistant-455"
+      "id": "evectorstore-694-assistant-2145",
+      "source": "vectorstore-694",
+      "target": "assistant-2145"
     },
     {
-      "id": "eassistant-455-telegram-295-1756301325501-112",
-      "source": "assistant-455",
-      "target": "telegram-295"
+      "id": "eassistant-2145-telegram-1344",
+      "source": "assistant-2145",
+      "target": "telegram-1344"
     },
     {
-      "id": "eassistant-455-iframe-140-1756301325501-70",
-      "source": "assistant-455",
-      "target": "iframe-140"
+      "id": "eassistant-2145-iframe-407",
+      "source": "assistant-2145",
+      "target": "iframe-407"
     },
     {
-      "id": "econtainer-250-analyzer-457-1756301325501-358",
-      "source": "container-250",
-      "target": "analyzer-457"
+      "id": "econtainer-444-analyzer-2146",
+      "source": "container-444",
+      "target": "analyzer-2146"
     }
   ]
 }

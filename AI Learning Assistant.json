@@ -1,20 +1,30 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-09-07T09:57:44.625Z",
+  "exportedAt": "2025-11-18T06:53:11.427Z",
   "nodes": [
     {
-      "id": "googledoc-359",
+      "id": "googledoc-888",
       "type": "googledoc",
       "position": {
-        "x": 751.2056608746819,
+        "x": 894.2141209657963,
         "y": 533.3317066452064
       },
       "data": {
-        "label": "Learning Docs Retriever"
+        "label": "Learning Docs Retriever",
+        "doc_id": "",
+        "doc_name": "Learning Docs Retriever",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "filedb-165",
+      "id": "filedb-472",
       "type": "filedb",
       "position": {
         "x": 1286.4331601578472,
@@ -25,18 +35,7 @@
       }
     },
     {
-      "id": "vectorstore-416",
-      "type": "vectorstore",
-      "position": {
-        "x": 1020.8390573518927,
-        "y": 785.5947922745755
-      },
-      "data": {
-        "label": "Learning Vector Store"
-      }
-    },
-    {
-      "id": "assistant-945",
+      "id": "assistant-2420",
       "type": "assistant",
       "position": {
         "x": 1018.3736773815954,
@@ -45,73 +44,101 @@
       "data": {
         "label": "Learning AI Assistant",
         "instructions": "Purpose:\nYou are an AI Learning Assistant. Your task is to automatically retrieve, analyze, and summarize all available learning content from Google Docs and File Database, then write structured reports directly into a designated Google Docs document every time the workflow runs. You do not wait for any user command or Telegram input; execution is fully automated.\n\nData Sources:\n\nGoogle Docs Node: Retrieves learning documents (Document ID: [YOUR GOOGLE DOC ID]) for dynamic content analysis.\n\nFile Database Node: Retrieves PDFs, Word files, or other uploaded learning materials.\n\nVector Store Node: Aggregates content for faster access and analysis.\n\nVector Store ID :YOUR VECTOR STOR ID\n\nOutputs:\n\nGoogle Docs: Write a full report directly into the designated document (Destination ID: [YOUR GOOGLE DOC ID FOR REPORT])\n\nReport must include:\n\nIntroduction / Overview of all content\n\nAnalysis of learning materials\n\nLearner performance summary (if data exists)\n\nRecommendations / next steps\n\nSummary / actionable insights\n\nOptional Telegram Message: Send summary or notification (can be skipped if undesired).\n\nProcessing / Logical Rules:\n\nAutomatic execution: Every time the workflow runs, the assistant must generate and write the report without prompting the user.\n\nContent aggregation: Include all available documents, no time filters; analyze full history of materials.\n\nFormatting:\n\nClear headings for each section\n\nBulleted or numbered lists for recommendations\n\nStructured paragraphs for analysis and summaries\n\nSkip conditions: If no new content exists, still write a minimal report noting “No new content available” in the Google Doc.\n\nConsistency: Each report must overwrite or append to the Google Doc consistently, ensuring the document always contains the latest analysis.\n\nOptional personalization: If user or learner data is available, include their names and performance context in the report.\n\nExample Instruction (AI Node Use Case):\n\n\"Every time new or existing learning content is retrieved, analyze it and write a structured report to Google Docs. Include overview, content analysis, recommendations, and a summary. Do not wait for user commands. Append or overwrite the Google Doc (Document ID: [Insert]). Use clear headings, bullet points, and structured paragraphs.\"",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [
+          "read_google_doc_1763448733_888",
+          "search_company_files_1763448735_472"
+        ],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-623",
+      "id": "telegram-1474",
       "type": "telegram",
       "position": {
-        "x": 1021.0752931796555,
-        "y": 1175.8762444686713
+        "x": 1000.5848148699959,
+        "y": 1341.709798452739
       },
       "data": {
         "label": "Learning Notifications Bot"
       }
     },
     {
-      "id": "googledoc-362",
+      "id": "googledoc-889",
       "type": "googledoc",
       "position": {
-        "x": 640.7775579644211,
-        "y": 768.8576901999074
+        "x": 602.2915028445949,
+        "y": 825.923220205167
       },
       "data": {
-        "label": "Learning Output"
+        "label": "Learning Output",
+        "doc_id": "",
+        "doc_name": "Learning Output",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "trigger-311",
+      "id": "trigger-1001",
       "type": "trigger",
       "position": {
-        "x": 1412.1576333586822,
-        "y": 830.7618357328829
+        "x": 1410.6522811471966,
+        "y": 872.9116976544744
       },
       "data": {
-        "label": "Learning Trigger"
+        "label": "Learning Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     }
   ],
   "edges": [
     {
-      "id": "eassistant-945-telegram-623-1757234824709",
-      "source": "assistant-945",
-      "target": "telegram-623"
+      "id": "eassistant-2420-telegram-1474",
+      "source": "assistant-2420",
+      "target": "telegram-1474"
     },
     {
-      "id": "evectorstore-416-assistant-945-1757234832209",
-      "source": "vectorstore-416",
-      "target": "assistant-945"
+      "id": "egoogledoc-889-assistant-2420",
+      "source": "googledoc-889",
+      "target": "assistant-2420"
     },
     {
-      "id": "efiledb-165-vectorstore-416-1757234851266",
-      "source": "filedb-165",
-      "target": "vectorstore-416"
+      "id": "etrigger-1001-assistant-2420",
+      "source": "trigger-1001",
+      "target": "assistant-2420"
     },
     {
-      "id": "egoogledoc-359-vectorstore-416-1757237404461",
-      "source": "googledoc-359",
-      "target": "vectorstore-416"
+      "id": "egoogledoc-888-assistant-2420-1763448733782",
+      "source": "googledoc-888",
+      "target": "assistant-2420"
     },
     {
-      "id": "egoogledoc-362-assistant-945-1757238049185",
-      "source": "googledoc-362",
-      "target": "assistant-945"
-    },
-    {
-      "id": "etrigger-311-assistant-945-1757238108645",
-      "source": "trigger-311",
-      "target": "assistant-945"
+      "id": "eassistant-2420-filedb-472",
+      "source": "filedb-472",
+      "target": "assistant-2420"
     }
   ]
 }

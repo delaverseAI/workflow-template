@@ -1,37 +1,49 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-31T08:05:04.345Z",
+  "exportedAt": "2025-11-06T11:01:08.554Z",
   "nodes": [
     {
-      "id": "assistant-838",
+      "id": "assistant-1762426738452",
       "type": "assistant",
       "position": {
-        "x": 1139.14,
-        "y": 916.891
+        "x": 1161.6667381065731,
+        "y": 825.2822650332702
       },
       "data": {
-        "label": "Content Creation API Assistant",
+        "label": "Content Creation API AI Agent",
         "instructions": "You automatically generate SEO-optimized news content using input title, full text, and news link from a Node API. It also creates and attaches a relevant featured image for WordPress publishing.\n\nData Sources:\n- Request API from a Node, providing:\n  - News title\n  - Full news text \n  - News link URL\n\nStep-by-Step Logic:\n1. Content Generation:\n   - Produce a 1000-word news article in Persian with a formal and journalistic tone.\n   - Include the main keyword with a density of 1-2% throughout the text.\n   - Structure the content as follows:\n     - Line 1: News title in plain text containing the main keyword.\n     - Introduction paragraph (100-150 words) introducing the topic without a heading.\n     - Main body with multiple paragraphs, organized using precise HTML heading tags (, , etc.) for automatic WordPress recognition.\n     - Diverse and engaging paragraphs.\n     - Conclusion paragraph (100-150 words) summarizing key points and including a clear, motivational call-to-action.\n     - Source of news as a hyperlink tagged correctly () for WordPress recognition.\n\n2. Image Generation:\n   - Generate a relevant featured image based on the article's topic.\n   - Output the generated image in JSON format:\n     {\n       \"generated_images\": [[\"generated_image\"]]\n     }\n   - This image will be used as the WordPress post’s index/featured image.\n\n3. Publishing:\n   - Send the complete generated content along with the generated image to WordPress for publishing.\n\nOutput Format and Connection:\n- Publish the full SEO-optimized post in WordPress with generated text and featured image.\n- Use precise HTML tags for headings and links to ensure correct WordPress formatting.\n\nRules and Constraints:\n- The content must be exactly 1000 words.\n- Use Persian language with a formal, news-style tone.\n- Maintain keyword density of 1-2%.\n- Include explicit call-to-action in the conclusion.\n- Generate and include one relevant featured image.\n- No summaries or deviations from the structure.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-489",
+      "id": "telegram-1391",
       "type": "telegram",
       "position": {
-        "x": 1305.89,
-        "y": 1190.05
+        "x": 1145.1992681731135,
+        "y": 1172.0286095147417
       },
       "data": {
-        "label": "WordPress news bot"
+        "label": "WordPress News bot"
       }
     },
     {
-      "id": "apidefinition-162",
+      "id": "apidefinition-251",
       "type": "apidefinition",
       "position": {
-        "x": 980.797,
-        "y": 396.046
+        "x": 961.2738269743036,
+        "y": 353.9960888677305
       },
       "data": {
         "label": "NewsAPI",
@@ -48,11 +60,11 @@
       }
     },
     {
-      "id": "request-171",
+      "id": "request-294",
       "type": "request",
       "position": {
-        "x": 1139.5,
-        "y": 728.352
+        "x": 1145.5071301617527,
+        "y": 573.668398334866
       },
       "data": {
         "label": "News Request",
@@ -68,69 +80,69 @@
       }
     },
     {
-      "id": "wordpress-88",
+      "id": "wordpress-306",
       "type": "wordpress",
       "position": {
-        "x": 957.437,
-        "y": 1191
+        "x": 807.2587459561806,
+        "y": 1156.4590015699214
       },
       "data": {
-        "label": "وردپرس جدید"
+        "label": "New WordPress"
       }
     },
     {
-      "id": "scheduler-129",
+      "id": "scheduler-191",
       "type": "scheduler",
       "position": {
-        "x": 1364.07,
-        "y": 508.256
+        "x": 1383.5931730256964,
+        "y": 422.65439519502297
       },
       "data": {
-        "label": "اسکجولر"
+        "label": "Scheduler"
       }
     },
     {
-      "id": "imagegeneration-42",
+      "id": "imagegeneration-334",
       "type": "imagegeneration",
       "position": {
-        "x": 1629.0058945909107,
-        "y": 1185.9412822315396
+        "x": 1442.7848595765747,
+        "y": 1161.9127615845284
       },
       "data": {
-        "label": "تولید تصویر"
+        "label": "Image Generation"
       }
     }
   ],
   "edges": [
     {
-      "id": "eapidefinition-162-request-171-1756627465800-182",
-      "source": "apidefinition-162",
-      "target": "request-171"
+      "id": "eapidefinition-251-request-294",
+      "source": "apidefinition-251",
+      "target": "request-294"
     },
     {
-      "id": "escheduler-129-request-171-1756627465800-456",
-      "source": "scheduler-129",
-      "target": "request-171"
+      "id": "escheduler-191-request-294",
+      "source": "scheduler-191",
+      "target": "request-294"
     },
     {
-      "id": "erequest-171-assistant-838-1756627465800-968",
-      "source": "request-171",
-      "target": "assistant-838"
+      "id": "erequest-294-assistant-1762426738452",
+      "source": "request-294",
+      "target": "assistant-1762426738452"
     },
     {
-      "id": "eassistant-838-telegram-489-1756627465800-260",
-      "source": "assistant-838",
-      "target": "telegram-489"
+      "id": "eassistant-1762426738452-telegram-1391",
+      "source": "assistant-1762426738452",
+      "target": "telegram-1391"
     },
     {
-      "id": "eassistant-838-wordpress-88-1756627465800-322",
-      "source": "assistant-838",
-      "target": "wordpress-88"
+      "id": "eassistant-1762426738452-wordpress-306",
+      "source": "assistant-1762426738452",
+      "target": "wordpress-306"
     },
     {
-      "id": "eassistant-838-imagegeneration-42-1756627489681",
-      "source": "assistant-838",
-      "target": "imagegeneration-42"
+      "id": "eassistant-1762426738452-imagegeneration-334",
+      "source": "assistant-1762426738452",
+      "target": "imagegeneration-334"
     }
   ]
 }

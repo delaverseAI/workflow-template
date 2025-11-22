@@ -1,85 +1,125 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-27T13:23:44.322Z",
+  "exportedAt": "2025-11-05T11:01:35.399Z",
   "nodes": [
     {
-      "id": "assistant-459",
+      "id": "assistant-2157",
       "type": "assistant",
       "position": {
         "x": 752.3083075812274,
         "y": 931.075
       },
       "data": {
-        "label": "دستیار فروش",
+        "label": "Sales Analysis AI Agent",
         "instructions": "Role Definition:\nThe assistant performs periodic analysis of sales data to generate comprehensive sales reports. It identifies causes of sales increases or decreases and provides future sales performance forecasts based strictly on the available data.\nData Sources:\n- Google Sheet ID: [Your Google Sheet ID]\nColumns: A = Row number, B = Product Code, C = Product Name, D = Category, E = Sale Date, F = Quantity Sold, G = Unit Price (Toman), H = Discount Applied (%), I = Total Sales (Toman), J = Payment Method\nFunction used: read_google_sheet\nStep-by-Step Logic:\n1. Retrieve sales data from Google Sheet using read_google_sheet.\n2. Analyze the data using to produce:\n   - A summary report covering key sales metrics.\n   - Identification of factors contributing to sales growth or decline.\n   - Sales performance forecasts based on historical data, if feasible.\n3. Compile the analysis results into a formatted report.\n4. Write the report to Google Doc with ID [Your Google Doc ID] using write_google_doc.\nOutput Formatting:\n- The report must be clear, structured, and data-driven.\n- Include sections: Summary, Reasons for Sales Growth/Decline, and Forecasts.\nRules and Constraints:\n- Use only data from the specified Google Sheet.\n- Ensure accuracy and relevance in analysis and reporting.\n- Do not include raw data dump; focus on insights and summaries.\nFunctions Involved:\n- read_google_sheet for sales data \n- write_google_doc for report output \nFinal Output:\n- A comprehensive analytical sales report published as a Google Doc.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-464",
+      "id": "telegram-1354",
       "type": "telegram",
       "position": {
-        "x": 749.198,
-        "y": 1139.33
+        "x": 733.5435559085015,
+        "y": 1292.743552096685
       },
       "data": {
-        "label": "Dela Test Bot Finance"
+        "label": "Sales Bot"
       }
     },
     {
-      "id": "googledoc-145",
+      "id": "googledoc-767",
       "type": "googledoc",
       "position": {
         "x": 955.553,
         "y": 657.412
       },
       "data": {
-        "label": "گزارش فروش"
+        "label": "Sales Report",
+        "doc_id": "",
+        "doc_name": "گزارش فروش",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "googlesheet-127",
+      "id": "googlesheet-917",
       "type": "googlesheet",
       "position": {
         "x": 538.921,
         "y": 656.783
       },
       "data": {
-        "label": "داده‌های فروش"
+        "label": "Sales Data",
+        "sheet_id": "",
+        "sheet_name": "داده‌های فروش",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
       }
     },
     {
-      "id": "trigger-179",
+      "id": "trigger-892",
       "type": "trigger",
       "position": {
-        "x": 846.492,
-        "y": 754.324
+        "x": 837.6134840437544,
+        "y": 733.0155617050106
       },
       "data": {
-        "label": "تریگر تحلیل داده‌های فروش"
+        "label": "Sales Data Analysis Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     }
   ],
   "edges": [
     {
-      "id": "egoogledoc-145-assistant-459-1756301015590-286",
-      "source": "googledoc-145",
-      "target": "assistant-459"
+      "id": "egoogledoc-767-assistant-2157",
+      "source": "googledoc-767",
+      "target": "assistant-2157"
     },
     {
-      "id": "egooglesheet-127-assistant-459-1756301015590-345",
-      "source": "googlesheet-127",
-      "target": "assistant-459"
+      "id": "egooglesheet-917-assistant-2157",
+      "source": "googlesheet-917",
+      "target": "assistant-2157"
     },
     {
-      "id": "etrigger-179-assistant-459-1756301015590-297",
-      "source": "trigger-179",
-      "target": "assistant-459"
+      "id": "etrigger-892-assistant-2157",
+      "source": "trigger-892",
+      "target": "assistant-2157"
     },
     {
-      "id": "eassistant-459-telegram-464-1756301015590-183",
-      "source": "assistant-459",
-      "target": "telegram-464"
+      "id": "eassistant-2157-telegram-1354",
+      "source": "assistant-2157",
+      "target": "telegram-1354"
     }
   ]
 }

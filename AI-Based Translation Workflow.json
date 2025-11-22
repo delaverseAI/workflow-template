@@ -1,101 +1,127 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-09-03T11:25:09.974Z",
+  "exportedAt": "2025-11-17T11:43:59.987Z",
   "nodes": [
     {
-      "id": "googledoc-311",
+      "id": "googledoc-874",
       "type": "googledoc",
       "position": {
         "x": 997.6500913590078,
         "y": 470.3964287565366
       },
       "data": {
-        "label": "Source Documents"
+        "label": "Source Documents",
+        "doc_id": "",
+        "doc_name": "Source Documents",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "vectorstore-384",
-      "type": "vectorstore",
-      "position": {
-        "x": 999.2058524348961,
-        "y": 714.1305065650488
-      },
-      "data": {
-        "label": "Static Translation Data Store"
-      }
-    },
-    {
-      "id": "assistant-864",
+      "id": "assistant-2397",
       "type": "assistant",
       "position": {
-        "x": 999.5911139366863,
-        "y": 1033.7105569543978
+        "x": 1001.7968949098906,
+        "y": 835.1902693660145
       },
       "data": {
         "label": "AI Translator",
-        "instructions": "Google Docs Node 1 (Source Documents):\n\nConfigure to read the source document (e.g., a Google Docs file containing text in English or another language).\nProvide the document ID (e.g., vs_68b81ec41c94819182047cd5187ba16d or as specified).\nAuthenticate with Google Docs API using valid credentials.\n\n\nFile Database Node (Optional):\n\nIf the file is a DOCX or PDF, configure this node to retrieve it.\nEnsure the file format is compatible (e.g., readable text in DOCX or PDF).\n\n\nVector Store Node (Optional):\n\nIf you have static translation data (e.g., glossary or context for Persian translations), configure the Vector Store with the relevant store ID.\nThis enhances translation accuracy for domain-specific terms.\n\n\nAI Assistant Node:\n\nSelect an AI model (e.g., OpenAI or a model optimized for Persian translation).\nProvide explicit instructions: \"Translate the input document into Persian (Farsi) while preserving context, tone, and cultural nuances. Ensure accuracy for idiomatic expressions and maintain formatting as closely as possible.\"\n\n\nGoogle Docs Node 2 (Translated Documents):\n\nConfigure to write the translated Persian text into a new Google Docs file.\nSpecify the target document ID or folder for saving.\n\n\nTelegram Node:\n\nSet up a Telegram bot with a valid bot token and API integration.\nConfigure to send notifications to a specific user or group (e.g., “Translation of Document XYZ into Persian completed successfully”).\n\n\nTrigger Node:\n\nSet the workflow to run on demand or schedule it (e.g., using a cron job or interval trigger).\n\n\n\n\n\n2. Authenticate and Test Nodes\n\nVerify that all nodes (Google Docs, File Database, Vector Store, Telegram) are authenticated:\n\nGoogle Docs: Check API token validity.\nTelegram: Test bot connectivity by sending a test message.\nFile Database/Vector Store: Ensure read/write access.\n\n\nTest data flow between nodes:\n\nRetrieve a sample document and confirm it reaches the AI Assistant Node.\nCheck that the AI outputs translated text and saves it correctly.\nConfirm Telegram notifications are sent.\n\n\n\n3. Run the Translation Workflow\n\nInput Document: Ensure the source document (from Google Docs or File Database) is ready and compatible (e.g., text-based, not scanned images).\nTranslation Process:\n\nThe AI Assistant Node processes the document, translating it into Persian.\nIf using a Vector Store, it references static data for better accuracy (e.g., Persian-specific terminology).\n\n\nOutput:\n\nThe translated document is saved in Google Docs (Node 2) with formatting preserved as much as possible.\nA Telegram notification is sent, e.g., “Document [Title] translated to Persian and saved to Google Docs [Doc ID].”\n\n\n\n4. Handle Errors\n\nIf the input document format is incompatible (e.g., a scanned PDF), the workflow should notify you via Telegram (e.g., “Error: Input document format not supported”).\nIf authentication fails, you’ll receive a Telegram message like “Error: Google Docs API token invalid.”\nTest the workflow with a small sample to catch issues early.\n\n5. Example Output\n\nTranslated Document: A new Google Docs file containing the Persian translation, with formatting (e.g., headings, paragraphs) intact where possible.\nTelegram Notification: A message like “Translation of ‘Sample_Document.docx’ to Persian completed. Access it here: [Google Docs Link].”\n\nIf You Provide a File or Text\nIf you upload a specific file (e.g., DOCX, PDF, or text) or share text, I can:\n\nSimulate the AI Assistant Node’s translation into Persian.\nProvide the translated text directly in this response.\nFormat it according to your needs.\n\nFor example, if you share a sentence like “Hello, how are you?”, I can translate it to Persian:\n\nInput: “Hello, how are you?”\nOutput: \"سلام، حال شما چطور است؟\"",
-        "model": "gpt-4.1-mini"
+        "instructions": "Google Docs Node 1 (Source Documents):\n\nConfigure to read the source document (e.g., a Google Docs file containing text in English or another language).\nProvide the document ID (e.g., vs_68b81ec41c94819182047cd5187ba16d or as specified).\nAuthenticate with Google Docs API using valid credentials.\n\n\nFile Database Node (Optional):\n\nIf the file is a DOCX or PDF, configure this node to retrieve it.\nEnsure the file format is compatible (e.g., readable text in DOCX or PDF).\n\n\nVector Store Node (Optional):\n\nIf you have static translation data (e.g., glossary or context for Persian translations), configure the Vector Store with the relevant store ID.\nThis enhances translation accuracy for domain-specific terms.\n\n\nAI Assistant Node:\n\nSelect an AI model (e.g., OpenAI or a model optimized for Persian translation).\nProvide explicit instructions: \"Translate the input document into Persian (Farsi) while preserving context, tone, and cultural nuances. Ensure accuracy for idiomatic expressions and maintain formatting as closely as possible.\"\n\n\nGoogle Docs Node 2 (Translated Documents):\n\nConfigure to write the translated Persian text into a new Google Docs file.\nSpecify the target document ID or folder for saving.\n\n\nTelegram Node:\n\nSet up a Telegram bot with a valid bot token and API integration.\nConfigure to send notifications to a specific user or group (e.g., “Translation of Document XYZ into Persian completed successfully”).\n\n\nTrigger Node:\n\nSet the workflow to run on demand or schedule it (e.g., using a cron job or interval trigger).\n\n\n\n\n\n2. Authenticate and Test Nodes\n\nVerify that all nodes (Google Docs, File Database, Vector Store, Telegram) are authenticated:\n\nGoogle Docs: Check API token validity.\nTelegram: Test bot connectivity by sending a test message.\nFile Database/Vector Store: Ensure read/write access.\n\n\nTest data flow between nodes:\n\nRetrieve a sample document and confirm it reaches the AI Assistant Node.\nCheck that the AI outputs translated text and saves it correctly.\nConfirm Telegram notifications are sent.\n\n\n\n3. Run the Translation Workflow\n\nInput Document: Ensure the source document (from Google Docs or File Database) is ready and compatible (e.g., text-based, not scanned images).\nTranslation Process:\n\nThe AI Assistant Node processes the document, translating it into Persian.\nIf using a Vector Store, it references static data for better accuracy (e.g., Persian-specific terminology).\n\n\nOutput:\n\nThe translated document is saved in Google Docs (Node 2) with formatting preserved as much as possible.\nA Telegram notification is sent, e.g., “Document [Title] translated to Persian and saved to Google Docs [Doc ID].”\n\n\n\n4. Handle Errors\n\nIf the input document format is incompatible (e.g., a scanned PDF), the workflow should notify you via Telegram (e.g., “Error: Input document format not supported”).\nIf authentication fails, you’ll receive a Telegram message like “Error: Google Docs API token invalid.”\nTest the workflow with a small sample to catch issues early.\n\n5. Example Output\n\nTranslated Document: A new Google Docs file containing the Persian translation, with formatting (e.g., headings, paragraphs) intact where possible.\nTelegram Notification: A message like “Translation of ‘Sample_Document.docx’ to Persian completed. Access it here: [Google Docs Link].”\n\nIf You Provide a File or Text\nIf you upload a specific file (e.g., DOCX, PDF, or text) or share text, I can:\n\nSimulate the AI Assistant Node’s translation into Persian.\nProvide the translated text directly in this response.\nFormat it according to your needs.\n\nFor example, if you share a sentence like “Hello, how are you?”, I can translate it to Persian:\n\nInput: “Hello, how are you?”\nOutput: \"Hello, how are you?\"",
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [
+          "read_google_doc_1763379756_874"
+        ],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "googledoc-312",
+      "id": "googledoc-875",
       "type": "googledoc",
       "position": {
-        "x": 622.2212289544746,
-        "y": 744.029971536662
+        "x": 629.9816173538234,
+        "y": 660.6218822515085
       },
       "data": {
-        "label": "Translated Documents"
+        "label": "Translated Documents",
+        "doc_id": "",
+        "doc_name": "Translated Documents",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "telegram-515",
+      "id": "telegram-1460",
       "type": "telegram",
       "position": {
-        "x": 999.5825413395789,
-        "y": 1221.4572413248409
+        "x": 982.5539357270941,
+        "y": 1212.9429385185986
       },
       "data": {
         "label": "Translation Bot"
       }
     },
     {
-      "id": "trigger-212",
+      "id": "trigger-987",
       "type": "trigger",
       "position": {
-        "x": 1411.5713528363626,
-        "y": 805.0527028596886
+        "x": 1442.4522864612222,
+        "y": 672.7058444674329
       },
       "data": {
-        "label": "Translation Trigger"
+        "label": "Translation Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     }
   ],
   "edges": [
     {
-      "id": "egoogledoc-311-vectorstore-384-1756897159554",
-      "source": "googledoc-311",
-      "target": "vectorstore-384"
+      "id": "egoogledoc-875-assistant-2397",
+      "source": "googledoc-875",
+      "target": "assistant-2397"
     },
     {
-      "id": "evectorstore-384-assistant-864-1756897292186",
-      "source": "vectorstore-384",
-      "target": "assistant-864"
+      "id": "eassistant-2397-telegram-1460",
+      "source": "assistant-2397",
+      "target": "telegram-1460"
     },
     {
-      "id": "egoogledoc-312-assistant-864-1756897312430",
-      "source": "googledoc-312",
-      "target": "assistant-864"
+      "id": "etrigger-987-assistant-2397",
+      "source": "trigger-987",
+      "target": "assistant-2397"
     },
     {
-      "id": "eassistant-864-telegram-515-1756897581753",
-      "source": "assistant-864",
-      "target": "telegram-515"
-    },
-    {
-      "id": "etrigger-212-assistant-864-1756897592304",
-      "source": "trigger-212",
-      "target": "assistant-864"
+      "id": "egoogledoc-874-assistant-2397-1763379758583",
+      "source": "googledoc-874",
+      "target": "assistant-2397"
     }
   ]
 }

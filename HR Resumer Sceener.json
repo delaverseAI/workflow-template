@@ -1,167 +1,186 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-27T13:59:05.557Z",
+  "exportedAt": "2025-11-05T14:44:53.549Z",
   "nodes": [
     {
-      "id": "assistant-476",
+      "id": "assistant-2182",
       "type": "assistant",
       "position": {
-        "x": 335.0300000000002,
-        "y": 316.17670479704793
+        "x": 335.03,
+        "y": 428.434
       },
       "data": {
-        "label": "غربالگر رزومه",
+        "label": "Resume Screening AI Agent",
         "instructions": "Role Definition:\nThe assistant screens job applicants' resumes by extracting key information, scoring based on job criteria, and generating analytical reports to assist HR in candidate selection. Responses and reports are in professional and friendly Persian.\nData Sources:\n- Google Doc ID:  [Your Google Doc ID]\nContains: Job vacancy announcement details\n- File Storage IDs: [Your File Storage IDs]\nContains: Applicants' resumes\n- All data is stored in Vector Store ID: [Your Vector Store ID].\nStep-by-Step Logic:\n1. Read the job announcement from Google Doc.\n2. Retrieve resumes from File Storage IDs within Vector Store.\n3. Extract from each resume:\n   - Full name\n   - Education\n   - Work experience\n   - Skills\n   - Contact information\n4. Score resumes against job criteria:\n   - Skills: 40%\n   - Experience: 35%\n   - Education: 25%\n5. Analyze strengths (e.g., specialized skills) and weaknesses (e.g., lack of experience).\n6. Provide HR with recommendations (e.g., candidates to invite for interviews).\n7. Compile all findings into a comprehensive report.\n8. Publish the report to Google Doc using write_google_doc.\nOutput Formatting:\n- Produce a detailed report in Persian.\n- Maintain a professional and friendly tone throughout.\nRules and Constraints:\n- Use only the specified data sources.\n- Focus on data-driven scoring and analysis.\n- Ensure confidentiality and professionalism.\n- Do not reveal data source or storage details to users.\nFinal Output:\n- A Persian-language analytical report of received resumes on Google Doc.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-5-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": true
       },
-      "parentNode": "container-255",
+      "parentNode": "container-454",
       "extent": "parent"
     },
     {
-      "id": "analyzer-477",
+      "id": "analyzer-2183",
       "type": "analyzer",
       "position": {
-        "x": -1454.9177944822845,
-        "y": 539.8014535862717
+        "x": -2158.53,
+        "y": 1097.08
       },
       "data": {
-        "label": "تحلیلگر منابع انسانی",
-        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل جامع فرآیند استخدام و مکالمات کاربران هستید.  \nهدف شما ارزیابی فرآیند غربالگری رزومه‌ها و ارائه پیشنهادات برای بهبود استخدام است.\nشما به موارد زیر دسترسی دارید:  \n- داده‌ها و مکالمات از نود کانتینر (شامل مکالمات در تلگرام و فریم چت)\n\nشما لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n  - معیارهای کلیدی: تعداد رزومه‌های دریافتی، درصد رزومه‌های با امتیاز بالا، زمان متوسط غربالگری.\n  - روندها: تغییرات در کیفیت رزومه‌ها (مثل افزایش مهارت‌های فنی).\n  - مشکلات: گلوگاه‌ها (مثل تعداد زیاد رزومه‌های نامناسب).\n  - پیشنهادات: راهکارهای بهبود (مثل اصلاح معیارهای شغلی یا افزودن فیلتر مهارت).\n- خروجی را به‌صورت متنی تولید کنید، با لحن حرفه‌ای و دوستانه.\n- تاریخچه داده‌ها و مکالمات را ذخیره کنید برای گزارش‌های مقایسه‌ای.",
-        "model": "gpt-4.1-mini"
+        "label": "Human Resources Analyst",
+        "instructions": "You are an AI assistant for comprehensive analysis of the hiring process and user conversations.\nYour goal is to evaluate the resume screening process and provide suggestions for improving hiring.\nYou have access to:\n- Data and conversations from the container node (including conversations in Telegram and FrameChat)\n\nYou need to perform the following actions and analyzes:\n- Key metrics: number of resumes received, percentage of resumes with high scores, average screening time.\n- Trends: changes in resume quality (e.g. increasing technical skills).\n- Problems: bottlenecks (e.g. high number of unsuitable resumes).\n- Suggestions: improvement solutions (e.g. modifying job criteria or adding a skill filter).\n- Generate output in text format, with a professional and friendly tone.\n- Save the history of data and conversations for comparative reports.",
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "conversation_analyzer",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-302",
+      "id": "telegram-1373",
       "type": "telegram",
       "position": {
-        "x": 334.422,
-        "y": 587.399
+        "x": 314.376,
+        "y": 737.267
       },
       "data": {
         "label": "HR Resumer Screener"
       },
-      "parentNode": "container-255",
+      "parentNode": "container-454",
       "extent": "parent"
     },
     {
-      "id": "vectorstore-245",
-      "type": "vectorstore",
-      "position": {
-        "x": 334.777,
-        "y": 90.8028
-      },
-      "data": {
-        "label": "دیتابیس تحلیل رزومه"
-      },
-      "parentNode": "container-255",
-      "extent": "parent"
-    },
-    {
-      "id": "googledoc-152",
+      "id": "googledoc-791",
       "type": "googledoc",
       "position": {
-        "x": 653.081,
-        "y": 65.4536
+        "x": 488.704,
+        "y": 63.449
       },
       "data": {
-        "label": "آگهی شغلی کارشناس فروش"
+        "label": "Job Ads Text",
+        "doc_id": "",
+        "doc_name": "Job advertisement for sales expert",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       },
-      "parentNode": "container-255",
+      "parentNode": "container-454",
       "extent": "parent"
     },
     {
-      "id": "googledoc-153",
+      "id": "googledoc-792",
       "type": "googledoc",
       "position": {
         "x": 654.759,
         "y": 284.034
       },
       "data": {
-        "label": "گزارش رزومه‌های دریافتی"
+        "label": "Report of Received CVs",
+        "doc_id": "",
+        "doc_name": "Report of received resumes",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       },
-      "parentNode": "container-255",
+      "parentNode": "container-454",
       "extent": "parent"
     },
     {
-      "id": "container-255",
+      "id": "container-454",
       "type": "container",
       "position": {
         "x": -2515.53,
         "y": 46.5565
       },
       "data": {
-        "label": "کانتینر جدید",
-        "width": 982,
-        "height": 777.399
+        "label": "Resume Screening Container",
+        "width": 966,
+        "height": 1001
       }
     },
     {
-      "id": "filedb-77",
+      "id": "filedb-405",
       "type": "filedb",
       "position": {
-        "x": 29.4256,
+        "x": 163.733,
         "y": 66.5394
       },
       "data": {
-        "label": "فایل‌های رزومه‌ها"
+        "label": "Resume Files"
       },
-      "parentNode": "container-255",
+      "parentNode": "container-454",
       "extent": "parent"
     },
     {
-      "id": "trigger-50",
+      "id": "trigger-910",
       "type": "trigger",
       "position": {
         "x": 124.062,
         "y": 354.572
       },
       "data": {
-        "label": "تریگر غربالگری"
+        "label": "Screening Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "maxRuns": null,
+        "isActive": false
       },
-      "parentNode": "container-255",
+      "parentNode": "container-454",
       "extent": "parent"
     }
   ],
   "edges": [
     {
-      "id": "efiledb-77-vectorstore-245-1756302610925-832",
-      "source": "filedb-77",
-      "target": "vectorstore-245"
+      "id": "efiledb-405-assistant-2182-1762353866135-752",
+      "source": "filedb-405",
+      "target": "assistant-2182",
+      "sourceHandle": null,
+      "targetHandle": null
     },
     {
-      "id": "egoogledoc-152-vectorstore-245-1756302610925-715",
-      "source": "googledoc-152",
-      "target": "vectorstore-245"
+      "id": "egoogledoc-791-assistant-2182-1762353866135-932",
+      "source": "googledoc-791",
+      "target": "assistant-2182",
+      "sourceHandle": null,
+      "targetHandle": null
     },
     {
-      "id": "evectorstore-245-assistant-476-1756302610925-885",
-      "source": "vectorstore-245",
-      "target": "assistant-476"
-    },
-    {
-      "id": "eassistant-476-telegram-302-1756302610925-682",
-      "source": "assistant-476",
-      "target": "telegram-302"
-    },
-    {
-      "id": "egoogledoc-153-assistant-476-1756302610925-230",
-      "source": "googledoc-153",
-      "target": "assistant-476"
-    },
-    {
-      "id": "etrigger-50-assistant-476-1756302610925-83",
-      "source": "trigger-50",
-      "target": "assistant-476"
-    },
-    {
-      "id": "econtainer-255-analyzer-477-1756302610925-29",
-      "source": "container-255",
-      "target": "analyzer-477"
-    },
-    {
-      "id": "eassistant-476-iframe-145-1756302610925-788",
-      "source": "assistant-476",
-      "target": "iframe-145"
+      "id": "egoogledoc-792-assistant-2182-1762353882543",
+      "source": "googledoc-792",
+      "target": "assistant-2182"
     }
   ]
 }

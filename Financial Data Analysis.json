@@ -1,95 +1,133 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-30T11:55:43.923Z",
+  "exportedAt": "2025-11-05T11:52:57.539Z",
   "nodes": [
     {
-      "id": "assistant-514",
+      "id": "assistant-2164",
       "type": "assistant",
       "position": {
         "x": -1010.21,
         "y": 1074.46
       },
       "data": {
-        "label": "دستیار مالی",
+        "label": "Financial Analysis AI Agent",
         "instructions": "You process complete invoice and financial transaction data from a Google Sheet and generate a detailed financial report.\nData Sources:\nGoogle Sheet ID [Your Google Sheet ID]: Contains financial invoice data with columns:\n A = Invoice Number - Unique invoice/transaction identifier\n B = User Code - Customer identification code\n C = National ID - Customer national identification number\n D = Customer Name - Full name of the customer\n E = Total Amount - Total transaction amount (Tomans)\n F = Shipping Cost - Delivery/shipping fees (Tomans)\n G = Tax - Tax amount applied (Tomans)\n H = Total Payment - Final amount paid by customer (Tomans)\n I = Date - Transaction date\n J = Bank - Bank or payment method used\nFunctions Used:\nread_google_sheet\ndelavers_code_interpreter\n\n\nStep-By-Step Logic:\nALWAYS read the full dataset from Google Sheet range 'Sheet1!A:J' to ensure all columns are included.\n\n\nNEVER, under any circumstances, read individual columns like A:A, B:B, etc.\n\n\nThis rule is absolute and non-negotiable because:\n\n\nColumn A:A alone gives only invoice numbers, not user codes.\nColumn B:B alone gives only user codes, disconnected from invoices.\nData only makes sense in context with all columns.\nThe delavers_code_interpreter requires the complete dataset.\nFiltering/analysis is only possible with all columns present.\n\n\nPass the complete dataset to delavers_code_interpreter.\nFor datasets >100 rows, a data_reference is returned instead of raw rows.\nALWAYS use data_reference, not partial data.\n\n\nProvide a clear task description when processing data.\n\n\nAlways reference exact column names and positions (e.g., Column B – User Code).\nExample: \"Count rows where 'User Code' (column B) equals '2763'\".\n\n\nGenerate a comprehensive financial report based on the analysis.\nWrite the full financial report in Persian, with formatting to reflect column info and analysis, into Google Doc ID [Your Google Doc ID] using write_google_doc.\nOutput Format:\nThe full financial report text in Persian.\nClear formatting reflecting column structure and results.\nRules and Constraints:\nMANDATORY DATA READING RULE – CRITICAL\n\n\nALWAYS use Sheet1!A:J for every query.\nNEVER use A:A, B:B, or any partial range.\nNo exceptions: efficiency does not matter.\n\n\nIncorrect Behavior (NEVER do these):\n\n\nReading only Sheet1!A:A for user codes → WRONG.\nReading only Sheet1!E:E for sums → WRONG.\nUsing partial ranges (A:C, B:D, etc.) → WRONG.\n\n\nCorrect Behavior (EVERY time):\n\n\nAlways read 'Sheet1!A:J'.\nAlways pass the full dataset reference to the interpreter.\nAlways describe tasks using exact column names and positions.\nKeywords That Always Require Full Data (but remember: ALWAYS read full data anyway):\nPersian: مربوط به، برای، که، با شماره، با کد، بزرگتر از، کمتر از، بین، شامل\nEnglish: related to, for, where, which, greater than, less than, between, contains\nOperations: فیلتر، گروه‌بندی، مرتب‌سازی، filter, group by, sort by\nAggregations: مجموع، میانگین، حداکثر، حداقل، sum, average, max, min\nComparisons: =, >, <, <=, !=\n\n\nExamples of Correct Usage:\nQuery: \"تعداد شماره فاکتورهای مربوط به کد کاربر با شماره ۲۷۶۳\"\n Do:\n\n\nRead Sheet1!A:J.\nPass dataset to interpreter.\nTask: \"Count rows where column B (کد کاربر) = 2763\".\n\n\nQuery: \"مجموع مبلغ کل\"\n Do:\n\n\nRead Sheet1!A:J.\nPass dataset to interpreter.\nTask: \"Calculate sum of column E (مبلغ کل)\".\n\n\nQuery: \"لیست همه فاکتورها\"\n Do:\n\n\nRead Sheet1!A:J.\nReturn all invoice data with all columns.\n\n\nFinal Rule:\nIf you ever find yourself about to use a range other than 'Sheet1!A:J', STOP.\nThe answer is always 'Sheet1!A:J'.\nThere are no exceptions, optimizations, or shortcuts.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-483",
+      "id": "telegram-1362",
       "type": "telegram",
       "position": {
-        "x": -1010.46989080165,
-        "y": 1299.5060010759282
+        "x": -1032.9308861757286,
+        "y": 1428.2823745539788
       },
       "data": {
-        "label": "اتصال به تلگرام"
+        "label": "Telegram Bot"
       }
     },
     {
-      "id": "googledoc-163",
+      "id": "googledoc-774",
       "type": "googledoc",
       "position": {
         "x": -700.9147258005645,
         "y": 846.7940525749511
       },
       "data": {
-        "label": "گزارش مالی"
+        "label": "Financial Report",
+        "doc_id": "",
+        "doc_name": "گزارش مالی",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "googlesheet-215",
+      "id": "googlesheet-922",
       "type": "googlesheet",
       "position": {
         "x": -1011.2736608250055,
         "y": 823.3670700999347
       },
       "data": {
-        "label": "داده‌های مالی"
+        "label": "Financial Data",
+        "sheet_id": "",
+        "sheet_name": "داده‌های مالی",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
       }
     },
     {
-      "id": "trigger-62",
+      "id": "trigger-899",
       "type": "trigger",
       "position": {
         "x": -1220.5934855751682,
         "y": 944.0830175249838
       },
       "data": {
-        "label": "تریگر مالی"
+        "label": "Financial Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     }
   ],
   "edges": [
     {
-      "id": "egoogledoc-163-assistant-514-1756553614384-70",
-      "source": "googledoc-163",
-      "target": "assistant-514"
+      "id": "egoogledoc-774-assistant-2164",
+      "source": "googledoc-774",
+      "target": "assistant-2164"
     },
     {
-      "id": "eassistant-514-iframe-155-1756553614384-24",
-      "source": "assistant-514",
-      "target": "iframe-155"
+      "id": "eassistant-2164-undefined",
+      "source": "assistant-2164"
     },
     {
-      "id": "etrigger-62-assistant-514-1756553614384-332",
-      "source": "trigger-62",
-      "target": "assistant-514"
+      "id": "etrigger-899-assistant-2164",
+      "source": "trigger-899",
+      "target": "assistant-2164"
     },
     {
-      "id": "eassistant-514-filedb-133-1756553614384-529",
-      "source": "assistant-514",
-      "target": "filedb-133"
+      "id": "eassistant-2164-undefined",
+      "source": "assistant-2164"
     },
     {
-      "id": "egooglesheet-215-assistant-514-1756553614384-786",
-      "source": "googlesheet-215",
-      "target": "assistant-514"
+      "id": "egooglesheet-922-assistant-2164",
+      "source": "googlesheet-922",
+      "target": "assistant-2164"
     },
     {
-      "id": "eassistant-514-telegram-483-1756553634021",
-      "source": "assistant-514",
-      "target": "telegram-483"
+      "id": "eassistant-2164-telegram-1362",
+      "source": "assistant-2164",
+      "target": "telegram-1362"
     }
   ]
 }

@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-09-08T08:33:52.247Z",
+  "exportedAt": "2025-11-18T07:30:35.868Z",
   "nodes": [
     {
-      "id": "filedb-170",
+      "id": "filedb-475",
       "type": "filedb",
       "position": {
         "x": 1029.927076940842,
@@ -14,18 +14,7 @@
       }
     },
     {
-      "id": "vectorstore-425",
-      "type": "vectorstore",
-      "position": {
-        "x": 856.6514973251841,
-        "y": 845.1616178815497
-      },
-      "data": {
-        "label": "Reusable Knowledge Base"
-      }
-    },
-    {
-      "id": "assistant-974",
+      "id": "assistant-2424",
       "type": "assistant",
       "position": {
         "x": 856.7051321686298,
@@ -34,84 +23,122 @@
       "data": {
         "label": "Proposal Drafting & Analysis",
         "instructions": "You are an AI Proposal Assistant that automates proposal drafting and analysis.\n\n1. Primary Role / Purpose\n\nYour main role is content creation and proposal drafting.\n\nYou must always produce a written proposal report as the output.\n\nYou generate, refine, and analyze proposals using:\n\nPast RFPs and documents (from the File Database).\n\nClient data (from Google Sheets).\n\nThe goal is to deliver professional, persuasive, and client-aligned proposals.\n\n2. Data Sources\n\nFile Database:\n\nID: \"YOUR VECTOR STORE ID\"\n\nContains archived proposals, RFPs, case studies, and reusable sections.\n\nGoogle Sheets:\n\nID: \"YOUR GOOGLE SHEET ID\"\n\nColumns:\n \n\"YOUR GOOGLE SHEET COLUMNS\"\n\nGoogle Docs:\n\nDocument ID: \"YOUR GOOGLE DOC ID\"\n\nEach generated proposal must be written into this Google Doc.\n\nThe written content must always include:\n\nExecutive Summary – a concise overview.\n\nFull Proposal Draft – structured sections with details.\n\nPersonalized Client Data – integrate client name, industry, budget, and relevant notes from the Sheet.\n\n4. Processing / Logical Rules\n\nAlways retrieve reusable sections from the File Database.\n\nAlways personalize proposals with Google Sheets data.\n\nSkip generation if Proposal Status = “Approved” or “Submitted”.\n\nFilter out RFPs older than 12 months.\n\nFollow Priority order: generate proposals for “High” priority first, then “Medium,” then “Low.”\n\nUse a consistent tone: formal, persuasive, concise.\n\nAlways produce a report and save it into the specified Google Doc, even if minimal input is available.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [
+          "read_google_sheet_1763451017_991",
+          "search_company_files_1763451020_475"
+        ],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "googledoc-371",
+      "id": "googledoc-894",
       "type": "googledoc",
       "position": {
-        "x": 554.8637089611228,
-        "y": 850.5007948322475
+        "x": 413.39592674847586,
+        "y": 1007.6872195129663
       },
       "data": {
-        "label": "Final Proposal Document"
+        "label": "Final Proposal Document",
+        "doc_id": "",
+        "doc_name": "Final Proposal Document",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "telegram-646",
+      "id": "telegram-1478",
       "type": "telegram",
       "position": {
-        "x": 856.8449648766338,
-        "y": 1307.2842749464198
+        "x": 845.8580236063366,
+        "y": 1475.750707757645
       },
       "data": {
         "label": "Proposal Notifications"
       }
     },
     {
-      "id": "trigger-331",
+      "id": "trigger-1005",
       "type": "trigger",
       "position": {
-        "x": 1195.555385481011,
-        "y": 881.4619882089218
+        "x": 1283.3178059277457,
+        "y": 1056.986829102391
       },
       "data": {
-        "label": "Automated Proposal trigger"
+        "label": "Automated Proposal trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     },
     {
-      "id": "googlesheet-355",
+      "id": "googlesheet-991",
       "type": "googlesheet",
       "position": {
         "x": 639.1129238656881,
         "y": 542.4881323539893
       },
       "data": {
-        "label": "Client Data & Tracking"
+        "label": "Client Data & Tracking",
+        "sheet_id": "",
+        "sheet_name": "Client Data & Tracking",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
       }
     }
   ],
   "edges": [
     {
-      "id": "eassistant-974-telegram-646-1757314735492",
-      "source": "assistant-974",
-      "target": "telegram-646"
+      "id": "eassistant-2424-telegram-1478",
+      "source": "assistant-2424",
+      "target": "telegram-1478"
     },
     {
-      "id": "evectorstore-425-assistant-974-1757314745638",
-      "source": "vectorstore-425",
-      "target": "assistant-974"
+      "id": "egoogledoc-894-assistant-2424",
+      "source": "googledoc-894",
+      "target": "assistant-2424"
     },
     {
-      "id": "egoogledoc-371-assistant-974-1757314759362",
-      "source": "googledoc-371",
-      "target": "assistant-974"
+      "id": "etrigger-1005-assistant-2424",
+      "source": "trigger-1005",
+      "target": "assistant-2424"
     },
     {
-      "id": "etrigger-331-assistant-974-1757314778846",
-      "source": "trigger-331",
-      "target": "assistant-974"
+      "id": "egooglesheet-991-assistant-2424-1763451018540",
+      "source": "googlesheet-991",
+      "target": "assistant-2424"
     },
     {
-      "id": "egooglesheet-355-vectorstore-425-1757318039314",
-      "source": "googlesheet-355",
-      "target": "vectorstore-425"
-    },
-    {
-      "id": "efiledb-170-vectorstore-425-1757320182164",
-      "source": "filedb-170",
-      "target": "vectorstore-425"
+      "id": "eassistant-2424-filedb-475",
+      "source": "filedb-475",
+      "target": "assistant-2424"
     }
   ]
 }

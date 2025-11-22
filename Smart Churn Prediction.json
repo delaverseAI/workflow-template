@@ -1,85 +1,125 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-09-07T14:30:15.387Z",
+  "exportedAt": "2025-11-18T07:27:37.009Z",
   "nodes": [
     {
-      "id": "assistant-956",
+      "id": "assistant-2423",
       "type": "assistant",
       "position": {
-        "x": 2850.237640934371,
-        "y": 620.3586589543938
+        "x": 2858.395492872095,
+        "y": 555.0958434526035
       },
       "data": {
-        "label": "دستیار جدید",
+        "label": "New assistant",
         "instructions": "Primary Role / Purpose:\nYour role is to act as a Smart Churn Prediction Assistant. You analyze customer data from Google Sheets to predict churn risk, identify key drivers, and recommend retention actions. You also generate structured reports in Google Docs and deliver summarized insights via Telegram.\n\nData Sources:\n\nGoogle Sheets Node:\n\nSheet ID: YOUR GOOGLE SHEET ID.\n\nColumns: YOUR GOOGLE SHEET COLUMNS.\nOperation: Read.\n\n(Optional) File Database Node: Upload additional static reports (PDF/Excel).\n\nVector Store Node (if needed): Aggregates historical churn datasets for reference.\n\nOutputs:\n\nfunction id: YOUR FUNCTION ID\n\nGoogle Docs Node (Reports):\n\nDestination Doc ID: YOUR GOOGLE DOC ID\n\nWrite detailed churn prediction reports including:\n\nExecutive Summary\n\nHigh-Risk Customer List\n\nRisk Drivers (usage, payment, inactivity)\n\nRecommended Retention Actions\n\nNext Steps / Alerts\n\nTelegram Node (Notifications):\n\nSend concise alerts such as:\n\n“5 customers at high churn risk this week. See report for details.”\n\n(Optional) Google Sheets (Write): Add churn score column (0–100) into the same or new sheet.\n\nProcessing / Logical Rules:\n\nChurn Risk Criteria:\n\nInactive > 30 days = High risk\n\nUsage < 3 hrs/week = Medium risk\n\nOverdue/Unpaid Payment = High risk\n\nPersonalization: Include customer names in retention recommendations.\n\nScheduling: Run daily at 9 AM via Trigger Node.\n\nSkip Conditions:\n\nIf no new customer records in last 24h → skip report writing, only log “No updates.”\n\nReport Formatting:\n\nUse clear headings (Executive Summary, Risk Analysis, Recommendations).\n\nBullet points for retention actions.\n\nAppend new results below previous reports (don’t overwrite).\n\nExample Instruction for Output:\n\n“Analyze Google Sheets customer data daily. Predict churn for each customer using usage, activity, and payment status. Write a detailed churn prediction report in Google Docs (Doc ID: X) with structured sections. Also, send a short summary alert to Telegram. Always run automatically without waiting for user input.”",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-634",
+      "id": "telegram-1477",
       "type": "telegram",
       "position": {
         "x": 2849.3893613056357,
-        "y": 805.314240989384
+        "y": 1005.181613463617
       },
       "data": {
         "label": "Delaverse"
       }
     },
     {
-      "id": "googledoc-365",
+      "id": "googledoc-893",
       "type": "googledoc",
       "position": {
-        "x": 2571.0654102998533,
-        "y": 361.2940022054079
+        "x": 2412.3099965168694,
+        "y": 444.1180437355436
       },
       "data": {
-        "label": "گوگل داک"
+        "label": "Google Doc",
+        "doc_id": "",
+        "doc_name": "گوگل داک",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "googlesheet-343",
+      "id": "googlesheet-990",
       "type": "googlesheet",
       "position": {
-        "x": 2850.482968797468,
-        "y": 311.7654960703876
+        "x": 2842.3251168597444,
+        "y": 253.30089051670035
       },
       "data": {
-        "label": "گوگل شیت"
+        "label": "Google Sheets",
+        "sheet_id": "",
+        "sheet_name": "گوگل شیت",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
       }
     },
     {
-      "id": "trigger-317",
+      "id": "trigger-1004",
       "type": "trigger",
       "position": {
-        "x": 3169.3969908591926,
-        "y": 434.50787008491716
+        "x": 3271.37014008074,
+        "y": 407.3150302925045
       },
       "data": {
-        "label": "تریگر جدید"
+        "label": "New trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     }
   ],
   "edges": [
     {
-      "id": "egooglesheet-343-assistant-956-1757253322971",
-      "source": "googlesheet-343",
-      "target": "assistant-956"
+      "id": "egooglesheet-990-assistant-2423",
+      "source": "googlesheet-990",
+      "target": "assistant-2423"
     },
     {
-      "id": "egoogledoc-365-assistant-956-1757253329514",
-      "source": "googledoc-365",
-      "target": "assistant-956"
+      "id": "egoogledoc-893-assistant-2423",
+      "source": "googledoc-893",
+      "target": "assistant-2423"
     },
     {
-      "id": "eassistant-956-telegram-634-1757253423847",
-      "source": "assistant-956",
-      "target": "telegram-634"
+      "id": "eassistant-2423-telegram-1477",
+      "source": "assistant-2423",
+      "target": "telegram-1477"
     },
     {
-      "id": "etrigger-317-assistant-956-1757253633222",
-      "source": "trigger-317",
-      "target": "assistant-956"
+      "id": "etrigger-1004-assistant-2423",
+      "source": "trigger-1004",
+      "target": "assistant-2423"
     }
   ]
 }

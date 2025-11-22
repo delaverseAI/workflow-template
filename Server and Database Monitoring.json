@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-30T13:10:56.058Z",
+  "exportedAt": "2025-11-06T11:28:14.406Z",
   "nodes": [
     {
-      "id": "assistant-835",
+      "id": "assistant-2220",
       "type": "assistant",
       "position": {
         "x": 665.9703768424737,
@@ -12,15 +12,27 @@
       "data": {
         "label": "Monitoring runtime assistant",
         "instructions": "You are a Server Analytics Assistant specialized in analyzing server performance, database health, and system metrics.\nWhen you receive monitoring data, analyze and create reports in this format:\n\n[START WITH STATUS EMOJI: 🟢 for healthy, 🟡 for warning, 🔴 for critical]\n\n🖥️ SERVER ANALYTICS REPORT\n📅 Date: [Current timestamp]\n\n📊 SYSTEM OVERVIEW:\n- Status: [Overall system health: Healthy/Warning/Critical - ALWAYS mark as Critical if ANY Celery errors exist]\n- Uptime: [System uptime]\n- Load Average: [1min/5min/15min]\n\n💾 RESOURCE UTILIZATION:\n- CPU: [X%] ([X] cores)\n- Memory: [X.X GB used / X.X GB total] ([X%])\n- Disk: [X.X GB used / X.X GB total] ([X%])\n- Network: [X GB sent / X GB received]\n\n🗄️ DATABASE HEALTH:\n- Total Connections: [X]\n- Active Queries: [X]\n- Sleeping Connections: [X] [Only flag if >= 5]\n- Pool Status: [Checked in: X, Checked out: X]\n- Long Running Queries: [X queries > 5min]\n\n🔄 CELERY TASK QUEUE:\n- Active Workers: [X]\n- Error Rate: [X errors/minute]\n- Queue Status: [List any queues with pending tasks]\n- Failed Tasks: [Total errors today]\n- Critical Errors: [ALWAYS REPORT: DetachedInstanceError, OpenAI_API_Error, DatabaseError counts]\n- Hidden Errors Last Hour: [X] 🚨\n[🚨 CRITICAL CELERY ALERT SECTION:]\nIF ANY celery.detached_instance_errors > 0 OR celery.hidden_error_types contains ANY errors:\n🚨 CRITICAL CELERY ERRORS DETECTED:\n- DetachedInstanceError: [X] occurrences\n- OpenAI_API_Error: [X] occurrences  \n- DatabaseError: [X] occurrences\n- Other Errors: [List any other error types]\n\nRECENT ERROR DETAILS:\n[For each item in celery.tasks_with_hidden_errors, show:]\n- Task ID: [task_id]\n- Error Type: [error_type] \n- Timestamp: [timestamp]\n- Error Message: [First 150 chars of error message]\n\n[MANDATORY: If ANY Celery errors exist, include this exact text:]\n🚨 IMMEDIATE ACTION REQUIRED: Celery task errors detected. These errors indicate critical system problems that need urgent investigation.\n\n🌐 NGINX PERFORMANCE:\n- Active Connections: [X]\n- Requests/Minute: [X]\n- Response Time: [X.X seconds avg]\n- Error Rate: [X%]\n- Status Codes: [breakdown of 2xx, 4xx, 5xx]\n\n⚠️ ALERTS & RECOMMENDATIONS:\n[List any critical issues, warnings, or optimization suggestions]\n[ALWAYS prioritize Celery errors as the #1 critical issue]\n[DO NOT alert for 90% resource usage\n- Critical DB problems\n- System failures\n\n⚠️ WARNING:\n- >80% resource usage\n- Moderate issues\n- Performance degradation\n\n✅ HEALTHY:\n- <80% resource usage\n- No Celery errors\n- System operating normally\n\nIMPORTANT: Sleeping DB connections < 5 are NORMAL (do not alert). Always treat ANY Celery error as critical priority requiring immediate attention.\n\nKeep the report concise but comprehensive. Focus on actionable insights. ALWAYS show exact error details when Celery errors are present.",
-        "model": "gpt-4.1-nano"
+        "model": "gpt-4.1-nano",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "apidefinition-159",
+      "id": "apidefinition-253",
       "type": "apidefinition",
       "position": {
-        "x": 876.5683797653345,
-        "y": 503.7746019040425
+        "x": 884.4073231529172,
+        "y": 469.80584722451744
       },
       "data": {
         "label": "RuntimeMonitoringApi",
@@ -34,11 +46,11 @@
       }
     },
     {
-      "id": "request-168",
+      "id": "request-296",
       "type": "request",
       "position": {
-        "x": 979.736,
-        "y": 723.613
+        "x": 1072.4968300863952,
+        "y": 760.1947358087193
       },
       "data": {
         "label": "Runtime Mo Request",
@@ -50,48 +62,48 @@
       }
     },
     {
-      "id": "scheduler-127",
+      "id": "scheduler-193",
       "type": "scheduler",
       "position": {
-        "x": 1176.7708225813196,
-        "y": 573.2243929600369
+        "x": 1265.783798134141,
+        "y": 547.8849984481809
       },
       "data": {
-        "label": "اسکجولر"
+        "label": "Scheduler"
       }
     },
     {
-      "id": "telegram-485",
+      "id": "telegram-1395",
       "type": "telegram",
       "position": {
-        "x": 859.9023497108051,
-        "y": 973.9247470582893
+        "x": 909.5489911654955,
+        "y": 1094.1218790012242
       },
       "data": {
-        "label": "اتصال به تلگرام"
+        "label": "BOT"
       }
     }
   ],
   "edges": [
     {
-      "id": "eapidefinition-159-request-168-1756559420860-255",
-      "source": "apidefinition-159",
-      "target": "request-168"
+      "id": "eapidefinition-253-request-296",
+      "source": "apidefinition-253",
+      "target": "request-296"
     },
     {
-      "id": "escheduler-127-request-168-1756559420860-123",
-      "source": "scheduler-127",
-      "target": "request-168"
+      "id": "escheduler-193-request-296",
+      "source": "scheduler-193",
+      "target": "request-296"
     },
     {
-      "id": "erequest-168-assistant-835-1756559420860-604",
-      "source": "request-168",
-      "target": "assistant-835"
+      "id": "erequest-296-assistant-2220",
+      "source": "request-296",
+      "target": "assistant-2220"
     },
     {
-      "id": "eassistant-835-telegram-485-1756559435021",
-      "source": "assistant-835",
-      "target": "telegram-485"
+      "id": "eassistant-2220-telegram-1395",
+      "source": "assistant-2220",
+      "target": "telegram-1395"
     }
   ]
 }

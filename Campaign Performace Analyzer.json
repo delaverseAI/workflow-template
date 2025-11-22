@@ -1,117 +1,163 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-09-03T07:40:46.872Z",
+  "exportedAt": "2025-11-09T07:17:14.833Z",
   "nodes": [
     {
-      "id": "assistant-754",
+      "id": "assistant-2261",
       "type": "assistant",
       "position": {
         "x": 3693.47,
         "y": 548.619
       },
       "data": {
-        "label": "دستیار تحلیل‌گر عملکرد",
+        "label": "Assistant Performance Analyst",
         "instructions": "You are an AI assistant specialized in digital marketing performance analysis.  \nYour task is to analyze advertising campaign data and provide detailed insights, conclusions, and recommendations.  \n\n## Input sources:\n- Campaign performance data is located in Google Sheets with the following ID: {1wuSy3QdRY6v_-s7UWYJpJ6l8R6iPdmbbXQNSZlmf3x8}  \n- Campaign description and objectives are located in Google Docs with the following ID: {1-Ml1D8UwU8aGL_BkxMBjR8QSg_oUxycKZF52NCMpJ4Q}  \n\n## Output destinations:\n- Store the final detailed analysis in Google Docs with the following ID: {1kzy3DySmtYgnEESfklr-bJb1M_hLXs1DxGsxflQ3F8Q}  \n- Send a summarized version of the report to the connected Telegram channel/group.  \n\n## Instructions:\n1. **Data Collection**  \n   - Retrieve all rows and columns from the Google Sheet ({sheet_id}).  \n   - Ensure that the columns include: Date, Channel, Impressions, Clicks, CTR, Conversions, Cost, Revenue.  \n   - Retrieve the campaign description and objectives from Google Docs ({doc_input_id}).  \n\n2. **Data Cleaning & Preprocessing**  \n   - Validate that numeric fields (impressions, clicks, cost, revenue, conversions) are properly formatted.  \n   - Calculate any missing metrics such as:  \n     - CPC (Cost ÷ Clicks)  \n     - CPA (Cost ÷ Conversions)  \n     - ROI ((Revenue - Cost) ÷ Cost × 100)  \n\n3. **Analysis**  \n   - Provide daily and aggregated campaign performance metrics.  \n   - Compare channels (Instagram, Google Ads, Telegram, etc.) to identify which channel performed best in terms of:  \n     - Highest CTR  \n     - Lowest CPC  \n     - Lowest CPA  \n     - Highest ROI  \n   - Identify trends over time (did performance improve, decline, or remain stable?).  \n   - Detect anomalies (e.g., unusual spikes or drops in CTR, CPA, or ROI).  \n   - Highlight which days and which channels generated the best and worst performance.  \n\n4. **Insights & Recommendations**  \n   - Write a clear interpretation of the data in plain English.  \n   - Relate results to the original campaign objectives (from {doc_input_id}).  \n   - Provide actionable recommendations (e.g., increase budget on Google Ads, optimize creatives on Instagram, discontinue underperforming Telegram ads, etc.).  \n   - Suggest next steps for future campaigns (A/B testing, retargeting, audience segmentation).  \n\n5. **Output Format**  \n   - The full structured report should include:  \n     - **Executive Summary** (campaign goals, main findings, overall ROI)  \n     - **Detailed Metrics Table** (with calculated CPC, CPA, ROI)  \n     - **Channel Comparison**  \n     - **Trend Analysis**  \n     - **Recommendations**  \n   - Store this detailed report in the Google Doc with ID: {doc_output_id}.  \n   - Additionally, generate a short summary (max 5 bullet points) and send it to Telegram in a readable format with key metrics.  \n\n6. **Style**  \n   - Use professional marketing language.  \n   - Provide both quantitative (numbers, charts if possible) and qualitative (interpretation, recommendations) insights.  \n   - Make sure the Telegram summary is short, catchy, and easy to read on mobile.  \n\n## Goal:\nDeliver a complete performance analysis of the campaign based on the provided Google Sheet data and Google Doc description.  \nEnsure that the final report in Google Docs is comprehensive, while the Telegram output is concise and highlights the key takeaways.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-439",
+      "id": "telegram-1425",
       "type": "telegram",
       "position": {
-        "x": 3694.84,
-        "y": 793.744
+        "x": 3675.4484331701665,
+        "y": 895.0110712224658
       },
       "data": {
-        "label": "performance analysis (قطع شده)"
+        "label": "performance analysis "
       }
     },
     {
-      "id": "vectorstore-340",
-      "type": "vectorstore",
-      "position": {
-        "x": 3695.13,
-        "y": 272.904
-      },
-      "data": {
-        "label": "دیتابیس برداری تحلیل‌گر عملکرد"
-      }
-    },
-    {
-      "id": "googledoc-254",
+      "id": "googledoc-846",
       "type": "googledoc",
       "position": {
-        "x": 3522.25,
-        "y": -29.7735
+        "x": 3520.575423696758,
+        "y": 43.90785734262241
       },
       "data": {
-        "label": "داک تحلیل‌گر عملکرد"
+        "label": "Performance Analyst Doc",
+        "doc_id": "",
+        "doc_name": "داک تحلیل‌گر عملکرد",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "googledoc-255",
+      "id": "googledoc-847",
       "type": "googledoc",
       "position": {
-        "x": 3329.23,
-        "y": 307.87
+        "x": 3289.370120622568,
+        "y": 273.9152879377432
       },
       "data": {
-        "label": "داک تحلیل"
+        "label": "Analysis Doc",
+        "doc_id": "",
+        "doc_name": "داک تحلیل",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "googlesheet-218",
+      "id": "googlesheet-958",
       "type": "googlesheet",
       "position": {
-        "x": 3872.33,
-        "y": -27.886
+        "x": 3874.0045763032413,
+        "y": 42.44620473613958
       },
       "data": {
-        "label": "شیت تحلیل‌گر عملکرد"
+        "label": "Performance Analyzer Sheet",
+        "sheet_id": "",
+        "sheet_name": "شیت تحلیل‌گر عملکرد",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
       }
     },
     {
-      "id": "trigger-157",
+      "id": "trigger-944",
       "type": "trigger",
       "position": {
         "x": 4112.69,
         "y": 359.293
       },
       "data": {
-        "label": "تریگر جدید"
+        "label": "New trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     }
   ],
   "edges": [
     {
-      "id": "egooglesheet-218-vectorstore-340-1756885240222-426",
-      "source": "googlesheet-218",
-      "target": "vectorstore-340"
+      "id": "egooglesheet-958-undefined",
+      "source": "googlesheet-958"
     },
     {
-      "id": "egoogledoc-254-vectorstore-340-1756885240222-729",
-      "source": "googledoc-254",
-      "target": "vectorstore-340"
+      "id": "egoogledoc-846-undefined",
+      "source": "googledoc-846"
     },
     {
-      "id": "evectorstore-340-assistant-754-1756885240222-186",
-      "source": "vectorstore-340",
-      "target": "assistant-754"
+      "id": "eundefined-assistant-2261",
+      "target": "assistant-2261"
     },
     {
-      "id": "egoogledoc-255-assistant-754-1756885240222-114",
-      "source": "googledoc-255",
-      "target": "assistant-754"
+      "id": "egoogledoc-847-assistant-2261",
+      "source": "googledoc-847",
+      "target": "assistant-2261"
     },
     {
-      "id": "eassistant-754-telegram-439-1756885240222-652",
-      "source": "assistant-754",
-      "target": "telegram-439"
+      "id": "eassistant-2261-telegram-1425",
+      "source": "assistant-2261",
+      "target": "telegram-1425"
     },
     {
-      "id": "etrigger-157-assistant-754-1756885240222-875",
-      "source": "trigger-157",
-      "target": "assistant-754"
+      "id": "etrigger-944-assistant-2261",
+      "source": "trigger-944",
+      "target": "assistant-2261"
+    },
+    {
+      "id": "egooglesheet-958-assistant-2261-1762672608150",
+      "source": "googlesheet-958",
+      "target": "assistant-2261"
+    },
+    {
+      "id": "egoogledoc-846-assistant-2261-1762672611344",
+      "source": "googledoc-846",
+      "target": "assistant-2261"
     }
   ]
 }

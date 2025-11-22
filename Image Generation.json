@@ -1,53 +1,65 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-09-02T06:20:59.626Z",
+  "exportedAt": "2025-11-06T11:42:18.769Z",
   "nodes": [
     {
-      "id": "assistant-850",
+      "id": "assistant-2222",
       "type": "assistant",
       "position": {
         "x": 965.3263126353788,
         "y": 591.8461205776174
       },
       "data": {
-        "label": "دستیار تولید تصویر",
+        "label": "Image Generation AI Agent",
         "instructions": "You generate images automatically based on user prompts received via Telegram. It sends the generated image back to the user on Telegram and also saves it in the gallery.\n\nData Sources:\n- User input prompt received from Telegram messages.\n\nStep-by-Step Logic:\n1. Receive image prompt from user via Telegram.\n2. Use the Node image generation service with the provided prompt to generate an image.\n3. Send the generated image file back to the user on Telegram as a full image message.\n4. Save the generated image into the gallery for future reference.\n\nOutput Format and Connection:\n- Output is an image file sent on Telegram.\n- The generated image is stored in the gallery.\n\nRules and Constraints:\n- The image must match the user prompt precisely.\n- Respond promptly with the image.\n- Ensure image storage is successful.\n",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-499",
+      "id": "telegram-1397",
       "type": "telegram",
       "position": {
-        "x": 805.1151597102671,
-        "y": 826.7083042484333
+        "x": 697.9597638139214,
+        "y": 966.4172381386054
       },
       "data": {
-        "label": "اتصال به تلگرام"
+        "label": "BOT"
       }
     },
     {
-      "id": "imagegeneration-48",
+      "id": "imagegeneration-336",
       "type": "imagegeneration",
       "position": {
-        "x": 1105.9236149138774,
-        "y": 825.9783892605054
+        "x": 1187.3074598984438,
+        "y": 957.5489386522211
       },
       "data": {
-        "label": "تولید تصویر"
+        "label": "Image Generation"
       }
     }
   ],
   "edges": [
     {
-      "id": "eassistant-850-imagegeneration-48-1756793882594",
-      "source": "assistant-850",
-      "target": "imagegeneration-48"
+      "id": "eassistant-2222-imagegeneration-336",
+      "source": "assistant-2222",
+      "target": "imagegeneration-336"
     },
     {
-      "id": "eassistant-850-telegram-499-1756793901933",
-      "source": "assistant-850",
-      "target": "telegram-499"
+      "id": "eassistant-2222-telegram-1397",
+      "source": "assistant-2222",
+      "target": "telegram-1397"
     }
   ]
 }

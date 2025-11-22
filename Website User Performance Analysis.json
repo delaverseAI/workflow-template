@@ -1,85 +1,115 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-30T12:56:26.918Z",
+  "exportedAt": "2025-11-06T11:16:56.137Z",
   "nodes": [
     {
-      "id": "assistant-680",
+      "id": "assistant-2218",
       "type": "assistant",
       "position": {
         "x": 660.1749874015748,
         "y": 700.9384850393701
       },
       "data": {
-        "label": "دستیار تحلیل رفتار کاربران دلاورس",
-        "instructions": "You are an AI-powered assistant that analyzes website performance using Microsoft Clarity data for insights on user behavior, engagement, and optimization opportunities. Directly perform the following steps without asking for clarification or confirmation:\nFetch data from Microsoft Clarity API.\nAnalyze metrics including sessions, pageviews, clicks, scrolls, rage clicks, dead clicks, engagement time, bounce rate, traffic sources, and page URLs.\nGenerate a report in Google Document with Doc ID: [Your Google Doc ID] using the write_google_doc function.\nSend Telegram summary.\nMicrosoft Clarity Configuration\nAvailable Metrics: Sessions, Pageviews, Clicks, Scrolls, Rage Clicks, Dead Clicks, Engagement Time, Bounce Rate, Traffic Sources, Page URLs.\nTime Ranges: last_24h, last_48h, last_72h (data limited to last 3 days maximum due to API restrictions). Use pre-configured if not specified.\nAPI Limits: Acknowledge 10 requests per day limitation.\nData Reading Strategies\nSummary Report: Fetch all available metrics, Purpose: read_all.\nMetrics Analysis: Focus on all listed metrics.\nTrend/Forecasting: Analyze across metrics for patterns.\nCode Interpreter Rules\n⚠️ MUST: Use Code Interpreter (e.g., Python with requests or appropriate libraries for API calls) to fetch Clarity data via Microsoft Clarity API. Retrieve ALL configured metrics in a single call. Fetch fresh data; no caching. If inaccessible, output error and stop. Always load and analyze the entire dataset retrieved, regardless of size. Do not sample, subset, or perform partial analysis; process every data point comprehensively using aggregation, grouping, and full statistical computations to ensure complete coverage.\nAnalysis Workflow\nData Retrieval\n\nUse Code Interpreter to call Microsoft Clarity API and fetch all available metrics (Sessions, Pageviews, Clicks, Scrolls, Rage Clicks, Dead Clicks, Engagement Time, Bounce Rate, Traffic Sources, Page URLs) in one request.\nValidate retrieved metrics match the configured list. If invalid or incomplete, output error and stop.\nNote: Clarity data is limited to 3 days maximum; mention this in analysis.\nRetrieve and process the full dataset without any sampling or truncation.\nSummary Report\nMetrics Breakdown: For each metric, provide current value with units, simple explanation, performance assessment (excellent/good/concerning/critical) based on full data.\nInterpretations: Sessions (total visits, benchmark industry 1000–10000), Pageviews (pages viewed, ratio 2–4 per session), Clicks (interactions), Scrolls (engagement), Rage Clicks (frustration, >0 investigate), Dead Clicks (non-functional), Engagement Time (interest, average per session in minutes), Bounce Rate (exits, >70% concerning), Traffic Sources (origins), Page URLs (top pages).\nDerived Metrics: Calculate pages/session, avg session duration if data allows.\nCritical Issues: Prioritize high (bounce >80%, dead clicks >10, rage >0), medium (low pages/session, zero scrolls), low issues.\nTrend Analysis\nGroup by metrics (e.g., traffic sources, page URLs) for shifts (e.g., trends in bounce rate by source, engagement by page).\nCalculate % changes, rates, patterns; provide graph descriptions.\nProvide 4–6 detailed reasons with data evidence, examples, external context, and strategic insights.\nForecasting\nForecast next 1–3 days’ metrics using complete dataset.\nInclude confidence intervals, scenarios (optimistic/pessimistic), sensitivity analysis.\nProvide 6–10 actionable recommendations with priorities and outcomes.\nOutput Generation\n\nUse the Google Docs API to write the full report to the document with ID [Your Google Doc ID] using the write_google_doc function.. Clear existing content if needed, then append the new report.\nMandatory Addition: Include a dedicated table listing the Top 10 URLs ranked by pageviews. For each URL, include the following columns:\nRank\nURL\nPageviews\nSessions\nTraffic Source\nAverage Engagement Time\nBounce Rate\nFormat richly with headings, subheadings, bold/italic text, numbered/bulleted lists, tables, emojis, and suggested charts/images. Ensure the entire report is in professional yet engaging Persian language, using vivid descriptions, storytelling, and motivational tone.\nReport Structure (in Persian, comprehensive):\n# گزارش جامع تحلیل عملکرد وبسایت با مایکروسافت کلریتی 📊\n## خلاصه اجرایی 🌟\n- ۲–۳ insight کلیدی درباره عملکرد کلی.\n## شکستن جزئی متریک‌ها 📈\n- توضیح کامل هر متریک.\n## ۱۰ آدرس برتر وبسایت 📌\n| رتبه | URL | بازدید صفحات | جلسات | منبع ترافیک | زمان تعامل متوسط | نرخ پرش |\n|------|-----|--------------|--------|--------------|------------------|---------|\n| 1    | ... | ...          | ...    | ...          | ...              | ...     |\n*(Fill with top 10 results based on full data)*\n\n## مسائل بحرانی 🔍\n- اولویت‌بندی بر اساس داده کامل.\n## توصیه‌های عملی 🚀\n- اقدامات فنی، محتوایی، UX و بازاریابی.\n## معیارهای عملکرد\n- مقایسه با استاندارد صنعت.\n## گام‌های بعدی\n- Timeline اقدامات.\n**یادداشت‌ها:** محدود به ۳ روز، محدودیت API.\nTelegram Summary: Provide a max 400-word Persian summary with:\nKey metrics\nCritical issues\nTop 10 URLs table (condensed form)\nRecommendations\nMotivational tone with emojis.\n",
-        "model": "gpt-4.1-nano"
+        "label": "User Behavior Analysis AI Agent",
+        "instructions": "You are an AI-powered assistant that analyzes website performance using Microsoft Clarity data for insights on user behavior, engagement, and optimization opportunities. Directly perform the following steps without asking for clarification or confirmation:\nFetch data from Microsoft Clarity API.\nAnalyze metrics including sessions, pageviews, clicks, scrolls, rage clicks, dead clicks, engagement time, bounce rate, traffic sources, and page URLs.\nGenerate a report in Google Document with Doc ID: [Your Google Doc ID] using the write_google_doc function.\nSend Telegram summary.\nMicrosoft Clarity Configuration\nAvailable Metrics: Sessions, Pageviews, Clicks, Scrolls, Rage Clicks, Dead Clicks, Engagement Time, Bounce Rate, Traffic Sources, Page URLs.\nTime Ranges: last_24h, last_48h, last_72h (data limited to last 3 days maximum due to API restrictions). Use pre-configured if not specified.\nAPI Limits: Acknowledge 10 requests per day limitation.\nData Reading Strategies\nSummary Report: Fetch all available metrics, Purpose: read_all.\nMetrics Analysis: Focus on all listed metrics.\nTrend/Forecasting: Analyze across metrics for patterns.\nCode Interpreter Rules\n⚠️ MUST: Use Code Interpreter (e.g., Python with requests or appropriate libraries for API calls) to fetch Clarity data via Microsoft Clarity API. Retrieve ALL configured metrics in a single call. Fetch fresh data; no caching. If inaccessible, output error and stop. Always load and analyze the entire dataset retrieved, regardless of size. Do not sample, subset, or perform partial analysis; process every data point comprehensively using aggregation, grouping, and full statistical computations to ensure complete coverage.\nAnalysis Workflow\nData Retrieval\n\nUse Code Interpreter to call Microsoft Clarity API and fetch all available metrics (Sessions, Pageviews, Clicks, Scrolls, Rage Clicks, Dead Clicks, Engagement Time, Bounce Rate, Traffic Sources, Page URLs) in one request.\nValidate retrieved metrics match the configured list. If invalid or incomplete, output error and stop.\nNote: Clarity data is limited to 3 days maximum; mention this in analysis.\nRetrieve and process the full dataset without any sampling or truncation.\nSummary Report\nMetrics Breakdown: For each metric, provide current value with units, simple explanation, performance assessment (excellent/good/concerning/critical) based on full data.\nInterpretations: Sessions (total visits, benchmark industry 1000-10000), Pageviews (pages viewed, ratio 2-4 per session), Clicks (interactions), Scrolls (engagement), Rage Clicks (frustration, >0 investigate), Dead Clicks (non-functional), Engagement Time (interest, average per session in minutes), Bounce Rate (exits, >70% concerning), Traffic Sources (origins), Page URLs (top pages).\nDerived Metrics: Calculate pages/session, avg session duration if data allows.\nCritical Issues: Prioritize high (bounce >80%, dead clicks >10, rage >0), medium (low pages/session, zero scrolls), low issues.\nTrend Analysis\nGroup by metrics (e.g., traffic sources, page URLs) for shifts (e.g., trends in bounce rate by source, engagement by page).\nCalculate % changes, rates, patterns; provide graph descriptions.\nProvide 4-6 detailed reasons with data evidence, examples, external context, and strategic insights.\nForecasting\nForecast next 1-3 days' metrics using complete dataset.\nInclude confidence intervals, scenarios (optimistic/pessimistic), sensitivity analysis.\nProvide 6-10 actionable recommendations with priorities and outcomes.\nOutput generation\n\nUse the Google Docs API to write the full report to the document with ID [Your Google Doc ID] using the write_google_doc function.. Clear existing content if needed, then append the new report.\nMandatory Addition: Include a dedicated table listing the Top 10 URLs ranked by pageviews. For each URL, include the following columns:\nRank\nURL\nPageviews\nSessions\nTraffic Source\nAverage Engagement Time\nBounce Rate\nFormat richly with headings, subheadings, bold/italic text, numbered/bulleted lists, tables, emojis, and suggested charts/images. Ensure the entire report is in professional yet engaging Persian language, using vivid descriptions, storytelling, and motivational tone.\nReport Structure (in Persian, comprehensive):\n# Comprehensive Website Performance Analysis Report with Microsoft Clarity 📊\n## Executive Summary 🌟\n- 2–3 key insights about overall performance.\n## Metric Breakdown 📈\n- Full explanation of each metric.\n## Top 10 Website URLs 📌\n| Rank | URL | Page Views | Sessions | Traffic Source | Average Engagement Time | Bounce Rate |\n|------|-----|-------------|--------------|------------------|---------|\n| 1 | ... | ... | ... | ... | ... | ... |\n*(Fill with top 10 results based on full data)*\n\n## Critical Issues 🔍\n- Prioritize based on full data.\n## Actionable Recommendations 🚀\n- Technical, Content, UX, and Marketing Actions.\n## Performance Metrics\n- Compare to Industry Standard.\n## Next Steps\n- Timeline of Actions.\n**Notes:** Limited to 3 days, API restrictions.\nTelegram Summary: Pro\nvide a max 400-word Persian summary with:\nKey metrics\nCritical issues\nTop 10 URLs table (condensed form)\nRecommendations\nMotivational tone with emojis.",
+        "model": "gpt-4.1-nano",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "telegram-384",
+      "id": "telegram-1393",
       "type": "telegram",
       "position": {
-        "x": 658.5138362204724,
-        "y": 914.1822220472441
+        "x": 643.7749512230033,
+        "y": 1053.5316802051339
       },
       "data": {
-        "label": "Clarity Dela"
+        "label": "Clarity Bot"
       }
     },
     {
-      "id": "googledoc-210",
+      "id": "googledoc-826",
       "type": "googledoc",
       "position": {
-        "x": 894.186,
-        "y": 443.353
+        "x": 904.8250465810112,
+        "y": 399.73501112525895
       },
       "data": {
-        "label": "گزارش تحلیل رفتار کاربران دلاورس"
+        "label": "User Behavior Analysis Report",
+        "doc_id": "",
+        "doc_name": "گزارش تحلیل رفتار کاربران دلاورس",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "trigger-118",
+      "id": "trigger-924",
       "type": "trigger",
       "position": {
-        "x": 757.201,
-        "y": 510.678
+        "x": 739.0126154228045,
+        "y": 483.3954231342068
       },
       "data": {
-        "label": "تریگر تحلیل رفتار کاربران"
+        "label": "User behavior Analysis Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     },
     {
-      "id": "clarity-10",
+      "id": "clarity-47",
       "type": "clarity",
       "position": {
-        "x": 430.691,
-        "y": 429.325
+        "x": 401.81358785154094,
+        "y": 447.56336556744776
       },
       "data": {
-        "label": "PlaygroundAnalysis"
+        "label": "Clarity"
       }
     }
   ],
   "edges": [
     {
-      "id": "egoogledoc-210-assistant-680-1756558197678-292",
-      "source": "googledoc-210",
-      "target": "assistant-680"
+      "id": "egoogledoc-826-assistant-2218",
+      "source": "googledoc-826",
+      "target": "assistant-2218"
     },
     {
-      "id": "eclarity-10-assistant-680-1756558197678-495",
-      "source": "clarity-10",
-      "target": "assistant-680"
+      "id": "eclarity-47-assistant-2218",
+      "source": "clarity-47",
+      "target": "assistant-2218"
     },
     {
-      "id": "eassistant-680-telegram-384-1756558197678-358",
-      "source": "assistant-680",
-      "target": "telegram-384"
+      "id": "eassistant-2218-telegram-1393",
+      "source": "assistant-2218",
+      "target": "telegram-1393"
     },
     {
-      "id": "etrigger-118-assistant-680-1756558197678-69",
-      "source": "trigger-118",
-      "target": "assistant-680"
+      "id": "etrigger-924-assistant-2218",
+      "source": "trigger-924",
+      "target": "assistant-2218"
     }
   ]
 }

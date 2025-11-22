@@ -1,198 +1,242 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-08-30T12:26:06.012Z",
+  "exportedAt": "2025-11-05T12:54:36.750Z",
   "nodes": [
     {
-      "id": "assistant-473",
-      "type": "assistant",
-      "position": {
-        "x": 370.3562501795001,
-        "y": 410.29
-      },
-      "data": {
-        "label": "دستیار تحلیلگر گزارشات",
-        "instructions": "You read multifaceted performance reports from various sources, analyze key metrics, trends, bottlenecks, and improvement suggestions, and consolidate a comprehensive management report.\nData Sources:\n- Vector Store ID: [Your Vector Store ID]\n- Files inside Vector Store:\n  - Google Sheet ID: [Your Google Sheet ID]\n  - Google Doc ID: [Your Google Doc ID]\n  - File Storage ID: [Your File Storage ID]\n\nStep-by-step Logic:\n1. Retrieve all required data from Vector Store [Your Vector Store ID] referencing files  [Your Google Sheet ID], [Your Google Doc ID] and [Your File Storage ID].\n2. Extract and parse the sales team data from Google Sheet, HR data from Google Doc , and marketing data from file storage.\n3. Analyze the datasets for each team:\n   - Calculate and summarize KPIs such as revenue, campaign ROI, and project progress percentages.\n   - Identify trends by comparing KPIs over defined time intervals (e.g., 10% sales growth).\n   - Detect bottlenecks like conversion rate drops or project delays.\n   - Formulate actionable recommendations such as boosting advertisement budgets or reprioritizing projects.\n4. Compile the analyses into a comprehensive, clear, and structured management report.\n5. Output the final report as a detailed document and save it to Google Doc with ID [Your Google Doc ID] using write_google_doc function.\n\nOutput Format:\n- Google Doc ID: [Your Google Doc ID]\n- Content: Full detailed management report with all analyses and recommendations.\n- Function: write_google_doc\n\nRules & Constraints:\n- Data must only be read via Vector Store ID using respective file IDs.\n- Summaries must be analytical, not simple recaps.\n- The report should be understandable to management with clear actionable insights.\n- Include all required KPIs, trend analysis, bottleneck identification, and suggestions.\n- Ensure proper formatting suitable for Google Docs.",
-        "model": "gpt-4.1-mini"
-      },
-      "parentNode": "container-254",
-      "extent": "parent"
-    },
-    {
-      "id": "analyzer-475",
-      "type": "analyzer",
-      "position": {
-        "x": 469.00374838449875,
-        "y": 666.4384946149959
-      },
-      "data": {
-        "label": "تحلیلگر جامع مدیریتی",
-        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل جامع گزارش‌های مدیریتی و مکالمات کاربران هستید. \nهدف شما تحلیل داده‌های عملکرد برای تولید معیارهای کلیدی و گزارش‌های دوره‌ای است.\nشما به موارد زیر دسترسی دارید:  \n- داده‌ها و مکالمات از نود کانتینر (شامل مکالمات در تلگرام و فریم چت)\nشما لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n  - معیارهای کلیدی: عملکرد تیم‌ها (مثل ROI مارکتینگ، پیشرفت پروژه‌ها).\n  - روندهای دوره‌ای: تغییرات معیارها در هفته‌ها/ماه‌های گذشته.\n  - مشکلات و گلوگاه‌ها: شناسایی مسائل (مثل کاهش فروش یا تأخیر پروژه).\n  - پیشنهادات استراتژیک: راهکارهایی برای بهبود (مثل تغییر استراتژی مارکتینگ).\n- تاریخچه داده‌ها و مکالمات را ذخیره کنید برای گزارش‌های مقایسه‌ای",
-        "model": "gpt-4.1-mini"
-      }
-    },
-    {
-      "id": "telegram-301",
-      "type": "telegram",
-      "position": {
-        "x": 370,
-        "y": 693.373
-      },
-      "data": {
-        "label": "Comprehensive Management Analysis"
-      },
-      "parentNode": "container-254",
-      "extent": "parent"
-    },
-    {
-      "id": "vectorstore-244",
-      "type": "vectorstore",
-      "position": {
-        "x": 714.792,
-        "y": 400.664
-      },
-      "data": {
-        "label": "دیتابیس گزارشات"
-      },
-      "parentNode": "container-254",
-      "extent": "parent"
-    },
-    {
-      "id": "googledoc-149",
-      "type": "googledoc",
-      "position": {
-        "x": 50.5124,
-        "y": 67.1881
-      },
-      "data": {
-        "label": "گزارش تیم منابع انسانی"
-      },
-      "parentNode": "container-254",
-      "extent": "parent"
-    },
-    {
-      "id": "googledoc-151",
-      "type": "googledoc",
-      "position": {
-        "x": 966.957,
-        "y": 78.0294
-      },
-      "data": {
-        "label": "گزارش جامع مدیریتی"
-      },
-      "parentNode": "container-254",
-      "extent": "parent"
-    },
-    {
-      "id": "googlesheet-131",
-      "type": "googlesheet",
-      "position": {
-        "x": 364.057,
-        "y": 69.4745
-      },
-      "data": {
-        "label": "گزارش تیم فروش"
-      },
-      "parentNode": "container-254",
-      "extent": "parent"
-    },
-    {
-      "id": "container-254",
+      "id": "container-449",
       "type": "container",
       "position": {
         "x": -991.497,
         "y": 75.884
       },
       "data": {
-        "label": "کانتینر جدید",
-        "width": 1260,
-        "height": 993
+        "label": "Management Reporting and Analysis Container",
+        "width": 1271,
+        "height": 1073
       }
     },
     {
-      "id": "iframe-144",
+      "id": "assistant-2172",
+      "type": "assistant",
+      "position": {
+        "x": 469.2083026500153,
+        "y": 434.08771633549446
+      },
+      "data": {
+        "label": "Management Reporting and Analysis AI Agent",
+        "instructions": "You are a helpful assistant.",
+        "model": "gpt-5-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
+      },
+      "parentNode": "container-449",
+      "extent": "parent"
+    },
+    {
+      "id": "analyzer-2173",
+      "type": "analyzer",
+      "position": {
+        "x": -482.561881010313,
+        "y": 1259.9893327523537
+      },
+      "data": {
+        "label": "Comprehensive Management Analyst",
+        "instructions": "شما یک دستیار هوش مصنوعی برای تحلیل جامع گزارش‌های مدیریتی و مکالمات کاربران هستید. \nهدف شما تحلیل داده‌های عملکرد برای تولید معیارهای کلیدی و گزارش‌های دوره‌ای است.\nشما به موارد زیر دسترسی دارید:  \n- داده‌ها و مکالمات از نود کانتینر (شامل مکالمات در تلگرام و فریم چت)\nشما لازم است اقدامات و تحلیل‌های زیر را انجام دهید:  \n  - معیارهای کلیدی: عملکرد تیم‌ها (مثل ROI مارکتینگ، پیشرفت پروژه‌ها).\n  - روندهای دوره‌ای: تغییرات معیارها در هفته‌ها/ماه‌های گذشته.\n  - مشکلات و گلوگاه‌ها: شناسایی مسائل (مثل کاهش فروش یا تأخیر پروژه).\n  - پیشنهادات استراتژیک: راهکارهایی برای بهبود (مثل تغییر استراتژی مارکتینگ).\n- تاریخچه داده‌ها و مکالمات را ذخیره کنید برای گزارش‌های مقایسه‌ای",
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
+      }
+    },
+    {
+      "id": "telegram-1368",
+      "type": "telegram",
+      "position": {
+        "x": 148.52604701246594,
+        "y": 837.8474536557267
+      },
+      "data": {
+        "label": "Comprehensive Management Analysis"
+      },
+      "parentNode": "container-449",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-781",
+      "type": "googledoc",
+      "position": {
+        "x": 50.51239999999996,
+        "y": 67.1881
+      },
+      "data": {
+        "label": "Human Resources Team Report",
+        "doc_id": "",
+        "doc_name": "Human Resources Team Report",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
+      },
+      "parentNode": "container-449",
+      "extent": "parent"
+    },
+    {
+      "id": "googledoc-782",
+      "type": "googledoc",
+      "position": {
+        "x": 970.0480505836575,
+        "y": 187.76169571984428
+      },
+      "data": {
+        "label": "Comprehensive Management Report",
+        "doc_id": "",
+        "doc_name": "Comprehensive management report",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
+      },
+      "parentNode": "container-449",
+      "extent": "parent"
+    },
+    {
+      "id": "googlesheet-928",
+      "type": "googlesheet",
+      "position": {
+        "x": 364.057,
+        "y": 69.47449999999999
+      },
+      "data": {
+        "label": "Sales Team Report",
+        "sheet_id": "",
+        "sheet_name": "Sales team report",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
+      },
+      "parentNode": "container-449",
+      "extent": "parent"
+    },
+    {
+      "id": "iframe-412",
       "type": "iframe",
       "position": {
         "x": 768.567,
-        "y": 623.714
+        "y": 671.3094326709887
       },
       "data": {
-        "label": "دلاورس"
+        "label": "Management Frame"
       },
-      "parentNode": "container-254",
+      "parentNode": "container-449",
       "extent": "parent"
     },
     {
-      "id": "filedb-75",
+      "id": "filedb-400",
       "type": "filedb",
       "position": {
-        "x": 664.835,
-        "y": 70.5836
+        "x": 666.3805252918288,
+        "y": 65.94702412451365
       },
       "data": {
-        "label": "گزارش تیم مارکتینگ"
+        "label": "Marketing Team Report"
       },
-      "parentNode": "container-254",
+      "parentNode": "container-449",
       "extent": "parent"
     },
     {
-      "id": "trigger-49",
+      "id": "trigger-905",
       "type": "trigger",
       "position": {
-        "x": 47.2075,
+        "x": 47.20749999999998,
         "y": 392.162
       },
       "data": {
-        "label": "تریگر گزارشات"
+        "label": "Report Trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       },
-      "parentNode": "container-254",
+      "parentNode": "container-449",
       "extent": "parent"
     }
   ],
   "edges": [
     {
-      "id": "efiledb-75-vectorstore-244-1756556188694-335",
-      "source": "filedb-75",
-      "target": "vectorstore-244"
+      "id": "eassistant-2172-telegram-1368",
+      "source": "assistant-2172",
+      "target": "telegram-1368"
     },
     {
-      "id": "egooglesheet-131-vectorstore-244-1756556188694-282",
-      "source": "googlesheet-131",
-      "target": "vectorstore-244"
+      "id": "egoogledoc-782-assistant-2172",
+      "source": "googledoc-782",
+      "target": "assistant-2172"
     },
     {
-      "id": "egoogledoc-149-vectorstore-244-1756556188694-396",
-      "source": "googledoc-149",
-      "target": "vectorstore-244"
+      "id": "etrigger-905-assistant-2172",
+      "source": "trigger-905",
+      "target": "assistant-2172"
     },
     {
-      "id": "evectorstore-244-assistant-473-1756556188694-898",
-      "source": "vectorstore-244",
-      "target": "assistant-473"
+      "id": "econtainer-449-analyzer-2173",
+      "source": "container-449",
+      "target": "analyzer-2173"
     },
     {
-      "id": "eassistant-473-telegram-301-1756556188694-872",
-      "source": "assistant-473",
-      "target": "telegram-301"
+      "id": "eassistant-2172-iframe-412",
+      "source": "assistant-2172",
+      "target": "iframe-412"
     },
     {
-      "id": "egoogledoc-151-assistant-473-1756556188694-332",
-      "source": "googledoc-151",
-      "target": "assistant-473"
+      "id": "egoogledoc-781-assistant-2172",
+      "source": "googledoc-781",
+      "target": "assistant-2172"
     },
     {
-      "id": "etrigger-49-assistant-473-1756556188694-75",
-      "source": "trigger-49",
-      "target": "assistant-473"
+      "id": "egooglesheet-928-assistant-2172",
+      "source": "googlesheet-928",
+      "target": "assistant-2172"
     },
     {
-      "id": "econtainer-254-analyzer-475-1756556188694-928",
-      "source": "container-254",
-      "target": "analyzer-475"
-    },
-    {
-      "id": "eassistant-473-iframe-144-1756556188694-117",
-      "source": "assistant-473",
-      "target": "iframe-144"
+      "id": "efiledb-400-assistant-2172",
+      "source": "filedb-400",
+      "target": "assistant-2172"
     }
   ]
 }

@@ -1,85 +1,125 @@
 {
   "version": "1.0",
-  "exportedAt": "2025-09-06T06:56:31.163Z",
+  "exportedAt": "2025-11-17T12:35:47.805Z",
   "nodes": [
     {
-      "id": "googlesheet-302",
+      "id": "googlesheet-981",
       "type": "googlesheet",
       "position": {
         "x": 952.0709842137546,
         "y": 438.30898070570015
       },
       "data": {
-        "label": "گوگل شیت"
+        "label": "Google Sheets",
+        "sheet_id": "",
+        "sheet_name": "گوگل شیت",
+        "operation_type": "read",
+        "selected_sheets": [],
+        "function_config": {
+          "default_range": "A1:Z1000",
+          "header_row": 1,
+          "column_definitions": [],
+          "sheet_description": ""
+        }
       }
     },
     {
-      "id": "assistant-897",
+      "id": "assistant-2403",
       "type": "assistant",
       "position": {
         "x": 949.8004708647322,
         "y": 793.081306291047
       },
       "data": {
-        "label": "دستیار جدید",
+        "label": "New assistant",
         "instructions": "your role is data processing and predictive analysis. It analyzes supply chain data from Google Sheets, detects risks (such as port congestion, labor strikes, currency fluctuations, or fuel cost increases), predicts possible delays, and recommends proactive actions. The assistant also generates structured risk reports and delivers real-time alerts via Telegram.\n\n2. Data Sources the Assistant Will Use\n\nGoogle Sheets (Source of Supply Chain Data):\n\nSheet ID: \"YOUR GOOGLE SHEET ID\"\n\nRange: \"YOUR GOOGLE SHEET RANGE\"\n\nColumns:\n\n\"YOUR GOOGLE SHEET COLUMNS\"\n\nGoogle Docs (Destination for detailed risk reports):\n\nDoc ID: \"YOUR GOOGLE DOC ID\"\n\nContent use: Store daily/weekly AI-generated risk prediction reports.\n\nTelegram Bot:\n\n\nRole: Deliver summarized alerts and action recommendations to Operations Managers.\n\n3. Outputs the Assistant Should Generate\n\nGoogle Docs Reports :write_google_doc_*\n\n\nDaily detailed supply chain risk analysis (per supplier).\n\nFormat: Structured sections → Overview, Risks Detected, Predicted Delays, Recommended Mitigation Actions.\n\nTelegram Messages\n\nAlerts for Operations Managers.\n\nContent:\n\nSupplier Name & Risk Factor\n\nPredicted Delay (Days)\n\nRecommended Action\n\nExample:\n\n⚠️ Supply Chain Alert  \nSupplier: GlobalSteel Ltd. (China)  \nRisk: High (Port Congestion)  \nPredicted Delay: 7 days  \nAction: Source backup supplier in India\n\n\n4. Specific Processing or Logical Rules\n\nFilters:\n\nOnly send Telegram alerts if Risk Factor != Low.\n\nIgnore suppliers with predicted delay = 0.\n\nPersonalization:\n\nAddress Telegram alerts directly to “Operations Team” with action-oriented wording.\n\nSkip Conditions:\n\nDo not generate Google Docs reports if no risks are detected.\n\nDo not send duplicate Telegram messages for the same supplier within 24 hours.",
-        "model": "gpt-4.1-mini"
+        "model": "gpt-4.1-mini",
+        "ai_provider": "openai",
+        "temperature": 1,
+        "top_p": 1,
+        "reasoning_effort": null,
+        "hasCodeInterpreter": false,
+        "hasDelaversInterpreter": false,
+        "enable_web_search": false,
+        "function_names": [],
+        "assistant_type": "regular",
+        "company_id": null,
+        "hasExecutionCapability": false,
+        "hasFunctions": false
       }
     },
     {
-      "id": "googledoc-334",
+      "id": "googledoc-878",
       "type": "googledoc",
       "position": {
         "x": 579.3823416613453,
         "y": 542.4647612360646
       },
       "data": {
-        "label": "گوگل داک"
+        "label": "Google Doc",
+        "doc_id": "",
+        "doc_name": "گوگل داک",
+        "operation_type": "read",
+        "selected_documents": [],
+        "function_config": {
+          "document_sections": [],
+          "document_description": "",
+          "content_format": "plain_text",
+          "max_content_length": 5000
+        }
       }
     },
     {
-      "id": "telegram-563",
+      "id": "telegram-1464",
       "type": "telegram",
       "position": {
-        "x": 949.8673344187464,
-        "y": 1045.6202790337818
+        "x": 928.5665136190819,
+        "y": 1169.165039671836
       },
       "data": {
-        "label": "اتصال به تلگرام"
+        "label": "Telegram"
       }
     },
     {
-      "id": "trigger-257",
+      "id": "trigger-991",
       "type": "trigger",
       "position": {
         "x": 1326.3095842245755,
         "y": 609.7989933087954
       },
       "data": {
-        "label": "تریگر جدید"
+        "label": "New trigger",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "cronExpression": "",
+        "timezone": "Asia/Tehran",
+        "messageTemplate": "",
+        "contextData": {},
+        "isActive": false
       }
     }
   ],
   "edges": [
     {
-      "id": "egoogledoc-334-assistant-897-1757141357125",
-      "source": "googledoc-334",
-      "target": "assistant-897"
+      "id": "egoogledoc-878-assistant-2403",
+      "source": "googledoc-878",
+      "target": "assistant-2403"
     },
     {
-      "id": "egooglesheet-302-assistant-897-1757141359631",
-      "source": "googlesheet-302",
-      "target": "assistant-897"
+      "id": "egooglesheet-981-assistant-2403",
+      "source": "googlesheet-981",
+      "target": "assistant-2403"
     },
     {
-      "id": "etrigger-257-assistant-897-1757141416044",
-      "source": "trigger-257",
-      "target": "assistant-897"
+      "id": "etrigger-991-assistant-2403",
+      "source": "trigger-991",
+      "target": "assistant-2403"
     },
     {
-      "id": "eassistant-897-telegram-563-1757141435531",
-      "source": "assistant-897",
-      "target": "telegram-563"
+      "id": "eassistant-2403-telegram-1464",
+      "source": "assistant-2403",
+      "target": "telegram-1464"
     }
   ]
 }
